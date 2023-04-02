@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "935380226578",
+    "project_id": "the-sun-food",
+    "storage_bucket": "the-sun-food.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935380226578:android:1b0df687c9d764f48f7ecb",
+        "android_client_info": {
+          "package_name": "com.theduckfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935380226578-k4er0i8jepot6adav61o0ioqjn3vpmvs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpTEmpA1usmHqCDSegNBssOfa9rYP8p3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935380226578-k4er0i8jepot6adav61o0ioqjn3vpmvs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
