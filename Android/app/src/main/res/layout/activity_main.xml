@@ -6,62 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <ScrollView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:text="Đang chuẩn bị"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:id="@+id/txtOrderStatus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:background="@color/red_pink_1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <TextView
-                android:background="@color/pink_1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-
-            <TextView
-                android:background="@color/yellow_light"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-
-            <TextView
-                android:background="@color/yellow_light_max"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <TextView
-                android:background="@color/orange_light"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <TextView
-                android:background="@color/red_pink_2"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <TextView
-                android:background="@color/red_pink_max"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <TextView
-                android:background="@color/red_pink_pro_max"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
