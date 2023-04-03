@@ -45,6 +45,9 @@ dependencies {
     // SDP - Responsive Layout
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
+    // Circle Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.3.0')
     implementation 'com.google.firebase:firebase-messaging:23.1.2'

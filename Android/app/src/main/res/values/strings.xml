@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">The Duck Food</string>
+    <string name="login">Đăng nhập</string>
+    <string name="welcome">Chào mừng bạn đã quay trở lại</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="do_not_have_account">Bạn chưa có tài khoản? </string>
+    <string name="register">Đăng ký</string>
+    <string name="have_account">Bạn đã có tài khoản? </string>
+    <string name="full_name">Họ tên</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="enter_email">Nhập Email</string>
+    <string name="enter_email_2">Nhập địa chỉ email đã liên kết với tài khoản của bạn</string>
+    <string name="recover_password">Khôi phục mật khẩu</string>
+    <string name="verify">Xác nhận</string>
+    <string name="do_not_you_receive_code">Bạn chưa nhận được mã? </string>
+    <string name="resend">Gửi lại</string>
+    <string name="create_new_password">Tạo mật khẩu mới</string>
+    <string name="we_sent_otp_to_your_mail">Chúng tôi đã gửi mã OTP đến địa chỉ email của bạn.</string>
+    <string name="enter_your_new_password">Nhập mật khẩu mới để hoàn tất</string>
+    <string name="change_password">Đổi mật khẩu</string>
 </resources>
