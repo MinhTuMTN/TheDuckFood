@@ -2,11 +2,12 @@ package com.theduckfood.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.theduckfood.util.Constants;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

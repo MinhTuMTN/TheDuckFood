@@ -1,6 +1,6 @@
 package com.theduckfood.model;
 
-import com.theduckfood.entity.UserProfile;
+import com.theduckfood.entity.UserAccount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,5 +9,5 @@ import lombok.Data;
 public class UserProfileResponse {
     private boolean error;
     private String message;
-    private UserProfile userProfile;
+    private UserAccount userAccount;
 }
