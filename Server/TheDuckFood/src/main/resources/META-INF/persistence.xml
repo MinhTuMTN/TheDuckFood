@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+	<persistence-unit name="jpaSQL">
+		
+		<properties>
+
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:sqlserver://localhost;databaseName=TheDuckFood" />
+				
+			<property name="javax.persistence.jdbc.driver"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+
+			<property name="javax.persistence.jdbc.user" value="sa" />
+
+			<property name="javax.persistence.jdbc.password"
+				value="3052" />
+
+			<property name="hibernate.show_sql" value="false" />
+
+			<property name="hibernate.format_sql" value="false" />
+
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.SQLServer2008Dialect" />
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
+
+
