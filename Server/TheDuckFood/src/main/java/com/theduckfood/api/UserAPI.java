@@ -19,6 +19,11 @@ public class UserAPI {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping
+    public String hello() {
+        return "Hello";
+    }
+
     @GetMapping("/user-profile-list")
     public UserProfileListResponse findAllUsers() {
         List<UserProfile> userProfileList = userRepository.findAllUserProfile();

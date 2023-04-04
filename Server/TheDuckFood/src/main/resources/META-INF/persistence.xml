@@ -9,21 +9,21 @@
 		<properties>
 
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:sqlserver://localhost;databaseName=TheDuckFood" />
+				value="jdbc:sqlserver://minhtu-test.database.windows.net:1433;database=minhtu-database" />
 				
 			<property name="javax.persistence.jdbc.driver"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 
-			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.user" value="minhtu@minhtu-test" />
 
 			<property name="javax.persistence.jdbc.password"
-				value="3052" />
+				value="Happy@123" />
 
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 
-			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
 
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.SQLServer2008Dialect" />
