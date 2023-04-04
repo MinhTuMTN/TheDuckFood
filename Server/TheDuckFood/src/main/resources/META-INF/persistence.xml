@@ -9,7 +9,7 @@
 		<properties>
 
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:sqlserver://minhtu-test.database.windows.net:1433;database=minhtu-database;encrypt=true;trustServerCertificate=true;" />
+				value="jdbc:sqlserver://minhtu-test.database.windows.net:1433;database=minhtu-database;encrypt=false;trustServerCertificate=true;" />
 				
 			<property name="javax.persistence.jdbc.driver"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
