@@ -11,5 +11,6 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
     List<UserAccount> findAll();
 
-    UserAccount findByEmail(String email);
+    UserAccount findUserAccountByEmailAndPasswordAndStatus(String email, String password, String status);
+    UserAccount findUserAccountByEmail(String email);
 }

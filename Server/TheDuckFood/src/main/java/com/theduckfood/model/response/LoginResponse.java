@@ -1,15 +1,15 @@
-package com.theduckfood.model;
+package com.theduckfood.model.response;
 
 import com.theduckfood.entity.UserProfile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class UserProfileListResponse {
+public class LoginResponse {
     private boolean error;
     private String message;
-    private List<UserProfile> userProfileList;
+    private UserProfile userProfile;
 }
