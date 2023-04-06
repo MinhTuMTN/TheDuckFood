@@ -12,4 +12,5 @@ public class LoginResponse {
     private boolean error;
     private String message;
     private UserProfile userProfile;
+    private String authToken;
 }

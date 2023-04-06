@@ -1,32 +1,43 @@
 package com.theduckfood.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JWTUtil {
-    private final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    private static String generateJWTToken(String email) {
-        String secret = "AJFE8GWBEGB873TI90FSVNEIJBEIGWHGIUslfwigkh3gifhewuyyreurywirwyrweureryeuywty43f2u375385ty";
-        //Jwts.builder()
+    static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    private static final String secret = "AJFE8GWBEGB873TI90FSVNEIJBEIGWHGIUslfwigkh3gifhewuyyreurywirwyrweureryeuywty43f2u375385ty";
+    public static String generateJWTToken(String email, String role) {
+        System.out.println(key);
         return Jwts.builder()
                 .claim("email", email)
-                .claim("role", "user")
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 5*60*60*1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
-    public static void main(String[] args) {
-        String token = generateJWTToken("minhtu@gmail.com");
-        System.out.println(Jwts.parserBuilder()
-                .setSigningKey("AJFE8GWBEGB873TI90FSVNEIJBEIGWHGIUslfwigkh3gifhewuyyreurywirwyrweureryeuywty43f2u375385ty")
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .get("email"));
+    public static Map<String, Object> getPayloadFromJWTToken(String token) {
+        Map<String, Object> payload = new HashMap<>();
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(secret)
+                    .build()
+                    .parseClaimsJws(token.replace("Bearer ", ""))
+                    .getBody();
+
+            payload.put("email", claims.get("email").toString());
+            payload.put("role", claims.get("role").toString());
+            payload.put("expiration", claims.getExpiration());
+        } catch (Exception e) {
+            return null;
+        }
+        return payload;
     }
 }

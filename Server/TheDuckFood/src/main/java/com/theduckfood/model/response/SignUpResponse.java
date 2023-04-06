@@ -12,4 +12,5 @@ public class SignUpResponse {
     private String message;
     private UserAccount userAccount;
     private UserProfile userProfile;
+    private String authToken;
 }

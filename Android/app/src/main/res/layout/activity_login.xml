@@ -110,6 +110,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
         android:text="@string/login"
         app:cornerRadius="@dimen/_15sdp"
         android:padding="@dimen/_10sdp"
