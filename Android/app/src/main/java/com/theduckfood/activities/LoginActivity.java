@@ -3,19 +3,25 @@ package com.theduckfood.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.R;
 import com.theduckfood.databinding.ActivityLoginBinding;
 import com.theduckfood.model.respone.LoginResponse;
 import com.theduckfood.presenter.LoginPresenter;
 import com.theduckfood.presenter.contact.ILoginView;
+import com.theduckfood.util.Constant;
 import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.Date;
@@ -29,12 +35,27 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        createNotificationChannel();
+        
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(this);
-        if (sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY) != null)
+        if (sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY) != null) {
             switchToMainActivity();
+        }
 
         addEvents();
     }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    Constant.GENERAL_NOTIFICATION_CHANNEL_ID,
+                    Constant.GENERAL_NOTIFICATION_CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_HIGH);
+
+            getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        }
+    }
+
 
     private void addEvents() {
         binding.txtRegister.setOnClickListener(v ->
@@ -50,6 +71,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
         if (email.isEmpty()) {
             binding.edtEmail.setError("Vui lòng nhập email");
+            binding.edtEmail.requestFocus();
+            return;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.edtEmail.setError("Email không hợp lệ");
             binding.edtEmail.requestFocus();
             return;
         } else if (password.isEmpty()) {

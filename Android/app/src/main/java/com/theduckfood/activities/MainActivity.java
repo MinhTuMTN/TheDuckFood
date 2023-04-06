@@ -17,9 +17,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.R;
 import com.theduckfood.databinding.ActivityMainBinding;
 import com.theduckfood.fragments.ProfileFragment;
+import com.theduckfood.presenter.LoginPresenter;
+import com.theduckfood.presenter.MainPresenter;
+import com.theduckfood.presenter.contact.IMainView;
 import com.theduckfood.services.FirebaseCloudMessagingService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainView {
 
     ActivityMainBinding binding;
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         addEvents();
-
+        getAndUpdateFCMToken();
     }
 
     private void addEvents() {
@@ -53,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+
+    private void getAndUpdateFCMToken() {
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateFCMToken);
+    }
+
     private void updateFCMToken(String fcmToken) {
-        Log.d("FCM", fcmToken);
+        MainPresenter mainPresenter = new MainPresenter(this, this);
+        mainPresenter.updateFCMToken(fcmToken);
     }
 
 

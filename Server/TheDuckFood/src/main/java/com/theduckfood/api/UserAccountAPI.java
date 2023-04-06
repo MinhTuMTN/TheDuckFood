@@ -81,6 +81,24 @@ public class UserAccountAPI {
                 JWTUtil.generateJWTToken(signUpRequest.getEmail(), "user")));
     }
 
+    @PostMapping("/update-fcm-token")
+    public ResponseEntity<SimpleMessageResponse> updateFCMToken(@RequestHeader("Authorization") String bearerToken,
+                                                                @RequestBody String fcmToken) {
+        try {
+            String fcmTokenValue = fcmToken.replace("fcmToken=", "");
+//            if (fcmTokenValue == null)
+//                return ResponseEntity.ok(new SimpleMessageResponse(true, "Vui lòng cung cấp fcmToken"));
+
+            String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+            UserAccount userAccount = userAccountRepository.findUserAccountByEmail(email);
+            userAccount.getUser().setFcmToken(fcmTokenValue);
+            userAccountRepository.save(userAccount);
+            return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật FCM Token thành công"));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new SimpleMessageResponse(true, e.getMessage()));
+        }
+    }
+
     @GetMapping("/change-password")
     public ResponseEntity<SimpleMessageResponse> changePassword(@RequestHeader("Authorization") String bearerToken,
                                                                 @RequestBody ChangePasswordRequest changePasswordRequest) {

@@ -25,7 +25,7 @@ public class SharedPreferenceManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_PROFILE_FULL_NAME_KEY, userProfile.getFullName());
-        editor.putString(USER_PROFILE_PHONE_KEY, userProfile.getFullName());
+        editor.putString(USER_PROFILE_PHONE_KEY, userProfile.getPhone());
         editor.putString(USER_PROFILE_POINTS_KEY, userProfile.getFullName());
         editor.putFloat(USER_PROFILE_BALANCE_KEY, userProfile.getBalance().floatValue());
         editor.putString(USER_PROFILE_FCM_TOKEN_KEY, userProfile.getFcmToken());
@@ -46,6 +46,13 @@ public class SharedPreferenceManager {
     public String getStringValue(String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, null);
+    }
+
+    public void setStringValue(String key, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     public float getFloatValue(String key) {
