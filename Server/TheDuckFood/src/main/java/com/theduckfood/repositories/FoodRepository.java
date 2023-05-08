@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
+    Food getFoodByFoodIdAndStatus(Long foodId, String status);
     List<Food> findFoodsByFoodNameContainingIgnoreCaseAndStatus(String foodName, String status, Pageable pageable);
 }
