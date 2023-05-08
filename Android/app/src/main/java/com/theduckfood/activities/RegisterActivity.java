@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.Window;
 import android.widget.Toast;
@@ -43,6 +44,37 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
         String phone = binding.edtPhone.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
         String confirmPassword = binding.edtConfirmPassword.getText().toString().trim();
+
+        if (fullName.isEmpty()) {
+            binding.edtFullName.setError("Vui lòng nhập họ tên");
+            binding.edtFullName.requestFocus();
+            return;
+        } else if (email.isEmpty()) {
+            binding.edtEmail.setError("Vui lòng nhập email");
+            binding.edtEmail.requestFocus();
+            return;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.edtEmail.setError("Email không hợp lệ");
+            binding.edtEmail.requestFocus();
+            return;
+        } else if (phone.isEmpty()) {
+            binding.edtPhone.setError("Vui lòng nhập số điện thoại");
+            binding.edtPhone.requestFocus();
+            return;
+        } else if (password.isEmpty()) {
+            binding.edtPassword.setError("Vui lòng nhập mật khẩu");
+            binding.edtPassword.requestFocus();
+            return;
+        } else if (confirmPassword.isEmpty()) {
+            binding.edtConfirmPassword.setError("Vui lòng nhập lại mật khẩu");
+            binding.edtConfirmPassword.requestFocus();
+            return;
+        } else if (!password.equals(confirmPassword)) {
+            binding.edtPassword.setError("Mật khẩu không khớp");
+            binding.edtConfirmPassword.setError("Mật khẩu không khớp");
+            binding.edtPassword.requestFocus();
+            return;
+        }
 
         RegisterPresenter registerPresenter = new RegisterPresenter(this, this);
         registerPresenter.register(new SignUpRequest(fullName, phone, email, password));

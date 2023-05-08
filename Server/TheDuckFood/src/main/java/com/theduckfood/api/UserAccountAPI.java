@@ -6,6 +6,7 @@ import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.request.SignUpRequest;
 import com.theduckfood.model.response.LoginResponse;
+import com.theduckfood.model.response.ProfileResponse;
 import com.theduckfood.model.response.SignUpResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.repositories.UserAccountRepository;
@@ -14,14 +15,9 @@ import com.theduckfood.util.Constants;
 import com.theduckfood.util.EncodingUtil;
 import com.theduckfood.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -99,7 +95,7 @@ public class UserAccountAPI {
         }
     }
 
-    @GetMapping("/change-password")
+    @PostMapping("/change-password")
     public ResponseEntity<SimpleMessageResponse> changePassword(@RequestHeader("Authorization") String bearerToken,
                                                                 @RequestBody ChangePasswordRequest changePasswordRequest) {
         if (!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getRepeatPassword()))
@@ -117,6 +113,16 @@ public class UserAccountAPI {
         userAccountRepository.save(userAccount);
 
         return ResponseEntity.ok(new SimpleMessageResponse(false, "Đổi mật khẩu thành công"));
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<ProfileResponse> getProfile(@RequestHeader("Authorization") String bearerToken) {
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        UserAccount userAccount = userAccountRepository.findUserAccountsByEmailAndStatus(email, Constants.USER_ACCOUNT_STATUS_ACTIVATED);
+        if (userAccount == null)
+            return ResponseEntity.status(400).body(new ProfileResponse(true, "Đã có lỗi xảy ra", null, null));
+        UserProfile userProfile = userProfileRepository.findUserProfileByUserId(userAccount.getUser().getUserId());
+        return ResponseEntity.ok(new ProfileResponse(false, "Thành công", userAccount, userProfile));
     }
 
     @GetMapping
