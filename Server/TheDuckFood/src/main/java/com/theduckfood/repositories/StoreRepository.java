@@ -13,4 +13,5 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
             String storeName,
             String status,
             Pageable pageable);
+    Store getStoreByStoreIdAndStatusNotContains(Long storeId, String status);
 }
