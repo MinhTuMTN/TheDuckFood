@@ -5,6 +5,7 @@ import com.theduckfood.entity.UserProfile;
 import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.request.SignUpRequest;
+import com.theduckfood.model.request.UpdateProfileRequest;
 import com.theduckfood.model.response.LoginResponse;
 import com.theduckfood.model.response.ProfileResponse;
 import com.theduckfood.model.response.SignUpResponse;
@@ -125,8 +126,18 @@ public class UserAccountAPI {
         return ResponseEntity.ok(new ProfileResponse(false, "Thành công", userAccount, userProfile));
     }
 
-    @GetMapping
-    public String payment(){
-        return "Success";
+    @PutMapping("/update-profile")
+    public ResponseEntity<SimpleMessageResponse> updateProfile(@RequestHeader("Authorization") String bearerToken,
+                                                                @RequestBody UpdateProfileRequest updateProfileRequest) {
+        try {
+            String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+            UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
+            userProfile.setFullName(updateProfileRequest.getFullName());
+            userProfile.setPhone(updateProfileRequest.getPhone());
+            userProfileRepository.save(userProfile);
+            return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật thành công"));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(true, "Đã có lỗi xảy ra"));
+        }
     }
 }
