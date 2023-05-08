@@ -31,6 +31,10 @@ public class StoreAPI {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    UserFavoritesRepository userFavoritesRepository;
+
     @GetMapping
     public ResponseEntity<StoreDetailsResponse> getStoreDetails(
             @RequestParam(value = "storeId", required = true) Long storeId) {
@@ -69,10 +73,16 @@ public class StoreAPI {
             );
 
             if(order.getReview() != null)
-                throw new Exception();
+                return ResponseEntity.status(409).body(new SimpleMessageResponse(
+                        true,
+                        "Đơn hàng đã được đánh giá"
+                ));
 
             if(!Objects.equals(userProfile.getUserId(), order.getUserProfile().getUserId()))
-                throw new Exception();
+                return ResponseEntity.status(401).body(new SimpleMessageResponse(
+                        true,
+                        "JWT Token không hợp lệ"
+                ));
 
             Review review = new Review(
                     reviewRequest.getReview_content(),
@@ -98,5 +108,32 @@ public class StoreAPI {
                     true,
                     "Đã có lỗi xảy ra"));
         }
+    }
+
+    @GetMapping("/favorites")
+    public ResponseEntity<SimpleMessageResponse> userFavorite(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam(value = "storeId", required = true) Long storeId) {
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
+        Store store = storeRepository.getStoreByStoreIdAndStatusNotContains(storeId, Constants.STORE_STATUS_DELETED);
+
+        UserFavorites userFavorites = userFavoritesRepository.getUserFavoritesByUserProfileAndStore(userProfile, store);
+        if (userFavorites != null) {
+            userFavoritesRepository.delete(userFavorites);
+            return ResponseEntity.ok(new SimpleMessageResponse(
+                    false,
+                    "Đã bỏ thích cửa hàng này"
+            ));
+        }
+
+        userFavorites = new UserFavorites();
+        userFavorites.setStore(store);
+        userFavorites.setUserProfile(userProfile);
+        userFavoritesRepository.save(userFavorites);
+        return ResponseEntity.ok(new SimpleMessageResponse(
+                false,
+                "Đã thích cửa hàng này"
+        ));
     }
 }
