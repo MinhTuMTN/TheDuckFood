@@ -43,16 +43,18 @@ public class HomeFragment extends Fragment {
 
     private void handleSlider() {
         ArrayList<Integer> arrayList = new ArrayList<>();
-        arrayList.add(R.drawable.img_1);
-        arrayList.add(R.drawable.img_2);
-        arrayList.add(R.drawable.img_3);
-        arrayList.add(R.drawable.img_4);
-        arrayList.add(R.drawable.img_5);
+        arrayList.add(R.drawable.slider_1);
+        arrayList.add(R.drawable.slider_2);
+//        arrayList.add(R.drawable.slider_3);
+        arrayList.add(R.drawable.slider_4);
+        arrayList.add(R.drawable.slider_5);
 
         SliderAdapter sliderAdapter = new SliderAdapter(getContext(), arrayList);
         binding.sliderView.setSliderAdapter(sliderAdapter);
-        binding.sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        binding.sliderView.setIndicatorAnimation(IndicatorAnimationType.THIN_WORM);
         binding.sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        binding.sliderView.setIndicatorRadius(5);
+        binding.sliderView.setIndicatorPadding(10);
         binding.sliderView.setIndicatorSelectedColor(Color.RED);
         binding.sliderView.setIndicatorUnselectedColor(Color.GRAY);
         binding.sliderView.startAutoCycle();

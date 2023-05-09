@@ -1,12 +1,14 @@
 package com.theduckfood.merchant.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.theduckfood.merchant.R;
 
@@ -30,7 +32,11 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderHoler> 
 
     @Override
     public void onBindViewHolder(SliderHoler viewHolder, int position) {
-        Glide.with(context).load(arrayList.get(position)).into(viewHolder.imageView);
+        Glide.with(context)
+                .load(arrayList.get(position))
+                .override(Resources.getSystem().getDisplayMetrics().widthPixels)
+                .override(Resources.getSystem().getDisplayMetrics().heightPixels)
+                .into(viewHolder.imageView);
     }
 
     @Override

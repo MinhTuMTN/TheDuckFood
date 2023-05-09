@@ -382,7 +382,7 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/sliderView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_height="@dimen/_150sdp"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:paddingStart="@dimen/_17sdp"
                 android:paddingEnd="@dimen/_17sdp"
