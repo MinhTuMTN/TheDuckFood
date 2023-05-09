@@ -39,6 +39,10 @@ public class OrderAPI {
 
     @Autowired
     UserProfileRepository userProfileRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
     @PostMapping("/create")
     @Transactional
     public ResponseEntity<CreateOrderResponse> createOrder(
@@ -96,7 +100,7 @@ public class OrderAPI {
         double amount = amount_before_coupon;
         if (couponIsValid) {
             double temp = amount * coupon.getDiscount();
-            temp =  temp > coupon.getMaxDiscount() ? coupon.getMaxDiscount() : temp;
+            temp = temp > coupon.getMaxDiscount() ? coupon.getMaxDiscount() : temp;
             amount -= temp;
         }
 
@@ -120,17 +124,21 @@ public class OrderAPI {
 
         Order order = new Order();
         order.setAmount(amount);
-        order.setCoupon(couponIsValid ? coupon: null);
+        order.setCoupon(couponIsValid ? coupon : null);
         order.setStore(store.get());
         order.setUserAddress(userAddress);
         order.setUserProfile(userProfile);
         order.setOrderItems(orderItems);
 
         try {
+            for (OrderItem orderItem : orderItems) {
+                orderItem.setOrder(order);
+                orderItemRepository.save(orderItem);
+            }
             orderRepository.save(order);
 
             Store updateStore = store.get();
-            updateStore.setBalance(updateStore.getBalance() + order.getAmount() - 2000);
+            updateStore.setBalance(updateStore.getBalance() + order.getAmount() - Constants.SERVICE_FEE);
             storeRepository.save(updateStore);
 
             if (couponIsValid) {
@@ -138,7 +146,7 @@ public class OrderAPI {
                 couponRepository.save(coupon);
             }
 
-            userProfile.setBalance(userProfile.getBalance() - order.getAmount() - 17000);
+            userProfile.setBalance(userProfile.getBalance() - order.getAmount() - Constants.SHIP_FEE - Constants.SERVICE_FEE);
             userProfileRepository.save(userProfile);
 
             return ResponseEntity.ok(
@@ -155,13 +163,50 @@ public class OrderAPI {
             System.out.println(e.getMessage());
             return ResponseEntity.status(400)
                     .body(
-                    new CreateOrderResponse(
-                            false,
-                            "Có lỗi xảy ra",
-                            amount_before_coupon,
-                            couponIsValid ? coupon : null,
-                            order
-                    ));
+                            new CreateOrderResponse(
+                                    false,
+                                    "Có lỗi xảy ra",
+                                    amount_before_coupon,
+                                    couponIsValid ? coupon : null,
+                                    order
+                            ));
         }
     }
+
+    @GetMapping("/cancel-order")
+    @Transactional
+    public ResponseEntity<SimpleMessageResponse> cancelOrder(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam(value = "orderId", required = true) Long orderId
+    ) {
+        try {
+            String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+            UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
+
+            Order order = orderRepository.getOrderByOrderIdAndStatus(orderId, Constants.ORDER_STATUS_PROCESSING);
+            if (order == null || !Objects.equals(
+                    userProfile.getUserId(),
+                    order.getUserProfile().getUserId()))
+                throw new Exception();
+
+            order.setStatus(Constants.ORDER_STATUS_USER_CANCELED);
+            orderRepository.save(order);
+
+            userProfile.setBalance(order.getAmount() + Constants.SHIP_FEE + Constants.SERVICE_FEE);
+            userProfileRepository.save(userProfile);
+
+            return ResponseEntity.ok(new SimpleMessageResponse(
+                    false,
+                    "Hủy đơn hàng thành công"
+            ));
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(
+                    true,
+                    "Không thể hủy đơn hàng này"
+            ));
+        }
+    }
+
 }
