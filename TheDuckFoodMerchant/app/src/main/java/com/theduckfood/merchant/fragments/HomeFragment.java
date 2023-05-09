@@ -1,5 +1,6 @@
 package com.theduckfood.merchant.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.adapter.SliderAdapter;
 import com.theduckfood.merchant.databinding.FragmentHomeBinding;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private static HomeFragment instance;
@@ -31,5 +37,25 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        handleSlider();
+    }
+
+    private void handleSlider() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(R.drawable.img_1);
+        arrayList.add(R.drawable.img_2);
+        arrayList.add(R.drawable.img_3);
+        arrayList.add(R.drawable.img_4);
+        arrayList.add(R.drawable.img_5);
+
+        SliderAdapter sliderAdapter = new SliderAdapter(getContext(), arrayList);
+        binding.sliderView.setSliderAdapter(sliderAdapter);
+        binding.sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        binding.sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        binding.sliderView.setIndicatorSelectedColor(Color.RED);
+        binding.sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        binding.sliderView.startAutoCycle();
+        binding.sliderView.setScrollTimeInSec(5);
     }
 }
