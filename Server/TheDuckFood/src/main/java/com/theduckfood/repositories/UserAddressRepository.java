@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UserAddressRepository extends JpaRepository<UserAddress, Long> {
+    UserAddress findUserAddressesByUserAddressIdAndIsDeletedFalse(Long userAddressId);
     List<UserAddress> findUserAddressesByUserProfileAndIsDeletedFalse(UserProfile userProfile);
     UserAddress findUserAddressesByUserAddressIdAndUserProfile(Long userAddressId, UserProfile userProfile);
 }

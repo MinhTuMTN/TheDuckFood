@@ -23,8 +23,8 @@ public class Order {
     private Long orderId;
 
     private Double amount = 0D;
-    private Double shipFee = 0D;
-    private Double serviceFee = 0D;
+    private Double shipFee = 15000D;
+    private Double serviceFee = 2000D;
 
 
     private Date createdAt = new Date();
