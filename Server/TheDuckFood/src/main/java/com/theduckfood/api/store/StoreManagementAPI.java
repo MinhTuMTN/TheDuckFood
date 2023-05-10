@@ -7,6 +7,7 @@ import com.theduckfood.entity.UserProfile;
 import com.theduckfood.model.request.StoreLoginRequest;
 import com.theduckfood.model.response.GetStoreProfileResponse;
 import com.theduckfood.model.response.ProfileResponse;
+import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.model.response.StoreLoginResponse;
 import com.theduckfood.repositories.StoreAccountRepository;
 import com.theduckfood.repositories.StoreRepository;
@@ -81,5 +82,33 @@ public class StoreManagementAPI {
                         store));
     }
 
+    @GetMapping("/change-status")
+    public ResponseEntity<SimpleMessageResponse> changeStatus(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam("status") boolean status) {
+        Store store = getStoreFromToken(bearerToken);
+        if (store == null)
+            return ResponseEntity
+                    .status(401)
+                    .body(new SimpleMessageResponse(true, "JWT Token không hợp lệ"));
+        if (status) {
+            store.setStatus(Constants.STORE_STATUS_OPENING);
+        }
+        else
+            store.setStatus(Constants.STORE_STATUS_CLOSED);
+        storeRepository.save(store);
+        return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật thành công"));
+    }
 
+
+    private Store getStoreFromToken(String bearerToken) {
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        StoreAccount storeAccount = storeAccountRepository.findStoreAccountByEmailAndStatusNotContaining(
+                email,
+                Constants.STORE_STATUS_DELETED);
+        if (storeAccount == null)
+            return null;
+
+        return storeAccount.getStore();
+    }
 }

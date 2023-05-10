@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityMainBinding;
 import com.theduckfood.merchant.fragments.AccountFragment;
@@ -17,6 +17,7 @@ import com.theduckfood.merchant.fragments.OrdersFragment;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private  void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(binding.fragmentContainer.getId(), fragment);
         fragmentTransaction.commit();
+    }
+
+
+    public void changeBottomBar(int itemId) {
+        binding.bottomNavigationView.setSelectedItemId(itemId);
     }
 
 
