@@ -15,17 +15,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
-import com.theduckfood.R;
 import com.theduckfood.activities.LoginActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
 import com.theduckfood.databinding.PopupLogoutConfirmBinding;
+import com.theduckfood.model.UserAccount;
+import com.theduckfood.model.UserProfile;
+import com.theduckfood.model.respone.GetProfileResponse;
+import com.theduckfood.presenter.ProfilePresenter;
+import com.theduckfood.presenter.contact.IProfileView;
 import com.theduckfood.util.SharedPreferenceManager;
 
-import java.util.Objects;
-
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements IProfileView {
     FragmentProfileBinding binding;
+    GetProfileResponse getProfileResponse;
+    Dialog dialog;
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
     }
@@ -75,9 +80,22 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadUserData(View view) {
-        SharedPreferenceManager preferenceManager = new SharedPreferenceManager(view.getContext());
-        binding.txtFullName.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_PROFILE_FULL_NAME_KEY));
-        binding.txtEmail.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_ACCOUNT_EMAIL));
-        binding.txtPhone.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_PROFILE_PHONE_KEY));
+        UserAccount userAccount = new UserAccount();
+        UserProfile userProfile = new UserProfile();
+        ProfilePresenter profilePresenter = new ProfilePresenter(this, userAccount, userProfile);
+        profilePresenter.getProfile();
+        binding.txtFullName.setText(profilePresenter.getUserProfile().getFullName());
+        binding.txtEmail.setText(profilePresenter.getUserAccount().getEmail());
+        binding.txtPhone.setText(profilePresenter.getUserProfile().getPhone());
+    }
+
+    @Override
+    public void getProfile(GetProfileResponse getProfileResponse) {
+//        if (getProfileResponse == null) {
+//            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//            return;
+//        }
+//        Toast.makeText(this, getProfileResponse.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
