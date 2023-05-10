@@ -1,15 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frlThucDon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MenuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintHeader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Menu Fragment" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient"
+        android:paddingTop="@dimen/_32sdp"
+        android:paddingBottom="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="QUẢN LÝ THỰC ĐƠN"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:src="@drawable/icons8_back_100px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.195"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.628" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/constraintHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:id="@+id/linearQuanLy"
+            android:paddingStart="@dimen/_24sdp"
+            android:paddingEnd="@dimen/_24sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp">
+            <com.google.android.material.card.MaterialCardView
+                app:strokeWidth="@dimen/_1sdp"
+                app:strokeColor="#555252"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/_12sdp"
+                android:backgroundTint="#EDEDED"
+                android:layout_marginEnd="@dimen/_24sdp"
+                >
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tất cả"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#555252"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingEnd="@dimen/_16sdp"/>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                app:strokeWidth="@dimen/_1sdp"
+                app:strokeColor="#555252"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/_12sdp"
+                android:backgroundTint="#EDEDED"
+                android:layout_marginEnd="@dimen/_24sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đang mở"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#555252"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingEnd="@dimen/_16sdp"/>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                app:strokeWidth="@dimen/_1sdp"
+                app:strokeColor="#555252"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/_12sdp"
+                android:backgroundTint="#EDEDED"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đã đóng"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#555252"
+                    android:layout_gravity="center"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"/>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listThucAn"
+            android:paddingTop="@dimen/_14sdp"
+            android:paddingStart="@dimen/_17sdp"
+            android:paddingEnd="@dimen/_17sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:src="@drawable/icons8_xbox_cross_100px"
+            app:tint="@color/white"
+            app:layout_anchor="@id/listThucAn"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:rippleColor="@color/red_deep"
+            app:backgroundTint="#E4655A">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
