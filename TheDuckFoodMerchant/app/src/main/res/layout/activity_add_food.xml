@@ -24,7 +24,7 @@
         android:layout_width="@dimen/_18sdp"
         android:layout_height="@dimen/_18sdp"
         android:layout_marginEnd="@dimen/_17sdp"
-        android:src="@drawable/icons8_Close_480px"
+        android:src="@drawable/icons8_close_100px"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
