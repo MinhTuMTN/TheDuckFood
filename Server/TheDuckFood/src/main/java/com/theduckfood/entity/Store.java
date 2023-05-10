@@ -40,6 +40,8 @@ public class Store {
 
     private Date createdAt = new Date();
     private Date updatedAt = new Date();
+
+    @JsonBackReference
     private String fcmToken = null;
 
     @OneToOne(mappedBy = "store", fetch = FetchType.LAZY)

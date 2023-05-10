@@ -24,7 +24,6 @@ public class SimpleFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         if (req.getRequestURI().equals("/api/users/login") || req.getRequestURI().equals("/api/users/register")) {
-            System.out.println(req.getRequestURI());
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

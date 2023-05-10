@@ -30,4 +30,7 @@ public class Constants {
 
     public final static String DELIVERY_MAN_ACCOUNT_STATUS_ACTIVATED = "activated";
     public final static String DELIVERY_MAN_ACCOUNT_STATUS_DELETED = "deleted";
+
+    public final static Double SHIP_FEE = 15000d;
+    public final static Double SERVICE_FEE = 2000d;
 }
