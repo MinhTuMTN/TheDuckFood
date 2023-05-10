@@ -52,6 +52,7 @@ public class AccountFragment extends Fragment implements IHomeView {
     private void addListener() {
         binding.constraintHoSoCaNhan.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ProfileActivity.class);
+            intent.putExtra("store", store);
             startActivity(intent);
         });
     }

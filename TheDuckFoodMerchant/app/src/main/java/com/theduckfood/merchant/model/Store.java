@@ -1,8 +1,9 @@
 package com.theduckfood.merchant.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Store {
+public class Store implements Serializable {
     private Long storeId;
     private String storeName;
     private String address;

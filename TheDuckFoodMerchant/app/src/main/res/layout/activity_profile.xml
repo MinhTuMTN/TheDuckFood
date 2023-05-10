@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="@dimen/_18sdp"
         android:layout_height="@dimen/_18sdp"
         android:src="@drawable/icons8_back_coral"
@@ -96,6 +97,7 @@
         app:strokeWidth="@dimen/_1sdp">
 
         <EditText
+            android:id="@+id/editTenQuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -127,10 +129,12 @@
         app:strokeWidth="@dimen/_1sdp">
 
         <EditText
+            android:id="@+id/editSoDienThoai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
+            android:inputType="phone"
             android:padding="@dimen/_10sdp"
             android:paddingStart="@dimen/_14sdp" />
     </com.google.android.material.card.MaterialCardView>
@@ -159,6 +163,7 @@
         app:strokeWidth="@dimen/_1sdp">
 
         <EditText
+            android:id="@+id/editDiaChi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -175,15 +180,17 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         app:cardCornerRadius="@dimen/_10sdp">
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnChinhSua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chỉnh sửa"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
+            android:background="@drawable/background_gradient"
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
-            android:background="@drawable/background_gradient"/>
+            android:text="Chỉnh sửa"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
     </com.google.android.material.card.MaterialCardView>
 
 
