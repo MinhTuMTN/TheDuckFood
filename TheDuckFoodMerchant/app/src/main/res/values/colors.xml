@@ -19,4 +19,5 @@
     <color name="red_pink_max">#FFD1D1</color>
     <color name="red_pink_pro_max">#FFE3E1</color>
     <color name="gray_light">#e0e0e0</color>
+    <color name="gray_hint">#FF9E9B9B</color>
 </resources>
