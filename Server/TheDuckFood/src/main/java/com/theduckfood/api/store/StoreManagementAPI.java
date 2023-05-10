@@ -2,6 +2,8 @@ package com.theduckfood.api.store;
 
 import com.theduckfood.entity.Store;
 import com.theduckfood.entity.StoreAccount;
+import com.theduckfood.entity.UserAccount;
+import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.StoreLoginRequest;
 import com.theduckfood.model.response.GetStoreProfileResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
@@ -77,6 +79,31 @@ public class StoreManagementAPI {
                         false,
                         "Thành công",
                         store));
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<SimpleMessageResponse> changePassword(@RequestHeader("Authorization") String bearerToken,
+                                                                @RequestBody ChangePasswordRequest changePasswordRequest) {
+        if (!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getRepeatPassword()))
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(true, "Mật khẩu không khớp"));
+
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        StoreAccount storeAccount = storeAccountRepository
+                .findStoreAccountByEmailAndStatusNotContaining(email, Constants.STORE_STATUS_DELETED);
+
+        if (storeAccount == null)
+            return ResponseEntity
+                    .status(400)
+                    .body(new SimpleMessageResponse(
+                            true,
+                            "Đã có lỗi xảy ra"));
+        else if (!EncodingUtil.isValid(changePasswordRequest.getOldPassword(), storeAccount.getPassword()))
+            return ResponseEntity.status(401).body(new SimpleMessageResponse(true, "Mật khẩu không đúng"));
+
+        storeAccount.setPassword(EncodingUtil.encoding(changePasswordRequest.getNewPassword()));
+        storeAccountRepository.save(storeAccount);
+
+        return ResponseEntity.ok(new SimpleMessageResponse(false, "Đổi mật khẩu thành công"));
     }
 
     @GetMapping("/change-status")

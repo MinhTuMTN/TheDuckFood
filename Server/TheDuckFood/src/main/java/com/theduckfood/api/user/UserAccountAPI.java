@@ -109,6 +109,13 @@ public class UserAccountAPI {
         String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
         UserAccount userAccount = userAccountRepository.findUserAccountByEmail(email);
 
+        if (!userAccount.getPassword().equals(changePasswordRequest.getOldPassword()))
+            return ResponseEntity.status(400)
+                    .body(new SimpleMessageResponse(
+                            true,
+                            "Mật khẩu không đúng"
+                    ));
+
         if (userAccount == null)
             return ResponseEntity.status(400).body(new SimpleMessageResponse(true, "Đã có lỗi xảy ra"));
         else if (!EncodingUtil.isValid(changePasswordRequest.getOldPassword(), userAccount.getPassword()))
