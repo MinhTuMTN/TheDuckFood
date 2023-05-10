@@ -22,7 +22,6 @@ public class GetProfilePresenter {
 
     }
 
-
     public void getProfile() {
         final SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context);
         UserAccountEndpoint userAccountEndpoint = APIUtil.getRetrofit().create(UserAccountEndpoint.class);

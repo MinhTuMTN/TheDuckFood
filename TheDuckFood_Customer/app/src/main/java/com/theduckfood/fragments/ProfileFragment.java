@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.theduckfood.activities.ChangePasswordActivity;
 import com.theduckfood.activities.LoginActivity;
+import com.theduckfood.activities.StoreDetailActivity;
 import com.theduckfood.activities.UpdateProfileActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
 import com.theduckfood.databinding.PopupLogoutConfirmBinding;
@@ -59,6 +60,13 @@ public class ProfileFragment extends Fragment implements IProfileView {
         binding.cardLogOut.setOnClickListener(this::logOut);
         binding.cardChangePassword.setOnClickListener(this::changePassword);
         binding.btnEditProfile.setOnClickListener(this::updateProfile);
+        binding.cardNotification.setOnClickListener(this::storeDetail);
+    }
+
+    private void storeDetail(View view) {
+        Intent intent = new Intent(getActivity(), StoreDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void updateProfile(View view) {
