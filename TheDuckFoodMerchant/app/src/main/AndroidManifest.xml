@@ -15,9 +15,6 @@
             android:name=".activities.AddFoodActivity"
             android:exported="false" />
         <activity
-            android:name=".AddNewFoodActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.ProfileActivity"
             android:exported="true">
             <intent-filter>
