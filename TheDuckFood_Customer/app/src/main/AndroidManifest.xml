@@ -17,6 +17,9 @@
             android:name=".activities.PasswordRecoveryActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

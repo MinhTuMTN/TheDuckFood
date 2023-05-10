@@ -17,19 +17,19 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.theduckfood.activities.ChangePasswordActivity;
 import com.theduckfood.activities.LoginActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
 import com.theduckfood.databinding.PopupLogoutConfirmBinding;
-import com.theduckfood.model.UserAccount;
-import com.theduckfood.model.UserProfile;
 import com.theduckfood.model.respone.GetProfileResponse;
+import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.presenter.ProfilePresenter;
 import com.theduckfood.presenter.contact.IProfileView;
 import com.theduckfood.util.SharedPreferenceManager;
 
 public class ProfileFragment extends Fragment implements IProfileView {
     FragmentProfileBinding binding;
-    GetProfileResponse getProfileResponse;
+
     Dialog dialog;
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -57,6 +57,7 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
     private void addEvents() {
         binding.cardLogOut.setOnClickListener(this::logOut);
+        binding.cardChangePassword.setOnClickListener(this::changePassword);
     }
 
     private void logOut(View view) {
@@ -79,9 +80,12 @@ public class ProfileFragment extends Fragment implements IProfileView {
         dialog.getWindow().setGravity(Gravity.CENTER);
     }
 
+    private void changePassword(View view){
+        Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
     private void loadUserData(View view) {
-        UserAccount userAccount = new UserAccount();
-        UserProfile userProfile = new UserProfile();
         ProfilePresenter profilePresenter = new ProfilePresenter(this, getContext());
         profilePresenter.getProfile();
     }
@@ -90,7 +94,6 @@ public class ProfileFragment extends Fragment implements IProfileView {
     public void getProfile(GetProfileResponse getProfileResponse) {
         if (getProfileResponse == null) {
             Toast.makeText(getContext(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
             return;
         }
 
@@ -98,4 +101,5 @@ public class ProfileFragment extends Fragment implements IProfileView {
         binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());
         binding.txtPhone.setText(getProfileResponse.getUserProfile().getPhone());
     }
+
 }

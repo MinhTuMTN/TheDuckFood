@@ -1,5 +1,6 @@
 package com.theduckfood.api;
 
+import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.request.SignUpRequest;
 import com.theduckfood.model.request.UpdateProfileRequest;
@@ -33,4 +34,7 @@ public interface UserAccountEndpoint {
 
     @PUT("/api/users/update-profile")
     Call<SimpleMessageResponse> updateProfile(@Body UpdateProfileRequest updateProfileRequest, @Header("Authorization") String authToken);
+
+    @POST("/api/users/change-password")
+    Call<SimpleMessageResponse> changePassword(@Body ChangePasswordRequest changePasswordRequest, @Header("Authorization") String authToken);
 }
