@@ -55,13 +55,15 @@ public class MenuFragment extends Fragment implements IMenuView {
         super.onViewCreated(view, savedInstanceState);
         initDialog();
         addListener();
-        foodAdapter = new FoodAdapter(getContext());
+
+        menuPresenter = new MenuPresenter(this, getContext());
+
+        foodAdapter = new FoodAdapter(getContext(), menuPresenter);
         binding.listThucAn.setAdapter(foodAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.listThucAn.setLayoutManager(linearLayoutManager);
 
-        menuPresenter = new MenuPresenter(this, getContext());
         menuPresenter.getListFoods(null);
     }
 

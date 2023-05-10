@@ -2,9 +2,11 @@ package com.theduckfood.merchant.presenter;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.theduckfood.merchant.api.APIUtil;
 import com.theduckfood.merchant.api.FoodEndPoint;
+import com.theduckfood.merchant.model.response.SimpleMessageResponse;
 import com.theduckfood.merchant.model.response.StoreGetAllFoodsResponse;
 import com.theduckfood.merchant.presenter.contact.IMenuView;
 import com.theduckfood.merchant.util.SharedPreferenceManager;
@@ -43,6 +45,28 @@ public class MenuPresenter {
                 Log.e("MainActivity", t.getMessage());
                 iMenuView.loadFoods(null);
                 iMenuView.loading(false);
+            }
+        });
+    }
+
+    public void changeFoodStatus(Long foodId, String status) {
+        FoodEndPoint foodEndPoint = APIUtil.getRetrofit().create(FoodEndPoint.class);
+        Call<SimpleMessageResponse> call = foodEndPoint.updateFoodStatus(
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY),
+                foodId,
+                status);
+        call.enqueue(new Callback<SimpleMessageResponse>() {
+            @Override
+            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response) {
+                SimpleMessageResponse simpleMessageResponse = response.body();
+                if (simpleMessageResponse != null &&simpleMessageResponse.isError())
+                    Toast.makeText(context, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<SimpleMessageResponse> call, Throwable t) {
+                Log.e("MenuFragment", t.getMessage());
+                Toast.makeText(context, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             }
         });
     }
