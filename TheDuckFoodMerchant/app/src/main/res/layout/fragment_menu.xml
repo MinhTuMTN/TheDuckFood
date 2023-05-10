@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_gradient"
-        android:paddingTop="@dimen/_32sdp"
+        android:paddingTop="@dimen/_36sdp"
         android:paddingBottom="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -140,8 +140,6 @@
             android:paddingEnd="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -158,6 +156,5 @@
         android:layout_marginEnd="@dimen/_32sdp"
         app:rippleColor="@color/red_deep"
         app:tint="@color/white">
-
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
