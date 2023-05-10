@@ -118,9 +118,11 @@ public class HomeFragment extends Fragment implements IHomeView {
         Store store = storeProfileResponse.getStore();
         binding.txtTen.setText(store.getStoreName());
         binding.txtDiaChi.setText(store.getAddress());
-        Glide.with(getContext())
-                .load(store.getAvatar())
-                .into(binding.imgAva);
+        if (getContext() != null) {
+            Glide.with(getContext())
+                    .load(store.getAvatar())
+                    .into(binding.imgAva);
+        }
 
         boolean opening = store.getStatus().equals(Constant.STORE_STATUS_OPENING);
         binding.swtTrangThai.setChecked(opening);
