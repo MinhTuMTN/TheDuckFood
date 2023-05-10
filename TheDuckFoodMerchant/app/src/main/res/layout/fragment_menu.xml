@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_gradient"
-        android:paddingTop="@dimen/_32sdp"
+        android:paddingTop="@dimen/_36sdp"
         android:paddingBottom="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -136,19 +136,24 @@
             android:paddingEnd="@dimen/_17sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="normal"
-            android:src="@drawable/icons8_xbox_cross_100px"
-            app:tint="@color/white"
-            app:layout_anchor="@id/listThucAn"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_12sdp"
-            app:rippleColor="@color/red_deep"
-            app:backgroundTint="#E4655A">
 
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/icons8_xbox_cross_100px"
+        app:backgroundTint="#E4655A"
+        app:fabSize="normal"
+        app:layout_anchor="@id/frlThucDon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/red_deep"
+        app:tint="@color/white"
+        android:layout_marginEnd="@dimen/_17sdp"
+        android:layout_marginBottom="@dimen/_17sdp"
+        android:contentDescription="TODO" />
 </androidx.constraintlayout.widget.ConstraintLayout>
