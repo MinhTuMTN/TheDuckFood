@@ -27,4 +27,5 @@
     <string name="order">Đơn hàng</string>
     <string name="account">Tài khoản</string>
     <string name="account_information">Thông tin tài khoản</string>
+    <string name="update_profile">Cập nhật thông tin cá nhân</string>
 </resources>

@@ -19,11 +19,11 @@ import android.widget.Toast;
 
 import com.theduckfood.activities.ChangePasswordActivity;
 import com.theduckfood.activities.LoginActivity;
+import com.theduckfood.activities.UpdateProfileActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
 import com.theduckfood.databinding.PopupLogoutConfirmBinding;
 import com.theduckfood.model.respone.GetProfileResponse;
-import com.theduckfood.model.respone.SimpleMessageResponse;
-import com.theduckfood.presenter.ProfilePresenter;
+import com.theduckfood.presenter.GetProfilePresenter;
 import com.theduckfood.presenter.contact.IProfileView;
 import com.theduckfood.util.SharedPreferenceManager;
 
@@ -58,6 +58,13 @@ public class ProfileFragment extends Fragment implements IProfileView {
     private void addEvents() {
         binding.cardLogOut.setOnClickListener(this::logOut);
         binding.cardChangePassword.setOnClickListener(this::changePassword);
+        binding.btnEditProfile.setOnClickListener(this::updateProfile);
+    }
+
+    private void updateProfile(View view) {
+        Intent intent = new Intent(getActivity(), UpdateProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void logOut(View view) {
@@ -86,8 +93,8 @@ public class ProfileFragment extends Fragment implements IProfileView {
         startActivity(intent);
     }
     private void loadUserData(View view) {
-        ProfilePresenter profilePresenter = new ProfilePresenter(this, getContext());
-        profilePresenter.getProfile();
+        GetProfilePresenter getProfilePresenter = new GetProfilePresenter(this, getContext());
+        getProfilePresenter.getProfile();
     }
 
     @Override

@@ -11,7 +11,6 @@ import com.theduckfood.databinding.ActivityChangePasswordBinding;
 import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.presenter.ChangePasswordPresenter;
-import com.theduckfood.presenter.ProfilePresenter;
 import com.theduckfood.presenter.contact.IChangePasswordView;
 
 public class ChangePasswordActivity extends AppCompatActivity implements IChangePasswordView {
@@ -29,6 +28,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
 
     private void addEvents() {
         binding.btnChangePass.setOnClickListener(v -> btnChangePassClick());
+        binding.btnBack3.setOnClickListener(v -> switchToMainActivity());
     }
 
     private void btnChangePassClick() {

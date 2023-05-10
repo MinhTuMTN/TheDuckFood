@@ -7,7 +7,7 @@ public class UpdateProfileRequest {
     public UpdateProfileRequest() {
     }
 
-    public UpdateProfileRequest(String phone, String fullName) {
+    public UpdateProfileRequest(String fullName, String phone) {
         this.phone = phone;
         this.fullName = fullName;
     }

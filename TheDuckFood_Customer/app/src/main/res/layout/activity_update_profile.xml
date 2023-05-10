@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ChangePasswordActivity">
+    tools:context=".activities.UpdateProfileActivity">
 
 
     <ImageView
-        android:id="@+id/btnBack3"
+        android:id="@+id/btnBack"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_16sdp"
@@ -22,16 +22,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/change_password"
+        android:text="@string/update_profile"
         android:textColor="@color/black"
         android:textSize="@dimen/_17sdp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnBack3"
-        app:layout_constraintStart_toEndOf="@+id/btnBack3"
-        app:layout_constraintTop_toTopOf="@+id/btnBack3" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
     <LinearLayout
-        android:id="@+id/card_change_password"
+        android:id="@+id/card_update_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
@@ -46,67 +46,46 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_old_password"
+            android:id="@+id/card_fullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_25sdp"
             app:cardCornerRadius="@dimen/_20sdp">
 
             <EditText
-                android:id="@+id/edtOldPassword"
+                android:id="@+id/edtFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00FFFFFF"
-                android:drawableStart="@drawable/icons8_password_key_30px"
+                android:drawableStart="@drawable/icons8_name_30px"
                 android:drawablePadding="@dimen/_8sdp"
                 android:ems="10"
-                android:hint="@string/old_password"
                 android:imeOptions="actionNext"
-                android:inputType="textPassword"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName"
                 android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_15sdp" />
+
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_password"
+            android:id="@+id/card_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
             app:cardCornerRadius="@dimen/_20sdp">
 
             <EditText
-                android:id="@+id/edtNewPassword"
+                android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
                 android:backgroundTint="#00FFFFFF"
-                android:drawableStart="@drawable/icons8_password_key_30px"
+                android:drawableStart="@drawable/icons8_phone_30px"
                 android:drawablePadding="@dimen/_8sdp"
                 android:ems="10"
-                android:hint="@string/new_password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:padding="@dimen/_8sdp"
-                android:textSize="@dimen/_15sdp" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            app:cardCornerRadius="@dimen/_20sdp">
-
-            <EditText
-                android:id="@+id/edtConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00FFFFFF"
-                android:drawableStart="@drawable/icons8_confirm_password_30px"
-                android:drawablePadding="@dimen/_8sdp"
-                android:ems="10"
-                android:hint="@string/confirm_password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
+                android:hint="@string/phone"
+                android:inputType="phone"
                 android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_15sdp" />
         </com.google.android.material.card.MaterialCardView>
@@ -114,18 +93,19 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangePass"
+        android:id="@+id/btnUpdateProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:backgroundTint="@color/red_pink_2"
         android:padding="@dimen/_8sdp"
-        android:text="@string/change_password"
+        android:text="@string/update_profile"
         android:textSize="@dimen/_13sdp"
         app:cornerRadius="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_change_password" />
+        app:layout_constraintTop_toBottomOf="@+id/card_update_profile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
