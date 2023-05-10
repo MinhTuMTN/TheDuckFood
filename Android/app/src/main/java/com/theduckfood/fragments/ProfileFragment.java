@@ -82,20 +82,20 @@ public class ProfileFragment extends Fragment implements IProfileView {
     private void loadUserData(View view) {
         UserAccount userAccount = new UserAccount();
         UserProfile userProfile = new UserProfile();
-        ProfilePresenter profilePresenter = new ProfilePresenter(this, userAccount, userProfile);
+        ProfilePresenter profilePresenter = new ProfilePresenter(this, getContext());
         profilePresenter.getProfile();
-        binding.txtFullName.setText(profilePresenter.getUserProfile().getFullName());
-        binding.txtEmail.setText(profilePresenter.getUserAccount().getEmail());
-        binding.txtPhone.setText(profilePresenter.getUserProfile().getPhone());
     }
 
     @Override
     public void getProfile(GetProfileResponse getProfileResponse) {
-//        if (getProfileResponse == null) {
-//            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
-//            dialog.dismiss();
-//            return;
-//        }
-//        Toast.makeText(this, getProfileResponse.getMessage(), Toast.LENGTH_SHORT).show();
+        if (getProfileResponse == null) {
+            Toast.makeText(getContext(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        }
+
+        binding.txtFullName.setText(getProfileResponse.getUserProfile().getFullName());
+        binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());
+        binding.txtPhone.setText(getProfileResponse.getUserProfile().getPhone());
     }
 }
