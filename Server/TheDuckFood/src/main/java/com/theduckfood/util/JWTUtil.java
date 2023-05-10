@@ -19,7 +19,7 @@ public class JWTUtil {
                 .claim("email", email)
                 .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 5*60*60*1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 30L *24*60*60*1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 

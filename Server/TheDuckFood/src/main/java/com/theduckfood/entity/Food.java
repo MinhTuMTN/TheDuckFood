@@ -5,9 +5,11 @@ import com.theduckfood.util.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Nationalized;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +23,7 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long foodId;
 
+    @Nationalized
     private String foodName;
     private String description;
     private String image;

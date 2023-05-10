@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
     Food getFoodByFoodIdAndStatus(Long foodId, String status);
+    Food getFoodByFoodIdAndStore(Long foodId, Store store);
     Food getFoodByFoodIdAndStoreAndStatus(Long foodId, Store store, String status);
+    Food getFoodByFoodIdAndStoreAndStatusNotContaining(Long foodId, Store store, String status);
     List<Food> findFoodsByFoodNameContainingIgnoreCaseAndStatus(String foodName, String status, Pageable pageable);
 }

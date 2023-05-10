@@ -2,11 +2,8 @@ package com.theduckfood.api.store;
 
 import com.theduckfood.entity.Store;
 import com.theduckfood.entity.StoreAccount;
-import com.theduckfood.entity.UserAccount;
-import com.theduckfood.entity.UserProfile;
 import com.theduckfood.model.request.StoreLoginRequest;
 import com.theduckfood.model.response.GetStoreProfileResponse;
-import com.theduckfood.model.response.ProfileResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.model.response.StoreLoginResponse;
 import com.theduckfood.repositories.StoreAccountRepository;
