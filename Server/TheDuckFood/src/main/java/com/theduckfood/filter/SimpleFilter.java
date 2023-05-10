@@ -31,6 +31,7 @@ public class SimpleFilter implements Filter {
         if (req.getRequestURI().equals("/api/users/login")
                 || req.getRequestURI().equals("/api/users/register")
                 || req.getRequestURI().equals("/api/merchant/login")
+                || req.getRequestURI().contains("/api/file/image")
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;

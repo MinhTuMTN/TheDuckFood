@@ -76,9 +76,8 @@ public class HomeFragment extends Fragment implements IHomeView {
             homePresenter.changeStatus(isChecked);
         });
 
-        binding.btnDonHang.setOnClickListener(v -> {
-
-        });
+        binding.btnDonHang.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_orders));
+        binding.btnThucDon.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_menu));
     }
 
     private void initDialog() {
@@ -119,7 +118,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         Store store = storeProfileResponse.getStore();
         binding.txtTen.setText(store.getStoreName());
         binding.txtDiaChi.setText(store.getAddress());
-        Glide.with(requireContext())
+        Glide.with(getContext())
                 .load(store.getAvatar())
                 .into(binding.imgAva);
 
@@ -132,9 +131,6 @@ public class HomeFragment extends Fragment implements IHomeView {
             binding.txtTrangThai.setText("Đã đóng cửa");
             binding.txtMoTaTrangThai.setText("Bật để mở");
         }
-
-        binding.btnDonHang.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_orders));
-        binding.btnThucDon.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_menu));
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.theduckfood.entity.Store;
 import com.theduckfood.entity.StoreAccount;
 import com.theduckfood.model.response.FoodDetailsResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
+import com.theduckfood.model.response.StoreGetAllFoodsResponse;
 import com.theduckfood.repositories.FoodRepository;
 import com.theduckfood.repositories.StoreAccountRepository;
 import com.theduckfood.repositories.StoreRepository;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -104,7 +106,7 @@ public class FoodManagementAPI {
         }
     }
 
-    @GetMapping
+    @GetMapping("/details")
     public ResponseEntity<FoodDetailsResponse> getFoodDetails(
             @RequestHeader("Authorization") String bearerToken,
             @RequestParam("foodId") Long foodId) {
@@ -181,6 +183,41 @@ public class FoodManagementAPI {
                             "Đã có lỗi xảy ra"));
         }
 
+    }
+
+    @GetMapping
+    public ResponseEntity<StoreGetAllFoodsResponse> getAllFood(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam(value = "status", required = false) String status
+    ) {
+        try {
+            Store store = getStoreFromToken(bearerToken);
+            List<Food> foods;
+            if (status!= null && status.equals(Constants.FOOD_STATUS_SOLD_OUT))
+                foods = foodRepository
+                        .getFoodsByStoreAndStatus(store, Constants.FOOD_STATUS_SOLD_OUT);
+            else if (status!= null && status.equals(Constants.FOOD_STATUS_SELLING)) {
+                foods = foodRepository
+                        .getFoodsByStoreAndStatus(store, Constants.FOOD_STATUS_SELLING);
+            } else {
+                foods = foodRepository
+                        .getFoodsByStoreAndStatusNotContaining(store, Constants.FOOD_STATUS_DELETED);
+            }
+
+            return ResponseEntity.ok(new StoreGetAllFoodsResponse(
+                    false,
+                    "Thành công",
+                    foods
+            ));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(400)
+                    .body(new StoreGetAllFoodsResponse(
+                            true,
+                            "Đã có lỗi xảy ra",
+                            null
+                    ));
+        }
     }
 
     private Store getStoreFromToken(String bearerToken) {

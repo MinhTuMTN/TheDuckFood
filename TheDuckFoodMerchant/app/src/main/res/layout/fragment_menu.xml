@@ -62,69 +62,73 @@
             android:paddingTop="@dimen/_8sdp"
             android:paddingBottom="@dimen/_8sdp">
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnTatCa"
                 app:strokeWidth="@dimen/_1sdp"
                 app:strokeColor="#555252"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
                 android:layout_marginEnd="@dimen/_24sdp"
                 >
+
                 <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtTatCa"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tất cả"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp"
+                    android:gravity="center"
                     android:paddingStart="@dimen/_16sdp"
-                    android:paddingEnd="@dimen/_16sdp"/>
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:text="Tất cả"
+                    android:textColor="@color/coral"
+                    android:textSize="@dimen/_12sdp" />
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnDangMo"
                 app:strokeWidth="@dimen/_1sdp"
                 app:strokeColor="#555252"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
                 android:layout_marginEnd="@dimen/_24sdp"
                 >
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtDangMo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đang mở"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
+                    android:textColor="@color/black"
                     android:paddingTop="@dimen/_4sdp"
                     android:paddingBottom="@dimen/_4sdp"
                     android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_16sdp"/>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnDaDong"
                 app:strokeWidth="@dimen/_1sdp"
                 app:strokeColor="#555252"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
                 >
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtDaDong"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đã đóng"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
-                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:gravity="center"
                     android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_14sdp"/>
+                    android:paddingBottom="@dimen/_4sdp"/>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
@@ -132,23 +136,28 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listThucAn"
             android:paddingTop="@dimen/_14sdp"
-            android:paddingStart="@dimen/_17sdp"
-            android:paddingEnd="@dimen/_17sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="normal"
-            android:src="@drawable/icons8_xbox_cross_100px"
-            app:tint="@color/white"
-            app:layout_anchor="@id/listThucAn"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_12sdp"
-            app:rippleColor="@color/red_deep"
-            app:backgroundTint="#E4655A">
 
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/icons8_xbox_cross_100px"
+        app:backgroundTint="#E4655A"
+        app:fabSize="normal"
+        app:layout_anchor="@id/frlThucDon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_32sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
+        app:rippleColor="@color/red_deep"
+        app:tint="@color/white">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
