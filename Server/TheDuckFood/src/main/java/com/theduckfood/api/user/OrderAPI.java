@@ -1,4 +1,4 @@
-package com.theduckfood.api;
+package com.theduckfood.api.user;
 
 import com.theduckfood.entity.*;
 import com.theduckfood.model.request.FoodOrderItemRequest;

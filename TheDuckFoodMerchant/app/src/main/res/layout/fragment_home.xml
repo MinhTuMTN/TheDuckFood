@@ -44,6 +44,7 @@
             tools:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txtDiaChi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -111,6 +112,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txtTrangThai" />
 
                     <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swtTrangThai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -127,6 +129,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDoanhThu"
+                app:cardElevation="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/materialCardView"
@@ -249,10 +252,11 @@
                             android:src="@drawable/basket_100px"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10sdp"
-                        android:text="Don hang"
+                        android:text="Đơn hàng"
                         />
                 </LinearLayout>
 
@@ -275,6 +279,7 @@
                             android:src="@drawable/cooking_book_100px"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10sdp"
@@ -301,6 +306,7 @@
                             android:src="@drawable/thumbs_up_100px"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10sdp"
@@ -327,6 +333,7 @@
                             android:src="@drawable/loudspeaker_100px"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10sdp"
@@ -353,6 +360,7 @@
                             android:src="@drawable/wallet_100px"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10sdp"

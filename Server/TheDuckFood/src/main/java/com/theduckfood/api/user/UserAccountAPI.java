@@ -1,4 +1,4 @@
-package com.theduckfood.api;
+package com.theduckfood.api.user;
 
 import com.theduckfood.entity.UserAccount;
 import com.theduckfood.entity.UserAddress;
