@@ -66,7 +66,7 @@
         android:id="@+id/btnThemHinhAnh"
         android:layout_width="181dp"
         android:layout_height="47dp"
-        android:background=""
+        android:background="#00000000"
         android:text="Thêm hình ảnh"
         android:textAllCaps="false"
         android:textColor="@color/teal_700"
@@ -210,7 +210,6 @@
             android:textStyle="bold"/>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/edtMoTa"
             android:layout_width="@dimen/_285sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"

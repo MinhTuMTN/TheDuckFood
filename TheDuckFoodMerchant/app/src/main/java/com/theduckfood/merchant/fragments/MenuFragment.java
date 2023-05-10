@@ -1,6 +1,7 @@
 package com.theduckfood.merchant.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +21,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.AddFoodActivity;
 import com.theduckfood.merchant.adapter.FoodAdapter;
 import com.theduckfood.merchant.databinding.FragmentMenuBinding;
 import com.theduckfood.merchant.model.Food;
@@ -68,6 +70,10 @@ public class MenuFragment extends Fragment implements IMenuView {
     }
 
     private void addListener() {
+        binding.fabAddFood.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AddFoodActivity.class);
+            startActivity(intent);
+        });
         binding.btnDaDong.setOnClickListener(v -> {
             resetButton();
             binding.txtDaDong.setTextColor(requireContext().getColor(R.color.coral));
