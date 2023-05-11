@@ -6,24 +6,32 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityEditFoodBinding;
+import com.theduckfood.merchant.databinding.PopupLogoutConfirmBinding;
 import com.theduckfood.merchant.model.Food;
 import com.theduckfood.merchant.model.response.SimpleMessageResponse;
 import com.theduckfood.merchant.presenter.EditFoodPresenter;
 import com.theduckfood.merchant.presenter.contact.IEditFoodView;
 import com.theduckfood.merchant.util.Constant;
+import com.theduckfood.merchant.util.SharedPreferenceManager;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -48,6 +56,24 @@ public class EditFoodActivity extends AppCompatActivity implements IEditFoodView
     private void addEvents() {
         binding.btnThemHinhAnh.setOnClickListener(this::pickImage);
         binding.btnSuaMon.setOnClickListener(this::editFood);
+        binding.btnXoaMon.setOnClickListener(view -> {
+            final Dialog dialog = new Dialog(view.getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            PopupLogoutConfirmBinding popupLogoutConfirmBinding = PopupLogoutConfirmBinding.inflate(LayoutInflater.from(view.getContext()));
+            dialog.setContentView(popupLogoutConfirmBinding.getRoot());
+
+            popupLogoutConfirmBinding.txtContent.setText("Bạn có chắc muốn xóa món ăn này không ?");
+            popupLogoutConfirmBinding.btnLogout.setText("Xóa món");
+
+            popupLogoutConfirmBinding.btnClose.setOnClickListener(v -> dialog.dismiss());
+            popupLogoutConfirmBinding.btnLogout.setOnClickListener(v -> {
+                editFoodPresenter.deleteFood(food.getFoodId());
+            });
+
+            dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setGravity(Gravity.CENTER);
+        });
         binding.editGiaTien.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -162,8 +188,20 @@ public class EditFoodActivity extends AppCompatActivity implements IEditFoodView
             Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             return;
         }
+        showToastAndSwitchActivity("Cập nhật món ăn thành công");
+    }
 
-        Toast.makeText(this, "Cập nhật món ăn thành công", Toast.LENGTH_SHORT).show();
+    @Override
+    public void deleteFoodResponse(SimpleMessageResponse simpleMessageResponse) {
+        if (simpleMessageResponse == null || simpleMessageResponse.isError()) {
+            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        showToastAndSwitchActivity("Xóa món ăn thành công");
+    }
+
+    private void showToastAndSwitchActivity(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("position", R.id.menu_menu);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
