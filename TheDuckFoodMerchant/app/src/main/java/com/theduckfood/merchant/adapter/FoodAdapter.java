@@ -1,6 +1,7 @@
 package com.theduckfood.merchant.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.EditFoodActivity;
 import com.theduckfood.merchant.databinding.ItemMonAnBinding;
 import com.theduckfood.merchant.model.Food;
 import com.theduckfood.merchant.presenter.HomePresenter;
@@ -67,6 +69,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 else
                     menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SOLD_OUT);
             }
+        });
+
+        holder.binding.txtChinhSua.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditFoodActivity.class);
+            intent.putExtra("food", food);
+            context.startActivity(intent);
         });
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         int margin17SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._17sdp);

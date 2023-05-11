@@ -45,13 +45,15 @@
             <TextView
                 android:id="@+id/txtTenMonAn"
                 android:layout_width="wrap_content"
+                android:maxWidth="@dimen/_170sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="Cơm tấm sườn bì trứng ốp la"
+                android:maxLines="2"
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/swtTrangThaiMonAn"
                 app:layout_constraintHorizontal_bias="0.066"
                 app:layout_constraintStart_toEndOf="@+id/layoutImgMonAn"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -80,6 +82,7 @@
                 app:trackTint="@drawable/switch_track" />
 
             <TextView
+                android:id="@+id/txtChinhSua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/_2sdp"

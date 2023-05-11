@@ -25,6 +25,8 @@ public class Food {
 
     @Nationalized
     private String foodName;
+
+    @Nationalized
     private String description;
     private String image;
     private float price = 0f;

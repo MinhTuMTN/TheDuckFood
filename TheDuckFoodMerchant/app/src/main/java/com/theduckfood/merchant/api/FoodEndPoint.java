@@ -30,4 +30,15 @@ public interface FoodEndPoint {
             @Part("price") RequestBody price,
             @Part MultipartBody.Part image
     );
+    @Multipart
+    @POST("api/merchant/food/update-food")
+    Call<SimpleMessageResponse> updateFood(
+            @Header("Authorization") String bearerToken,
+            @Part("foodId") RequestBody foodId,
+            @Part("foodName") RequestBody foodName,
+            @Part("description") RequestBody description,
+            @Part("price") RequestBody price,
+            @Part MultipartBody.Part image
+    );
+
 }

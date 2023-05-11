@@ -75,8 +75,9 @@ public class FoodManagementAPI {
             @RequestHeader("Authorization") String bearerToken,
             @RequestParam("foodId") Long foodId,
             @RequestParam("foodName") String foodName,
+            @RequestParam(value = "description", required = false) String description,
             @RequestParam("price") float price,
-            @RequestParam("image")MultipartFile image
+            @RequestParam(value = "image", required = false)MultipartFile image
     ) {
         try {
             if (price < 0 )
@@ -91,12 +92,15 @@ public class FoodManagementAPI {
             );
             food.setFoodName(foodName);
             food.setPrice(price);
+            food.setDescription(description);
             food.setPricePromotion(price);
 
-            String imageName = FileAPI.uploadImage(image);
-            if(imageName == null)
-                throw new Exception();
-            food.setImage(imageName);
+            if (image != null) {
+                String imageName = FileAPI.uploadImage(image);
+                if(imageName == null)
+                    throw new Exception();
+                food.setImage(imageName);
+            }
 
             foodRepository.save(food);
             return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật món ăn thành công"));
