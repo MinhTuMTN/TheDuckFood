@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,13 +59,20 @@ public class AccountFragment extends Fragment implements IHomeView {
     }
 
     private void addListener() {
-        binding.constraintHoSoCaNhan.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ProfileActivity.class);
-            intent.putExtra("store", store);
-            startActivity(intent);
-        });
-
+        binding.constraintHoSoCaNhan.setOnClickListener(this::switchToProfileActivity);
         binding.constraintDangXuat.setOnClickListener(this::logOut);
+        binding.constraintLayout.setOnClickListener(this::switchToProfileActivity);
+        binding.constraintGoi.setOnClickListener(v -> {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:"+900));//change the number.
+            startActivity(callIntent);
+        });
+    }
+
+    private void switchToProfileActivity(View view) {
+        Intent intent = new Intent(getContext(), ProfileActivity.class);
+        intent.putExtra("store", store);
+        startActivity(intent);
     }
 
     private void logOut(View view) {

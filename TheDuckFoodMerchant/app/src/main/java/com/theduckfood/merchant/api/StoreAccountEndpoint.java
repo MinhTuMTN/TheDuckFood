@@ -1,6 +1,7 @@
 package com.theduckfood.merchant.api;
 
 import com.theduckfood.merchant.model.request.StoreLoginRequest;
+import com.theduckfood.merchant.model.request.StoreUpdateInfoRequest;
 import com.theduckfood.merchant.model.response.GetStoreProfileResponse;
 import com.theduckfood.merchant.model.response.SimpleMessageResponse;
 import com.theduckfood.merchant.model.response.StoreLoginResponse;
@@ -23,4 +24,10 @@ public interface StoreAccountEndpoint {
     Call<SimpleMessageResponse> changeStatus(
             @Header("Authorization") String authToken,
             @Query("status") boolean status);
+
+    @POST("/api/merchant/update-profile")
+    Call<SimpleMessageResponse> updateMerchantProfile(
+            @Header("Authorization") String bearerToken,
+            @Body StoreUpdateInfoRequest updateInfoRequest
+    );
 }

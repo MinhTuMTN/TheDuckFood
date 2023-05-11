@@ -30,7 +30,6 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/layoutImgMonAn"
                 android:layout_width="@dimen/_50sdp"
-
                 android:layout_height="@dimen/_50sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
