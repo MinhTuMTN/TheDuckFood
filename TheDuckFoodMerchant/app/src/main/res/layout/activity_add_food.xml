@@ -221,9 +221,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:background="@null"
                 android:padding="@dimen/_10sdp"
+                android:inputType="number"
                 android:hint="25.000"
                 android:textColorHint="@color/gray_hint"/>
         </com.google.android.material.card.MaterialCardView>
