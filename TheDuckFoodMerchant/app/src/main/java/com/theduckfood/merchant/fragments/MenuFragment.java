@@ -117,6 +117,11 @@ public class MenuFragment extends Fragment implements IMenuView {
         List<Food> foods = foodsResponse.getFoods();
         if (foods.size() == 0) {
             Toast.makeText(getContext(), "Cửa hàng hiện chưa có món ăn nào", Toast.LENGTH_SHORT).show();
+            binding.listThucAn.setVisibility(View.GONE);
+            binding.layoutNoFood.setVisibility(View.VISIBLE);
+        } else {
+            binding.layoutNoFood.setVisibility(View.GONE);
+            binding.listThucAn.setVisibility(View.VISIBLE);
         }
 
         foodAdapter.setFoods(foods);
