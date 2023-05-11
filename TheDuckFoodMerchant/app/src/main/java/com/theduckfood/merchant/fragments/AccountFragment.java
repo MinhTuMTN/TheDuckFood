@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.ChangePasswordActivity;
 import com.theduckfood.merchant.activities.LoginActivity;
 import com.theduckfood.merchant.activities.ProfileActivity;
 import com.theduckfood.merchant.databinding.FragmentAccountBinding;
@@ -60,6 +61,10 @@ public class AccountFragment extends Fragment implements IHomeView {
 
     private void addListener() {
         binding.constraintHoSoCaNhan.setOnClickListener(this::switchToProfileActivity);
+        binding.constraintMatKhau.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+            startActivity(intent);
+        });
         binding.constraintDangXuat.setOnClickListener(this::logOut);
         binding.constraintLayout.setOnClickListener(this::switchToProfileActivity);
         binding.constraintGoi.setOnClickListener(v -> {
