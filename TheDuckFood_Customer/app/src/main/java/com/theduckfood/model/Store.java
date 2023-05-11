@@ -9,7 +9,7 @@ public class Store {
     private String phone;
     private Double balance;
     private String avatar;
-    private Double rate;
+    private float rate;
     private Long reviewCount;
     private String status;
     private Date createdAt = new Date();
@@ -18,7 +18,7 @@ public class Store {
     public Store() {
     }
 
-    public Store(Long storeId, String storeName, String address, String phone, Double balance, String avatar, Double rate, Long reviewCount, String status, Date createdAt, Date updatedAt) {
+    public Store(Long storeId, String storeName, String address, String phone, Double balance, String avatar, float rate, Long reviewCount, String status, Date createdAt, Date updatedAt) {
         this.storeId = storeId;
         this.storeName = storeName;
         this.address = address;
@@ -80,11 +80,11 @@ public class Store {
         this.avatar = avatar;
     }
 
-    public Double getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(Double rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 

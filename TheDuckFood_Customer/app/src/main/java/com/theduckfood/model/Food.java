@@ -7,8 +7,8 @@ public class Food {
     private String foodName;
     private String description;
     private String image;
-    private Double price;
-    private Double pricePromotion;
+    private float price;
+    private float pricePromotion;
     private String status;
     private Date createdAt = new Date();
     private Date updatedAt = new Date();
@@ -16,7 +16,7 @@ public class Food {
     public Food() {
     }
 
-    public Food(Long foodId, String foodName, String description, String image, Double price, Double pricePromotion, String status, Date createdAt, Date updatedAt) {
+    public Food(Long foodId, String foodName, String description, String image, float price, float pricePromotion, String status, Date createdAt, Date updatedAt) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.description = description;
@@ -60,19 +60,19 @@ public class Food {
         this.image = image;
     }
 
-    public Double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public Double getPricePromotion() {
+    public float getPricePromotion() {
         return pricePromotion;
     }
 
-    public void setPricePromotion(Double pricePromotion) {
+    public void setPricePromotion(float pricePromotion) {
         this.pricePromotion = pricePromotion;
     }
 

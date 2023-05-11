@@ -29,80 +29,74 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
                 <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toEndOf="@+id/materialCardView"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp"
+                        app:strokeColor="@color/coral"
+                        app:strokeWidth="1dp">
 
-                    <TextView
-                        android:id="@+id/txtName"
+                        <ImageView
+                            android:id="@+id/imgAvatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </com.google.android.material.card.MaterialCardView>
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:text="Food Shop"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtPhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:drawableStart="@drawable/icons8_phone_15px"
-                        android:drawablePadding="@dimen/_8sdp"
-                        android:text="0123456789"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        app:layout_constraintHorizontal_bias="0.439" />
+                        android:gravity="left|center"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txtName"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Food Shop"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/icons8_phone_15px"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:text="0123456789"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="1 Võ Văn Ngân"
+                            android:drawableStart="@drawable/icons8_address_16px"
+                            android:gravity="center_horizontal"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
                 </LinearLayout>
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/coral"
-                    app:strokeWidth="1dp">
-
-                    <ImageView
-                        android:id="@+id/imgAvatar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:id="@+id/txtAddress"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="1 VVN"
-                    android:drawableStart="@drawable/icons8_address_16px"
-                    android:drawablePadding="@dimen/_8sdp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-                    app:layout_constraintHorizontal_bias="0.493"
-                    app:layout_constraintStart_toStartOf="@+id/materialCardView"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView3"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +153,8 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                    android:layout_gravity="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_foods"
@@ -168,12 +163,24 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="32dp"
-                    android:paddingBottom="80dp"
+                    android:paddingBottom="175dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
+
+    <CheckBox
+        android:id="@+id/chk_favorite"
+        android:layout_width="42dp"
+        android:layout_height="43dp"
+        android:button="@drawable/checkbox_favorite_custom"
+        app:layout_constraintBottom_toTopOf="@+id/scrollview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

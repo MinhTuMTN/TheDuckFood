@@ -42,4 +42,7 @@ public interface UserAccountEndpoint {
 
     @GET("/api/store")
     Call<StoreDetailResponse> getStoreDetail(@Query("storeId") Long storeId, @Header("Authorization") String authToken);
+
+    @GET("/api/store/favorites")
+    Call<SimpleMessageResponse> favorite(@Query("storeId") Long storeId, @Header("Authorization") String authToken);
 }

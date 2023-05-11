@@ -5,37 +5,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
-    android:layout_margin="5dp">
+    android:layout_marginBottom="40dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="15dp"
-            app:strokeColor="@color/coral"
-            app:strokeWidth="1dp">
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_margin="@dimen/_5sdp"
+            app:cardCornerRadius="50dp"
+            android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:id="@+id/imgAvatarFood"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background" />
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
+            android:layout_marginRight="25dp"
+            android:gravity="right|center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtFoodName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Tên món ăn"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -43,19 +46,20 @@
 
             <TextView
                 android:id="@+id/txtPrice"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="10000 VNĐ"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdd"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
                 android:text="@string/add"
-                android:textSize="@dimen/_9sdp"
-                app:cornerRadius="@dimen/_15sdp" />
+                android:textSize="@dimen/_10sdp"
+                app:cornerRadius="@dimen/_10sdp" />
         </LinearLayout>
 
     </LinearLayout>
