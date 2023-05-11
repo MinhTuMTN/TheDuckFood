@@ -216,6 +216,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tóm tẳt đơn hàng"
@@ -226,6 +227,130 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:textSize="@dimen/_14sdp"/>
+            <TextView
+                android:id="@+id/txtSoMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(1 món)"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/purple_700"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_width="@dimen/_291sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#D1D0D0"
+            android:layout_gravity="center"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_17sdp"
+            android:paddingEnd="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_5sdp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_12sdp"
+                android:text="Tổng cộng"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <TextView
+                android:id="@+id/txtTongTamTinh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/_4sdp"
+                android:text="25.777"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/_17sdp"
+                android:text="đ"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chiết khấu"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-2.000"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="@+id/txtTongTamTinh"
+                app:layout_constraintTop_toBottomOf="@+id/txtTongTamTinh" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="đ"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/view5"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_width="@dimen/_291sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#D1D0D0"
+            android:layout_gravity="center"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng sau cùng"
+                android:textColor="@color/purple_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
