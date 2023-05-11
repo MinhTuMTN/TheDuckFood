@@ -36,10 +36,12 @@ public class FoodManagementAPI {
     public ResponseEntity<SimpleMessageResponse> addFood(
             @RequestHeader("Authorization") String bearerToken,
             @RequestParam("foodName") String foodName,
-            @RequestParam("price") float price,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam("price") String foodPrice,
             @RequestParam("image")MultipartFile image
             ) {
         try {
+            float price = Float.parseFloat(foodPrice);
             if (price < 0 )
                 throw new Exception();
 
@@ -47,6 +49,7 @@ public class FoodManagementAPI {
 
             Food food = new Food();
             food.setFoodName(foodName);
+            food.setDescription(description);
             food.setPrice(price);
             food.setPricePromotion(price);
             food.setStore(store);

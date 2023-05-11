@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ItemMonAnBinding;
 import com.theduckfood.merchant.model.Food;
 import com.theduckfood.merchant.presenter.HomePresenter;
@@ -66,8 +68,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                     menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SOLD_OUT);
             }
         });
-        if (position == foods.size() - 1)
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int margin17SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._17sdp);
+        int margin64SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._64sdp);
+        int margin8SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp);
+
+        if (position == foods.size() - 1) {
             first = false;
+            layoutParams.setMargins(margin17SDP, 0, margin17SDP, margin64SDP);
+        } else if (position == 0){
+            layoutParams.setMargins(margin17SDP, margin8SDP, margin17SDP, margin8SDP);
+        } else {
+            layoutParams.setMargins(margin17SDP, 0, margin17SDP, margin8SDP);
+        }
+        holder.binding.getRoot().setLayoutParams(layoutParams);
     }
 
     @Override
