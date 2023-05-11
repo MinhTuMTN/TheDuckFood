@@ -27,7 +27,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     Context context;
     List<Food> foods;
     MenuPresenter menuPresenter;
-    boolean first;
 
     public FoodAdapter(Context context, MenuPresenter menuPresenter) {
         this.context = context;
@@ -47,6 +46,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
+        holder.binding.swtTrangThaiMonAn.setOnCheckedChangeListener(null);
         Food food = foods.get(position);
 
         holder.binding.txtTenMonAn.setText(food.getFoodName());
@@ -62,15 +62,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 .load(urlImage)
                 .into(holder.binding.imgMonAn);
 
-        holder.binding.swtTrangThaiMonAn.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (!first) {
-                if (isChecked)
-                    menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SELLING);
-                else
-                    menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SOLD_OUT);
-            }
-        });
-
         holder.binding.txtChinhSua.setOnClickListener(v -> {
             Intent intent = new Intent(context, EditFoodActivity.class);
             intent.putExtra("food", food);
@@ -82,7 +73,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         int margin8SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp);
 
         if (position == foods.size() - 1) {
-            first = false;
             layoutParams.setMargins(margin17SDP, 0, margin17SDP, margin64SDP);
         } else if (position == 0){
             layoutParams.setMargins(margin17SDP, margin8SDP, margin17SDP, margin8SDP);
@@ -90,6 +80,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             layoutParams.setMargins(margin17SDP, 0, margin17SDP, margin8SDP);
         }
         holder.binding.getRoot().setLayoutParams(layoutParams);
+        holder.binding.swtTrangThaiMonAn.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked)
+                menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SELLING);
+            else
+                menuPresenter.changeFoodStatus(food.getFoodId(), Constant.FOOD_STATUS_SOLD_OUT);
+        });
     }
 
     @Override
@@ -101,7 +97,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         if (this.foods != null)
             this.foods.clear();
         this.foods = foods;
-        first = true;
         notifyDataSetChanged();
     }
 
