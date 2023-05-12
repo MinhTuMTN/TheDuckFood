@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.theduckfood.merchant.R;
@@ -25,9 +26,22 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(HomeFragment.newInstance());
+
         addEvents();
+        loadFragment();
 //        getAndUpdateFCMToken();
+    }
+
+    private void loadFragment() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            int id = intent.getIntExtra("position", 0);
+            if (id != 0) {
+                changeBottomBar(id);
+                return;
+            }
+        }
+        changeBottomBar(R.id.menu_home);
     }
 
     private void addEvents() {

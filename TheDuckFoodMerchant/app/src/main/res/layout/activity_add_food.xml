@@ -7,6 +7,7 @@
     tools:context=".activities.AddFoodActivity"
     android:layout_marginTop="@dimen/_42sdp">
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:paddingTop="@dimen/_42sdp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -86,13 +87,34 @@
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintTop_toBottomOf="@+id/btnThemHinhAnh">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingStart="@dimen/_17sdp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_17sdp"
-            android:text="Tên món ăn:"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"/>
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/labelTenMonan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên món ăn"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@color/red_pink_1"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelTenMonan"
+                app:layout_constraintTop_toTopOf="@+id/labelTenMonan" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/edtTenQuan"
@@ -105,6 +127,7 @@
             app:strokeWidth="@dimen/_1sdp">
 
             <EditText
+                android:id="@+id/editTenMon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -176,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_17sdp"
             android:layout_marginTop="@dimen/_14sdp"
-            android:text="Mô tả:"
+            android:text="Mô tả"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"/>
 
@@ -191,6 +214,7 @@
             app:strokeWidth="@dimen/_1sdp">
 
             <EditText
+                android:id="@+id/editMoTa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -200,14 +224,36 @@
                 android:textColorHint="@color/gray_hint"/>
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
             android:layout_marginStart="@dimen/_17sdp"
             android:layout_marginTop="@dimen/_18sdp"
-            android:text="Giá tiền:"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/labelGiaTien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giá tiền"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@color/red_pink_1"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelGiaTien"
+                app:layout_constraintTop_toTopOf="@+id/labelGiaTien" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="@dimen/_285sdp"
@@ -219,11 +265,12 @@
             app:strokeWidth="@dimen/_1sdp">
 
             <EditText
+                android:id="@+id/editGiaTien"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:background="@null"
                 android:padding="@dimen/_10sdp"
+                android:inputType="number"
                 android:hint="25.000"
                 android:textColorHint="@color/gray_hint"/>
         </com.google.android.material.card.MaterialCardView>
@@ -283,6 +330,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnThemMon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tạo món"

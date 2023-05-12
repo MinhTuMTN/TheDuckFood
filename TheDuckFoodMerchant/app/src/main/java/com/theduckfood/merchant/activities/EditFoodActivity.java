@@ -6,55 +6,74 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.JsonObject;
 import com.theduckfood.merchant.R;
-import com.theduckfood.merchant.databinding.ActivityAddFoodBinding;
+import com.theduckfood.merchant.databinding.ActivityEditFoodBinding;
+import com.theduckfood.merchant.databinding.PopupLogoutConfirmBinding;
+import com.theduckfood.merchant.model.Food;
 import com.theduckfood.merchant.model.response.SimpleMessageResponse;
-import com.theduckfood.merchant.presenter.AddFoodPresenter;
-import com.theduckfood.merchant.presenter.contact.IAddFoodView;
+import com.theduckfood.merchant.presenter.EditFoodPresenter;
+import com.theduckfood.merchant.presenter.contact.IEditFoodView;
+import com.theduckfood.merchant.util.Constant;
+import com.theduckfood.merchant.util.SharedPreferenceManager;
 
-import java.io.File;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class AddFoodActivity extends AppCompatActivity implements IAddFoodView {
-    ActivityAddFoodBinding binding;
+public class EditFoodActivity extends AppCompatActivity implements IEditFoodView {
+    ActivityEditFoodBinding binding;
+    EditFoodPresenter editFoodPresenter;
     Uri imageUri;
-    AddFoodPresenter addFoodPresenter;
+    Food food;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddFoodBinding.inflate(getLayoutInflater());
+        binding = ActivityEditFoodBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        addEvent();
-        addFoodPresenter = new AddFoodPresenter(this, this);
+        addEvents();
+        loadInfo();
+        editFoodPresenter = new EditFoodPresenter(this, this);
     }
 
-    private void addEvent() {
+    private void addEvents() {
         binding.btnThemHinhAnh.setOnClickListener(this::pickImage);
-        binding.btnThemMon.setOnClickListener(this::addFood);
-        binding.imageView.setOnClickListener(v -> onBackPressed());
+        binding.btnSuaMon.setOnClickListener(this::editFood);
+        binding.btnXoaMon.setOnClickListener(view -> {
+            final Dialog dialog = new Dialog(view.getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            PopupLogoutConfirmBinding popupLogoutConfirmBinding = PopupLogoutConfirmBinding.inflate(LayoutInflater.from(view.getContext()));
+            dialog.setContentView(popupLogoutConfirmBinding.getRoot());
+
+            popupLogoutConfirmBinding.txtContent.setText("Bạn có chắc muốn xóa món ăn này không ?");
+            popupLogoutConfirmBinding.btnLogout.setText("Xóa món");
+
+            popupLogoutConfirmBinding.btnClose.setOnClickListener(v -> dialog.dismiss());
+            popupLogoutConfirmBinding.btnLogout.setOnClickListener(v -> {
+                editFoodPresenter.deleteFood(food.getFoodId());
+            });
+
+            dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setGravity(Gravity.CENTER);
+        });
         binding.editGiaTien.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,15 +102,27 @@ public class AddFoodActivity extends AppCompatActivity implements IAddFoodView {
         });
     }
 
-    private void addFood(View view) {
+    private void loadInfo() {
+        Intent intent = getIntent();
+        Food food = (Food) intent.getSerializableExtra("food");
+        this.food = food;
+
+        String urlImage = food.getImage().startsWith("http") ? food.getImage() : Constant.IMAGE_BASE_URL + food.getImage();
+        Glide.with(this)
+                .load(urlImage)
+                .into(binding.imgUpLoadAva);
+
+        binding.editTenMon.setText(food.getFoodName());
+        binding.editMoTa.setText(food.getDescription());
+        binding.editGiaTien.setText(String.valueOf(food.getPricePromotion()));
+    }
+
+    private void editFood(View view) {
         String foodName = binding.editTenMon.getText().toString().trim();
         String description = binding.editMoTa.getText().toString().trim();
         String price = binding.editGiaTien.getText().toString().trim().replace(",", "");
 
-        if (imageUri == null) {
-            Toast.makeText(this, "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (foodName.isEmpty() || price.isEmpty()) {
+        if (foodName.isEmpty() || price.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -106,7 +137,7 @@ public class AddFoodActivity extends AppCompatActivity implements IAddFoodView {
             return;
         }
 
-        addFoodPresenter.addFood(foodName, description, foodPrice, imageUri);
+        editFoodPresenter.editFood(food.getFoodId(), foodName, description, foodPrice, imageUri);
     }
 
     private void pickImage(View view) {
@@ -145,20 +176,32 @@ public class AddFoodActivity extends AppCompatActivity implements IAddFoodView {
             assert data != null;
 
             this.imageUri = data.getData();
-            Glide.with(AddFoodActivity.this)
+            Glide.with(EditFoodActivity.this)
                     .load(imageUri)
                     .into(binding.imgUpLoadAva);
         }
     }
 
     @Override
-    public void addFoodResponse(SimpleMessageResponse simpleMessageResponse) {
+    public void editFoodResponse(SimpleMessageResponse simpleMessageResponse) {
         if (simpleMessageResponse == null || simpleMessageResponse.isError()) {
             Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             return;
         }
+        showToastAndSwitchActivity("Cập nhật món ăn thành công");
+    }
 
-        Toast.makeText(this, "Thêm món ăn thành công", Toast.LENGTH_SHORT).show();
+    @Override
+    public void deleteFoodResponse(SimpleMessageResponse simpleMessageResponse) {
+        if (simpleMessageResponse == null || simpleMessageResponse.isError()) {
+            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        showToastAndSwitchActivity("Xóa món ăn thành công");
+    }
+
+    private void showToastAndSwitchActivity(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("position", R.id.menu_menu);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
