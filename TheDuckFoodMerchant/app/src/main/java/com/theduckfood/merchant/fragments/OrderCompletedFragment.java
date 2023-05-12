@@ -1,4 +1,4 @@
-package com.theduckfood.merchant.activities;
+package com.theduckfood.merchant.fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.theduckfood.merchant.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OrderCancelledFragment#newInstance} factory method to
+ * Use the {@link OrderCompletedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrderCancelledFragment extends Fragment {
+public class OrderCompletedFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class OrderCancelledFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OrderCancelledFragment() {
+    public OrderCompletedFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class OrderCancelledFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderCancelledFragment.
+     * @return A new instance of fragment OrderCompletedFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static OrderCancelledFragment newInstance(String param1, String param2) {
-        OrderCancelledFragment fragment = new OrderCancelledFragment();
+    public static OrderCompletedFragment newInstance(String param1, String param2) {
+        OrderCompletedFragment fragment = new OrderCompletedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class OrderCancelledFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order_cancelled, container, false);
+        return inflater.inflate(R.layout.fragment_order_completed, container, false);
     }
 }

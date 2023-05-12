@@ -19,6 +19,7 @@ public class HomePresenter {
     private IHomeView iHomeView;
     private Context context;
     final SharedPreferenceManager sharedPreferenceManager;
+
     public HomePresenter(IHomeView iHomeView, Context context) {
         this.iHomeView = iHomeView;
         this.context = context;
@@ -49,9 +50,9 @@ public class HomePresenter {
 
     public void changeStatus(boolean status) {
         StoreAccountEndpoint storeAccountEndpoint = APIUtil.getRetrofit().create(StoreAccountEndpoint.class);
-            Call<SimpleMessageResponse> call = storeAccountEndpoint.changeStatus(
-                    "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY),
-                    status);
+        Call<SimpleMessageResponse> call = storeAccountEndpoint.changeStatus(
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY),
+                status);
         call.enqueue(new Callback<SimpleMessageResponse>() {
             @Override
             public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response) {
