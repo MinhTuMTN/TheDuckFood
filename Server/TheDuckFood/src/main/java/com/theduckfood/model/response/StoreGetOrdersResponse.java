@@ -10,8 +10,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderResponse {
-    private Order order;
-    private String address;
-    List<OrderItemResponse> orderItems;
+public class StoreGetOrdersResponse {
+    private boolean error;
+    private String message;
+    private String storeName;
+    private List<StoreOrderResponse> orders;
 }
