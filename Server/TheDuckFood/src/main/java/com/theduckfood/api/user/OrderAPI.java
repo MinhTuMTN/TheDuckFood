@@ -226,7 +226,8 @@ public class OrderAPI {
                 for (OrderItem orderItem : order.getOrderItems())
                     orderItemResponses.add(new OrderItemResponse(
                             orderItem.getFood().getFoodName(),
-                            orderItem.getAmount()));
+                            orderItem.getAmount(),
+                            orderItem.getFoodPrice()));
                 OrderResponse orderResponse = new OrderResponse();
                 orderResponse.setOrder(order);
                 orderResponse.setAddress(order.getUserAddress().getStreetAddress());

@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class OrderItemResponse {
     private String foodName;
     private int amount;
+    private Double price;
 }

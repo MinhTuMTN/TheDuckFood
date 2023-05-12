@@ -52,7 +52,10 @@ public class OrderCompletedFragment extends Fragment implements IOrderView {
             return;
         binding.imgKhongDonHang.setVisibility(View.GONE);
         binding.listDonHang.setVisibility(View.VISIBLE);
-        OrderAdapter orderAdapter = new OrderAdapter(getContext(), ordersResponse.getOrders());
+        OrderAdapter orderAdapter = new OrderAdapter(
+                getContext(),
+                ordersResponse.getOrders(),
+                ordersResponse.getStoreName());
         binding.listDonHang.setAdapter(orderAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(

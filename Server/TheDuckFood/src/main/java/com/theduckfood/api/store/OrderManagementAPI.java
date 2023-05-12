@@ -47,7 +47,8 @@ public class OrderManagementAPI {
                 for (OrderItem orderItem : order.getOrderItems())
                     orderItemResponses.add(new OrderItemResponse(
                             orderItem.getFood().getFoodName(),
-                            orderItem.getAmount()
+                            orderItem.getAmount(),
+                            orderItem.getFoodPrice()
                     ));
 
                 storeOrderResponses.add(new StoreOrderResponse(

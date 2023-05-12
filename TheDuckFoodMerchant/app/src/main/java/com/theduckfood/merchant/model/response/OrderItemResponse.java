@@ -1,8 +1,19 @@
 package com.theduckfood.merchant.model.response;
 
-public class OrderItemResponse {
+import java.io.Serializable;
+
+public class OrderItemResponse implements Serializable {
     private String foodName;
     private int amount;
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public String getFoodName() {
         return foodName;

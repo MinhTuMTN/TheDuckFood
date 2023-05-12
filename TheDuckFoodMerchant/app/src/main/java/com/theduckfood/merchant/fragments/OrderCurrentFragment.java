@@ -19,7 +19,7 @@ import com.theduckfood.merchant.presenter.contact.IOrderView;
 import com.theduckfood.merchant.util.Constant;
 
 
-public class CurrentOrderFragment extends Fragment implements IOrderView {
+public class OrderCurrentFragment extends Fragment implements IOrderView {
     FragmentCurrentOrderBinding binding;
     OrderPresenter orderPresenter;
 
@@ -48,7 +48,10 @@ public class CurrentOrderFragment extends Fragment implements IOrderView {
         binding.imgKhongDonHang.setVisibility(View.VISIBLE);
         if (ordersResponse.getOrders() == null || ordersResponse.getOrders().size() == 0)
             return;
-        OrderAdapter orderAdapter = new OrderAdapter(getContext(), ordersResponse.getOrders());
+        OrderAdapter orderAdapter = new OrderAdapter(
+                getContext(),
+                ordersResponse.getOrders(),
+                ordersResponse.getStoreName());
         binding.listDonHang.setAdapter(orderAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
