@@ -15,17 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
-import com.theduckfood.R;
+import com.theduckfood.activities.ChangePasswordActivity;
 import com.theduckfood.activities.LoginActivity;
+import com.theduckfood.activities.StoreDetailActivity;
+import com.theduckfood.activities.UpdateProfileActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
 import com.theduckfood.databinding.PopupLogoutConfirmBinding;
+import com.theduckfood.model.respone.GetProfileResponse;
+import com.theduckfood.presenter.GetProfilePresenter;
+import com.theduckfood.presenter.contact.IProfileView;
 import com.theduckfood.util.SharedPreferenceManager;
 
-import java.util.Objects;
-
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements IProfileView {
     FragmentProfileBinding binding;
+
+    Dialog dialog;
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
     }
@@ -52,6 +58,21 @@ public class ProfileFragment extends Fragment {
 
     private void addEvents() {
         binding.cardLogOut.setOnClickListener(this::logOut);
+        binding.cardChangePassword.setOnClickListener(this::changePassword);
+        binding.btnEditProfile.setOnClickListener(this::updateProfile);
+        binding.cardNotification.setOnClickListener(this::storeDetail);
+    }
+
+    private void storeDetail(View view) {
+        Intent intent = new Intent(getActivity(), StoreDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void updateProfile(View view) {
+        Intent intent = new Intent(getActivity(), UpdateProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void logOut(View view) {
@@ -74,10 +95,26 @@ public class ProfileFragment extends Fragment {
         dialog.getWindow().setGravity(Gravity.CENTER);
     }
 
-    private void loadUserData(View view) {
-        SharedPreferenceManager preferenceManager = new SharedPreferenceManager(view.getContext());
-        binding.txtFullName.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_PROFILE_FULL_NAME_KEY));
-        binding.txtEmail.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_ACCOUNT_EMAIL));
-        binding.txtPhone.setText(preferenceManager.getStringValue(SharedPreferenceManager.USER_PROFILE_PHONE_KEY));
+    private void changePassword(View view){
+        Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
+    private void loadUserData(View view) {
+        GetProfilePresenter getProfilePresenter = new GetProfilePresenter(this, getContext());
+        getProfilePresenter.getProfile();
+    }
+
+    @Override
+    public void getProfile(GetProfileResponse getProfileResponse) {
+        if (getProfileResponse == null) {
+            Toast.makeText(getContext(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        binding.txtFullName.setText(getProfileResponse.getUserProfile().getFullName());
+        binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());
+        binding.txtPhone.setText(getProfileResponse.getUserProfile().getPhone());
+    }
+
 }

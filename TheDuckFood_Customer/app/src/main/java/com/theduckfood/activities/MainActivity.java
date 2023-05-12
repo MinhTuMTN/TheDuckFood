@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             switch (item.getItemId()) {
                 case R.id.menu_home:
                     break;
+                case R.id.menu_profile:
+                    replaceFragment(ProfileFragment.newInstance());
+                    break;
                 default:
                     replaceFragment(ProfileFragment.newInstance());
                     break;

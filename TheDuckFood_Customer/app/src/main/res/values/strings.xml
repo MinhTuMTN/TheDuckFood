@@ -8,6 +8,8 @@
     <string name="register">Đăng ký</string>
     <string name="have_account">Bạn đã có tài khoản? </string>
     <string name="full_name">Họ tên</string>
+    <string name="old_password">Mật khẩu cũ</string>
+    <string name="new_password">Mật khẩu mới</string>
     <string name="confirm_password">Xác nhận mật khẩu</string>
     <string name="phone">Số điện thoại</string>
     <string name="enter_email">Nhập Email</string>
@@ -25,4 +27,6 @@
     <string name="order">Đơn hàng</string>
     <string name="account">Tài khoản</string>
     <string name="account_information">Thông tin tài khoản</string>
+    <string name="update_profile">Cập nhật thông tin cá nhân</string>
+    <string name="add">Thêm</string>
 </resources>
