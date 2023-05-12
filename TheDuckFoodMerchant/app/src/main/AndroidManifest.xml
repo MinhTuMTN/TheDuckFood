@@ -24,6 +24,15 @@
         android:theme="@style/Theme.TheDuckFoodMerchant"
         tools:targetApi="31">
         <activity
+            android:name=".activities.AddCouponActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.ReviewActivity"
             android:exported="false" />
         <activity
@@ -38,13 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".activities.AddFoodActivity"
             android:exported="false"
