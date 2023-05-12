@@ -6,12 +6,25 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="colorAccent">#E97777</item>
     </style>
+    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>
+    </style>
 
+    <style name="MaterialDialogSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
+    </style>
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+    <style name="BottomNavigationViewActive" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">14sp</item>
     </style>
 </resources>

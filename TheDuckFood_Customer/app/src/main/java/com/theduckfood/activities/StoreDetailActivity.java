@@ -17,6 +17,7 @@ import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
 import com.theduckfood.presenter.StoreDetailPresenter;
 import com.theduckfood.presenter.contact.IStoreDetailView;
+import com.theduckfood.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         StoreDetailPresenter storeDetailPresenter = new StoreDetailPresenter(this, StoreDetailActivity.this);
         addEvents(storeDetailPresenter);
 
-}
+    }
 
     private void addEvents(StoreDetailPresenter storeDetailPresenter) {
         loadStoreDetail(storeDetailPresenter);
@@ -70,8 +71,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
             Toast.makeText(this, "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
+        String urlImage = storeDetailResponse.getStore().getAvatar().startsWith("http") ? storeDetailResponse.getStore().getAvatar() : Constant.IMAGE_BASE_URL + storeDetailResponse.getStore().getAvatar();
         Glide.with(StoreDetailActivity.this)
-                .load(storeDetailResponse.getStore().getAvatar())
+                .load(urlImage)
                 .into(binding.imgAvatar);
         binding.txtName.setText(storeDetailResponse.getStore().getStoreName());
         binding.txtPhone.setText(storeDetailResponse.getStore().getPhone());

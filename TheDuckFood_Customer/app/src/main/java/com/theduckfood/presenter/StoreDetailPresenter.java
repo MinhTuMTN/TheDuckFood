@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.theduckfood.api.APIUtil;
 import com.theduckfood.api.UserAccountEndpoint;
+import com.theduckfood.model.respone.FoodDetailResponse;
 import com.theduckfood.model.respone.GetProfileResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
@@ -43,7 +44,7 @@ public class StoreDetailPresenter {
         });
     }
 
-    public void favorite(Long storeId){
+    public void favorite(Long storeId) {
         final SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context);
         UserAccountEndpoint userAccountEndpoint = APIUtil.getRetrofit().create(UserAccountEndpoint.class);
         Call<SimpleMessageResponse> call = userAccountEndpoint.favorite(
