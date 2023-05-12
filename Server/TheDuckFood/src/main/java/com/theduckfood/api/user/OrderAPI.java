@@ -3,8 +3,7 @@ package com.theduckfood.api.user;
 import com.theduckfood.entity.*;
 import com.theduckfood.model.request.FoodOrderItemRequest;
 import com.theduckfood.model.request.OrderRequest;
-import com.theduckfood.model.response.CreateOrderResponse;
-import com.theduckfood.model.response.SimpleMessageResponse;
+import com.theduckfood.model.response.*;
 import com.theduckfood.repositories.*;
 import com.theduckfood.util.Constants;
 import com.theduckfood.util.JWTUtil;
@@ -205,6 +204,46 @@ public class OrderAPI {
             return ResponseEntity.status(400).body(new SimpleMessageResponse(
                     true,
                     "Không thể hủy đơn hàng này"
+            ));
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<UserGetAllOrderResponse> getAllOrders(
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        try {
+            String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+            UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
+
+            List<Order> orders = orderRepository.getOrdersByUserProfile(userProfile);
+            if (orders == null || orders.size() == 0)
+                throw new Exception();
+
+            List<OrderResponse> orderResponses = new ArrayList<>();
+            for (Order order : orders) {
+                List<OrderItemResponse> orderItemResponses = new ArrayList<>();
+                for (OrderItem orderItem : order.getOrderItems())
+                    orderItemResponses.add(new OrderItemResponse(
+                            orderItem.getFood().getFoodName(),
+                            orderItem.getAmount()));
+                OrderResponse orderResponse = new OrderResponse();
+                orderResponse.setOrder(order);
+                orderResponse.setAddress(order.getUserAddress().getStreetAddress());
+                orderResponse.setOrderItems(orderItemResponses);
+                orderResponses.add(orderResponse);
+            }
+            return ResponseEntity.ok(new UserGetAllOrderResponse(
+                    false,
+                    "Thành công",
+                    orderResponses
+            ));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(400).body(new UserGetAllOrderResponse(
+                    true,
+                    "Đã có lỗi xảy ra",
+                    null
             ));
         }
     }

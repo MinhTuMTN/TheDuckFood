@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:text="Cài đặt"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_17sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imgSetting"
                 app:layout_constraintStart_toEndOf="@+id/imgSetting"
@@ -135,13 +135,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgSetting"
                 app:layout_constraintStart_toStartOf="@+id/imgSetting"
                 android:layout_marginTop="@dimen/_12sdp">
+
                 <TextView
-                    android:paddingStart="@dimen/_17sdp"
                     android:id="@+id/btnProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_17sdp"
                     android:text="Hồ sơ cá nhân"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/arrow_right_ho_so"
@@ -169,12 +173,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/view1"
                 app:layout_constraintStart_toStartOf="@+id/constraint_ho_so_ca_nhan"
                 android:layout_marginTop="@dimen/_12sdp">
+
                 <TextView
-                    android:paddingStart="@dimen/_17sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_17sdp"
                     android:text="Mật khẩu"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/arrow_right_mat_khau"
@@ -205,7 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:text="Hỗ trợ"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_17sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imgHelp"
                 app:layout_constraintStart_toEndOf="@+id/imgHelp"
@@ -217,12 +225,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgHelp"
                 app:layout_constraintStart_toStartOf="@+id/imgHelp"
                 android:layout_marginTop="@dimen/_12sdp">
+
                 <TextView
-                    android:paddingStart="@dimen/_17sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_17sdp"
                     android:text="Gọi The Duck Food"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/arrow_right_goi"
@@ -256,9 +268,11 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/_17sdp"
                     android:text="Đăng xuất"
-                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#DA2626"
+                    android:textSize="@dimen/_15sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/arrow_right_dang_xuat"

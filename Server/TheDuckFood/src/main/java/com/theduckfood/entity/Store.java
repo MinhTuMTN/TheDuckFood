@@ -25,6 +25,7 @@ public class Store {
     @Nationalized
     private String storeName;
 
+    @Nationalized
     private String address;
 
     @Pattern(regexp = "^0\\d{9}$", message = "Invalid phone number format")

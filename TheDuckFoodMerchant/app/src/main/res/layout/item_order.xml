@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/_14sdp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1-2hwwutextv"
+        android:textAllCaps="true"
+        android:textColor="@color/gray_hint"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/_14sdp"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img1"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:src="@drawable/food_design_icon"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/txtSoMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1 món được đặt"
+        android:textColor="@color/coral_pink"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toEndOf="@+id/img1"
+        app:layout_constraintTop_toTopOf="@+id/img1" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView2"
+        android:layout_width="@dimen/_7sdp"
+        android:layout_height="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:src="@drawable/icons8_filled_circle_96px"
+        app:layout_constraintStart_toStartOf="@+id/txtSoMon"
+        app:layout_constraintTop_toBottomOf="@+id/txtSoMon" />
+
+    <TextView
+        android:id="@+id/txtTongTien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="25.000 đ"
+        android:textColor="#0F9512"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView2"
+        app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
+
+
+    <TextView
+        android:id="@+id/txtGioDat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_right"
+        app:layout_constraintTop_toTopOf="@+id/txtSoMon" />
+
+    <TextView
+        android:id="@+id/txtNgayDat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/05"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTongTien"
+        app:layout_constraintEnd_toEndOf="@+id/txtGioDat"
+        app:layout_constraintTop_toBottomOf="@+id/txtGioDat" />
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="17dp"
+        android:src="@drawable/right"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTongTien"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtSoMon"
+        app:layout_constraintVertical_bias="0.49" />
+</androidx.constraintlayout.widget.ConstraintLayout>

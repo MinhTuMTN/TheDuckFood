@@ -1,6 +1,7 @@
 package com.theduckfood.merchant.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.activities.MainActivity;
+import com.theduckfood.merchant.activities.ReviewActivity;
 import com.theduckfood.merchant.adapter.SliderAdapter;
 import com.theduckfood.merchant.databinding.FragmentHomeBinding;
 import com.theduckfood.merchant.model.Store;
@@ -76,9 +78,10 @@ public class HomeFragment extends Fragment implements IHomeView {
             homePresenter.changeStatus(isChecked);
         });
 
-        binding.btnDonHang.setOnClickListener(v -> {
-
-        });
+        binding.btnDanhGia.setOnClickListener(v -> requireContext()
+                .startActivity(new Intent(getContext(), ReviewActivity.class)));
+        binding.btnDonHang.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_orders));
+        binding.btnThucDon.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_menu));
     }
 
     private void initDialog() {
@@ -119,9 +122,11 @@ public class HomeFragment extends Fragment implements IHomeView {
         Store store = storeProfileResponse.getStore();
         binding.txtTen.setText(store.getStoreName());
         binding.txtDiaChi.setText(store.getAddress());
-        Glide.with(requireContext())
-                .load(store.getAvatar())
-                .into(binding.imgAva);
+        if (getContext() != null) {
+            Glide.with(getContext())
+                    .load(store.getAvatar())
+                    .into(binding.imgAva);
+        }
 
         boolean opening = store.getStatus().equals(Constant.STORE_STATUS_OPENING);
         binding.swtTrangThai.setChecked(opening);
@@ -132,9 +137,6 @@ public class HomeFragment extends Fragment implements IHomeView {
             binding.txtTrangThai.setText("Đã đóng cửa");
             binding.txtMoTaTrangThai.setText("Bật để mở");
         }
-
-        binding.btnDonHang.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_orders));
-        binding.btnThucDon.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_menu));
     }
 
     @Override

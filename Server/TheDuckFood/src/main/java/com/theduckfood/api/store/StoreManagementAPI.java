@@ -3,10 +3,10 @@ package com.theduckfood.api.store;
 import com.theduckfood.entity.Store;
 import com.theduckfood.entity.StoreAccount;
 import com.theduckfood.entity.UserAccount;
-import com.theduckfood.entity.UserProfile;
+import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.StoreLoginRequest;
+import com.theduckfood.model.request.StoreUpdateInfoRequest;
 import com.theduckfood.model.response.GetStoreProfileResponse;
-import com.theduckfood.model.response.ProfileResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.model.response.StoreLoginResponse;
 import com.theduckfood.repositories.StoreAccountRepository;
@@ -80,6 +80,55 @@ public class StoreManagementAPI {
                         false,
                         "Thành công",
                         store));
+    }
+
+    @PostMapping("/update-profile")
+    public ResponseEntity<SimpleMessageResponse> updateProfile(@RequestHeader("Authorization") String bearerToken,
+                                                               @RequestBody StoreUpdateInfoRequest updateInfoRequest)
+    {
+        try {
+            Store store = getStoreFromToken(bearerToken);
+            if (store == null)
+                throw new Exception();
+            store.setStoreName(updateInfoRequest.getStoreName());
+            store.setPhone(updateInfoRequest.getStorePhone());
+            store.setAddress(updateInfoRequest.getStoreAddress());
+            storeRepository.save(store);
+
+            return ResponseEntity.ok(new SimpleMessageResponse(
+                    false,
+                    "Cập nhật thành công"
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(
+                    true,
+                    "Đã có lỗi xảy ra"));
+        }
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<SimpleMessageResponse> changePassword(@RequestHeader("Authorization") String bearerToken,
+                                                                @RequestBody ChangePasswordRequest changePasswordRequest) {
+        if (!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getRepeatPassword()))
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(true, "Mật khẩu không khớp"));
+
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        StoreAccount storeAccount = storeAccountRepository
+                .findStoreAccountByEmailAndStatusNotContaining(email, Constants.STORE_STATUS_DELETED);
+
+        if (storeAccount == null)
+            return ResponseEntity
+                    .status(400)
+                    .body(new SimpleMessageResponse(
+                            true,
+                            "Đã có lỗi xảy ra"));
+        else if (!EncodingUtil.isValid(changePasswordRequest.getOldPassword(), storeAccount.getPassword()))
+            return ResponseEntity.status(401).body(new SimpleMessageResponse(true, "Mật khẩu không đúng"));
+
+        storeAccount.setPassword(EncodingUtil.encoding(changePasswordRequest.getNewPassword()));
+        storeAccountRepository.save(storeAccount);
+
+        return ResponseEntity.ok(new SimpleMessageResponse(false, "Đổi mật khẩu thành công"));
     }
 
     @GetMapping("/change-status")

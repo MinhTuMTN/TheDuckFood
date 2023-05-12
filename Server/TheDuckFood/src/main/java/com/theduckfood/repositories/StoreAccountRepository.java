@@ -11,5 +11,6 @@ public interface StoreAccountRepository extends JpaRepository<StoreAccount, Stri
             String password,
             String status);
 
+
     StoreAccount findStoreAccountByEmailAndStatusNotContaining(String email, String status);
 }

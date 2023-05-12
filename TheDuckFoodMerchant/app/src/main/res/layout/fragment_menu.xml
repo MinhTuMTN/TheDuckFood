@@ -45,105 +45,142 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.628" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/constraintHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/constraintHeader">
+
         <LinearLayout
             android:id="@+id/linearQuanLy"
-            android:paddingStart="@dimen/_24sdp"
-            android:paddingEnd="@dimen/_24sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingStart="@dimen/_24sdp"
             android:paddingTop="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_24sdp"
             android:paddingBottom="@dimen/_8sdp">
+
             <com.google.android.material.card.MaterialCardView
-                app:strokeWidth="@dimen/_1sdp"
-                app:strokeColor="#555252"
+                android:id="@+id/btnTatCa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_24sdp"
                 android:layout_weight="1"
                 app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
-                android:layout_marginEnd="@dimen/_24sdp"
-                >
+                app:strokeColor="#555252"
+                app:strokeWidth="@dimen/_1sdp">
+
                 <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtTatCa"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:paddingBottom="@dimen/_4sdp"
                     android:text="Tất cả"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:paddingEnd="@dimen/_16sdp"/>
+                    android:textColor="@color/coral"
+                    android:textSize="@dimen/_12sdp" />
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
-                app:strokeWidth="@dimen/_1sdp"
-                app:strokeColor="#555252"
+                android:id="@+id/btnDangMo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
                 android:layout_marginEnd="@dimen/_24sdp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đang mở"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:paddingEnd="@dimen/_16sdp"/>
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
-                app:strokeWidth="@dimen/_1sdp"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/_12sdp"
                 app:strokeColor="#555252"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <TextView
+                    android:id="@+id/txtDangMo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:text="Đang mở"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnDaDong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="@dimen/_12sdp"
-                android:backgroundTint="#EDEDED"
-                >
+                app:strokeColor="#555252"
+                app:strokeWidth="@dimen/_1sdp">
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtDaDong"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Đã đóng"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="#555252"
-                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_8sdp"
                     android:paddingTop="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_4sdp"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_14sdp"/>
+                    android:text="Đã đóng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listThucAn"
-            android:paddingTop="@dimen/_14sdp"
-            android:paddingStart="@dimen/_17sdp"
-            android:paddingEnd="@dimen/_17sdp"
+            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/_14sdp" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_no_food"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_14sdp" >
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/icons8_male_user_480px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chưa có món ăn nào"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toStartOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fabCustomSize="@dimen/_40sdp"
         android:layout_gravity="end"
         android:src="@drawable/icons8_xbox_cross_100px"
         app:backgroundTint="#E4655A"
@@ -151,9 +188,9 @@
         app:layout_anchor="@id/frlThucDon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
         app:rippleColor="@color/red_deep"
-        app:tint="@color/white"
-        android:layout_marginEnd="@dimen/_17sdp"
-        android:layout_marginBottom="@dimen/_17sdp"
-        android:contentDescription="TODO" />
+        app:tint="@color/white">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

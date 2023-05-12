@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.card.MaterialCardView
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginEnd="@dimen/_17sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:strokeWidth="@dimen/_1sdp"
-        app:strokeColor="#555252"
-        app:cardElevation="10dp"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="10dp"
+        app:contentPaddingBottom="@dimen/_8sdp"
+        app:contentPaddingTop="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#555252"
+        app:strokeWidth="@dimen/_1sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintContener"
@@ -27,15 +27,15 @@
             android:paddingBottom="@dimen/_8sdp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/imgMonAn"
+                android:id="@+id/layoutImgMonAn"
                 android:layout_width="@dimen/_50sdp"
-
                 android:layout_height="@dimen/_50sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/imgMonAn"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:scaleType="centerCrop"
@@ -45,19 +45,21 @@
             <TextView
                 android:id="@+id/txtTenMonAn"
                 android:layout_width="wrap_content"
+                android:maxWidth="@dimen/_170sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="Cơm tấm sườn bì trứng ốp la"
+                android:maxLines="2"
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/swtTrangThaiMonAn"
                 app:layout_constraintHorizontal_bias="0.066"
-                app:layout_constraintStart_toEndOf="@+id/imgMonAn"
+                app:layout_constraintStart_toEndOf="@+id/layoutImgMonAn"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/txtGiaTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
@@ -68,7 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtTenMonAn" />
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchCompat"
+                android:id="@+id/swtTrangThaiMonAn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -80,18 +82,17 @@
                 app:trackTint="@drawable/switch_track" />
 
             <TextView
+                android:id="@+id/txtChinhSua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chỉnh sửa"
                 android:paddingTop="@dimen/_2sdp"
-                android:textStyle="bold"
+                android:text="Chỉnh sửa"
                 android:textColor="#E4FF5722"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/switchCompat"
+                app:layout_constraintEnd_toEndOf="@+id/swtTrangThaiMonAn"
                 app:layout_constraintVertical_bias="0.45" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>

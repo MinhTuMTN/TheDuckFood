@@ -6,15 +6,20 @@ import com.theduckfood.model.request.ReviewRequest;
 import com.theduckfood.model.response.FoodDetailsResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.model.response.StoreDetailsResponse;
+import com.theduckfood.model.response.UserGetListStore;
 import com.theduckfood.repositories.*;
 import com.theduckfood.util.Constants;
 import com.theduckfood.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -42,7 +47,7 @@ public class StoreAPI {
                 storeId,
                 Constants.STORE_STATUS_DELETED);
         if (store != null)
-            return  ResponseEntity.ok(new StoreDetailsResponse(
+            return ResponseEntity.ok(new StoreDetailsResponse(
                     false,
                     "Thành công",
                     store,
@@ -72,13 +77,13 @@ public class StoreAPI {
                     Constants.ORDER_STATUS_SUCCESS
             );
 
-            if(order.getReview() != null)
+            if (order.getReview() != null)
                 return ResponseEntity.status(409).body(new SimpleMessageResponse(
                         true,
                         "Đơn hàng đã được đánh giá"
                 ));
 
-            if(!Objects.equals(userProfile.getUserId(), order.getUserProfile().getUserId()))
+            if (!Objects.equals(userProfile.getUserId(), order.getUserProfile().getUserId()))
                 return ResponseEntity.status(401).body(new SimpleMessageResponse(
                         true,
                         "JWT Token không hợp lệ"
@@ -97,14 +102,14 @@ public class StoreAPI {
             store.setReviewCount(store.getReviewCount() + 1);
             storeRepository.save(store);
 
-            return  ResponseEntity.ok(new SimpleMessageResponse(
+            return ResponseEntity.ok(new SimpleMessageResponse(
                     false,
                     "Thành công"
             ));
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             System.out.println(e.getMessage());
-            return  ResponseEntity.status(400).body(new SimpleMessageResponse(
+            return ResponseEntity.status(400).body(new SimpleMessageResponse(
                     true,
                     "Đã có lỗi xảy ra"));
         }
@@ -135,5 +140,38 @@ public class StoreAPI {
                 false,
                 "Đã thích cửa hàng này"
         ));
+    }
+
+    @GetMapping("/list-store")
+    public ResponseEntity<UserGetListStore> getListStore(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "limit", required = false) Integer limit,
+            @RequestParam(value = "sort", required = false) String sortParam,
+            @RequestParam(value = "sortType", required = false) String sortType
+    ) {
+
+        page = page == null ? 0 : page;
+        limit = limit == null ? 5 : limit;
+        if (sortParam != null)
+            switch (sortParam) {
+                case "rate" -> sortParam = "rate";
+                case "date" -> sortParam = "createdAt";
+                default -> sortParam = "storeId";
+            }
+        else sortParam = "storeId";
+
+        Sort sort = (sortType != null && sortType.equals("ASC")) ? Sort.by(sortParam).ascending() : Sort.by(sortParam).descending();
+        Pageable pageable = PageRequest.of(page, limit, sort);
+        List<Store> stores = storeRepository.getStoresByStatusNotContaining(
+                Constants.STORE_STATUS_DELETED,
+                pageable
+        );
+        return ResponseEntity.ok(new UserGetListStore(
+                false,
+                "Thành công",
+                stores
+        ));
+
     }
 }

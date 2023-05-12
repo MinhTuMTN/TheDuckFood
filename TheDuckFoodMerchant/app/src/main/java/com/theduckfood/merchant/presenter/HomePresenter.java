@@ -19,6 +19,7 @@ public class HomePresenter {
     private IHomeView iHomeView;
     private Context context;
     final SharedPreferenceManager sharedPreferenceManager;
+
     public HomePresenter(IHomeView iHomeView, Context context) {
         this.iHomeView = iHomeView;
         this.context = context;
