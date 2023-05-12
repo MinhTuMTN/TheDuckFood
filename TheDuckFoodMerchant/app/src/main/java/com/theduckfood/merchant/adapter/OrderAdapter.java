@@ -56,7 +56,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.binding.txtSoMon.setText(numberFood);
 
         String orderId = "Đơn hàng " + orderResponse.getOrder().getOrderId();
-        holder.binding.textView.setText(orderId);
+        holder.binding.txtMaDonHang.setText(orderId);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), OrderDetailsActivity.class);

@@ -25,6 +25,7 @@ import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.activities.MainActivity;
 import com.theduckfood.merchant.activities.ReviewActivity;
+import com.theduckfood.merchant.activities.WalletActivity;
 import com.theduckfood.merchant.adapter.SliderAdapter;
 import com.theduckfood.merchant.databinding.FragmentHomeBinding;
 import com.theduckfood.merchant.model.Store;
@@ -78,6 +79,8 @@ public class HomeFragment extends Fragment implements IHomeView {
             homePresenter.changeStatus(isChecked);
         });
 
+        binding.btnVi.setOnClickListener(v -> requireContext()
+                .startActivity(new Intent(getContext(), WalletActivity.class)));
         binding.btnDanhGia.setOnClickListener(v -> requireContext()
                 .startActivity(new Intent(getContext(), ReviewActivity.class)));
         binding.btnDonHang.setOnClickListener(v -> ((MainActivity) requireActivity()).changeBottomBar(R.id.menu_orders));
