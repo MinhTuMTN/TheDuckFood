@@ -31,6 +31,7 @@ public class Coupon {
 
     private Date createdAt = new Date();
     private Date updatedAt = new Date();
+    private Date startAt = new Date();
     private Date expiredAt = new Date();
 
     private String status = Constants.COUPON_STATUS_ACTIVATED;

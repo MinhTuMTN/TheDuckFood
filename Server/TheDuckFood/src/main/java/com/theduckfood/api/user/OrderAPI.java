@@ -94,6 +94,7 @@ public class OrderAPI {
         boolean couponIsValid = coupon != null
                 && coupon.getUsed() < coupon.getAmount()
                 && coupon.getMinPrice() <= amount_before_coupon
+                && (new Date()).after(coupon.getStartAt())
                 && (new Date()).before(coupon.getExpiredAt());
 
         double amount = amount_before_coupon;
@@ -182,7 +183,7 @@ public class OrderAPI {
             String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
             UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
 
-            Order order = orderRepository.getOrderByOrderIdAndStatus(orderId, Constants.ORDER_STATUS_PROCESSING);
+            Order order = orderRepository.getOrderByOrderIdAndStatus(orderId, Constants.ORDER_STATUS_WAITING);
             if (order == null || !Objects.equals(
                     userProfile.getUserId(),
                     order.getUserProfile().getUserId()))
