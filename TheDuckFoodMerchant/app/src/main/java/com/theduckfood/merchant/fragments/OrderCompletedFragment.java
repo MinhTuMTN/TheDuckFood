@@ -2,65 +2,67 @@ package com.theduckfood.merchant.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.adapter.OrderAdapter;
+import com.theduckfood.merchant.databinding.FragmentDeliveryBinding;
+import com.theduckfood.merchant.databinding.FragmentOrderCompletedBinding;
+import com.theduckfood.merchant.model.response.StoreGetOrdersResponse;
+import com.theduckfood.merchant.presenter.OrderPresenter;
+import com.theduckfood.merchant.presenter.contact.IOrderView;
+import com.theduckfood.merchant.util.Constant;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderCompletedFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class OrderCompletedFragment extends Fragment {
+public class OrderCompletedFragment extends Fragment implements IOrderView {
+    FragmentOrderCompletedBinding binding;
+    OrderPresenter orderPresenter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public OrderCompletedFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderCompletedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OrderCompletedFragment newInstance(String param1, String param2) {
-        OrderCompletedFragment fragment = new OrderCompletedFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentOrderCompletedBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        orderPresenter = new OrderPresenter(this, getContext());
+        orderPresenter.getOrders(Constant.ORDER_STATUS_SUCCESS);
+    }
+
+    @Override
+    public void getOrdersResponse(StoreGetOrdersResponse ordersResponse) {
+        if (ordersResponse == null || ordersResponse.isError()) {
+            Toast.makeText(getContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            return;
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order_completed, container, false);
+        binding.listDonHang.setVisibility(View.GONE);
+        binding.imgKhongDonHang.setVisibility(View.VISIBLE);
+        if (ordersResponse.getOrders() == null || ordersResponse.getOrders().size() == 0)
+            return;
+        binding.imgKhongDonHang.setVisibility(View.GONE);
+        binding.listDonHang.setVisibility(View.VISIBLE);
+        OrderAdapter orderAdapter = new OrderAdapter(
+                getContext(),
+                ordersResponse.getOrders(),
+                ordersResponse.getStoreName());
+        binding.listDonHang.setAdapter(orderAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                getContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+        );
+        binding.listDonHang.setLayoutManager(linearLayoutManager);
     }
 }

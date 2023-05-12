@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="@+id/txtSoMon" />
 
     <TextView
-        android:id="@+id/txtTongTamTinh"
+        android:id="@+id/txtTongTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_5sdp"
@@ -77,12 +77,13 @@
         app:layout_constraintTop_toTopOf="@+id/txtSoMon" />
 
     <TextView
-        android:id="@+id/NgayDat"
+        android:id="@+id/txtNgayDat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12/05"
         android:textColor="@color/gray_hint"
         android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTongTien"
         app:layout_constraintEnd_toEndOf="@+id/txtGioDat"
         app:layout_constraintTop_toBottomOf="@+id/txtGioDat" />
 
@@ -92,7 +93,7 @@
         android:layout_height="@dimen/_22sdp"
         android:layout_marginEnd="17dp"
         android:src="@drawable/right"
-        app:layout_constraintBottom_toBottomOf="@+id/NgayDat"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTongTien"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtSoMon"
         app:layout_constraintVertical_bias="0.49" />
