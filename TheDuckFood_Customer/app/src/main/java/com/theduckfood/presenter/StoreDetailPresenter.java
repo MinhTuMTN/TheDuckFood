@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.theduckfood.api.APIUtil;
 import com.theduckfood.api.UserAccountEndpoint;
-import com.theduckfood.model.respone.FoodDetailResponse;
-import com.theduckfood.model.respone.GetProfileResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
 import com.theduckfood.presenter.contact.IStoreDetailView;

@@ -1,7 +1,6 @@
 package com.theduckfood.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.theduckfood.api.APIUtil;
 import com.theduckfood.api.UserAccountEndpoint;

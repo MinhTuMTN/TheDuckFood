@@ -1,22 +1,14 @@
 package com.theduckfood.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.theduckfood.R;
-import com.theduckfood.activities.OrderDetailActivity;
-import com.theduckfood.databinding.ItemOrderBinding;
 import com.theduckfood.databinding.ItemOrderDetailBinding;
 import com.theduckfood.model.respone.OrderItemResponse;
-import com.theduckfood.model.respone.OrderResponse;
-import com.theduckfood.util.Constant;
 
 import java.util.List;
 

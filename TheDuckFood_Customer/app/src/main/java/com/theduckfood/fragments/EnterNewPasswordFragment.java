@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.theduckfood.R;
 import com.theduckfood.databinding.FragmentEnterNewPasswordBinding;
 
 public class EnterNewPasswordFragment extends Fragment {

@@ -8,7 +8,6 @@ import com.theduckfood.api.UserAccountEndpoint;
 import com.theduckfood.model.UserProfile;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.respone.LoginResponse;
-import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.presenter.contact.ILoginView;
 import com.theduckfood.util.SharedPreferenceManager;
 

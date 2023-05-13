@@ -6,7 +6,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +18,6 @@ import com.theduckfood.presenter.StoreDetailPresenter;
 import com.theduckfood.presenter.contact.IStoreDetailView;
 import com.theduckfood.util.Constant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDetailActivity extends AppCompatActivity implements IStoreDetailView {

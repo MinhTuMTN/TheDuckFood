@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.theduckfood.R;
 import com.theduckfood.databinding.FragmentEnterOtpBinding;
 
-import java.util.Objects;
-
 public class EnterOTPFragment extends Fragment {
     private FragmentEnterOtpBinding binding;
     private static EnterOTPFragment instance;

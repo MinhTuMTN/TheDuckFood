@@ -2,7 +2,6 @@ package com.theduckfood.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,27 +55,41 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         amountFood = "Đã đặt " + amount + " món";
         holder.binding.txtAmount.setText(amountFood);
 
-        if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_SUCCESS)) {
-            holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_success_14px, 0, 0, 0);
-            holder.binding.txtStatus.setText("Đã nhận");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.green_dark));
-        } else if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_USER_CANCELED)) {
-            holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_cancelled_14px, 0, 0, 0);
-            holder.binding.txtStatus.setText("Đã hủy");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.red));
-        } else if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_SHIPPING)) {
-            holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_shipping_14px, 0, 0, 0);
-            holder.binding.txtStatus.setText("Đang giao");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.yellow_dark));
-        } else if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_PROCESSING)) {
-            holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_process_14px, 0, 0, 0);
-            holder.binding.txtStatus.setText("Chờ tiếp nhận");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.yellow_dark));
-        } else if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_WAITING)) {
-            holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_waiting_14px, 0, 0, 0);
-            holder.binding.txtStatus.setText("Chờ shipper");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.yellow_dark));
+        String status;
+        int leftDrawable;
+        int textColor;
+
+        switch (orderResponse.getOrder().getStatus()){
+            case Constant.ORDER_STATUS_SUCCESS:
+                status = "Đã đến nơi";
+                leftDrawable = R.drawable.icons8_success_14px;
+                textColor = R.color.green_dark;
+                break;
+            case Constant.ORDER_STATUS_USER_CANCELED:
+                status = "Bị hủy";
+                leftDrawable = R.drawable.icons8_cancelled_14px;
+                textColor = R.color.red;
+                break;
+            case Constant.ORDER_STATUS_SHIPPING:
+                status = "Đang giao hàng";
+                leftDrawable = R.drawable.icons8_shipping_14px;
+                textColor = R.color.yellow_dark;
+                break;
+            case Constant.ORDER_STATUS_PROCESSING:
+                status = "Đang chuẩn bị";
+                leftDrawable = R.drawable.icons8_process_14px;
+                textColor = R.color.yellow_dark;
+                break;
+            default:
+                status = "Chờ shipper";
+                leftDrawable = R.drawable.icons8_waiting_14px;
+                textColor = R.color.yellow_dark;
+                break;
         }
+
+        holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, 0, 0, 0);
+        holder.binding.txtStatus.setText(status);
+        holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, textColor));
 
         holder.binding.btnDetail.setOnClickListener(v -> orderDetail(v, orderResponse));
     }

@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-import com.theduckfood.R;
 import com.theduckfood.databinding.ActivityPasswordRecoveryBinding;
 import com.theduckfood.fragments.EnterEmailFragment;
 

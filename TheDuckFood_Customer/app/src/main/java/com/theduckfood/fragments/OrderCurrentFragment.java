@@ -4,19 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.theduckfood.R;
 import com.theduckfood.adapter.OrderListAdapter;
 import com.theduckfood.databinding.FragmentOrderCurrentBinding;
 import com.theduckfood.model.respone.GetOrdersResponse;
-import com.theduckfood.model.respone.OrderItemResponse;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.presenter.GetOrdersPresenter;
 import com.theduckfood.presenter.contact.IGetOrdersView;
