@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.theduckfood.adapter.OrderListAdapter;
-import com.theduckfood.databinding.FragmentOrderCurrentBinding;
 import com.theduckfood.databinding.FragmentOrderHistoryBinding;
 import com.theduckfood.model.respone.GetOrdersResponse;
 import com.theduckfood.model.respone.OrderResponse;
@@ -48,16 +46,18 @@ public class OrderHistoryFragment extends Fragment implements IGetOrdersView {
     @Override
     public void getAllOrders(GetOrdersResponse getOrdersResponse) {
         if (getOrdersResponse == null) {
-            Toast.makeText(getContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            binding.recyclerHistoryOrders.setVisibility(View.GONE);
+            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
             return;
         }
 
         getHistoryOrders(getOrdersResponse);
 
-        if (historyOrders != null && historyOrders.size() != 0){
-            binding.recyclerHistoryOrders.setVisibility(View.VISIBLE);
-            binding.layoutNotFoundOrder.setVisibility(View.GONE);
-        } else return;
+        if (historyOrders == null || historyOrders.size() == 0){
+            binding.recyclerHistoryOrders.setVisibility(View.GONE);
+            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
+            return;
+        }
 
         orderListAdapter = new OrderListAdapter(getContext(), historyOrders);
         binding.recyclerHistoryOrders.setAdapter(orderListAdapter);

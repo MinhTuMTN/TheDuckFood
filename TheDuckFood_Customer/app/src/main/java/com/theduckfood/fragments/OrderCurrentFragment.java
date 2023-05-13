@@ -49,16 +49,18 @@ public class OrderCurrentFragment extends Fragment implements IGetOrdersView{
     @Override
     public void getAllOrders(GetOrdersResponse getOrdersResponse) {
         if (getOrdersResponse == null) {
-            Toast.makeText(getContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            binding.recyclerCurrentOrders.setVisibility(View.GONE);
+            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
             return;
         }
 
         getCurrentOrders(getOrdersResponse);
 
-        if (currentOrders != null && currentOrders.size() != 0){
-            binding.recyclerCurrentOrders.setVisibility(View.VISIBLE);
-            binding.layoutNotFoundOrder.setVisibility(View.GONE);
-        } else return;
+        if (currentOrders == null || currentOrders.size() == 0) {
+            binding.recyclerCurrentOrders.setVisibility(View.GONE);
+            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
+            return;
+        }
 
         orderListAdapter = new OrderListAdapter(getContext(), currentOrders);
         binding.recyclerCurrentOrders.setAdapter(orderListAdapter);

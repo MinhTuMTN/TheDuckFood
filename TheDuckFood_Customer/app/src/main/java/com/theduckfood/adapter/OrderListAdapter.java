@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.theduckfood.R;
 import com.theduckfood.databinding.ItemOrderBinding;
-import com.theduckfood.model.Order;
 import com.theduckfood.model.respone.OrderItemResponse;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.Constant;
 
 import java.util.List;
-import java.util.Locale;
 
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.OrderViewHolder> {
     ItemOrderBinding binding;
