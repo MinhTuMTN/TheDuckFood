@@ -89,8 +89,8 @@ public class StoreManagementAPI {
                         false,
                         "Thành công",
                         store,
-                        (Double) results.get(0)[0],
-                        (Long) results.get(0)[1]
+                        (Double) results.get(0)[0] == null ? 0D : (Double) results.get(0)[0] ,
+                        (Long) results.get(0)[1] == null ? 0L : (Long) results.get(0)[1]
                 ));
     }
 

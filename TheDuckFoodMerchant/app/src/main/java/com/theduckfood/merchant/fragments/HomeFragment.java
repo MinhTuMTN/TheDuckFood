@@ -129,11 +129,15 @@ public class HomeFragment extends Fragment implements IHomeView {
         Store store = storeProfileResponse.getStore();
         binding.txtTen.setText(store.getStoreName());
         binding.txtDiaChi.setText(store.getAddress());
+        try {
+            String amount = DateTimeUtil.formatCurrency(storeProfileResponse.getAmount().toString()) + " VND";
+            binding.txtSoTien.setText(amount);
 
-        String amount = DateTimeUtil.formatCurrency(storeProfileResponse.getAmount().toString()) + " VND";
-        binding.txtSoTien.setText(amount);
+            binding.txtSoDonTrongNgay.setText(String.valueOf(storeProfileResponse.getOrderCount()));
+        } catch (Exception ignored) {
 
-        binding.txtSoDonTrongNgay.setText(String.valueOf(storeProfileResponse.getOrderCount()));
+        }
+
         if (getContext() != null) {
             Glide.with(getContext())
                     .load(store.getAvatar())

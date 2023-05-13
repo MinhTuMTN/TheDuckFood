@@ -1,6 +1,7 @@
 package com.theduckfood.merchant.util;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -24,5 +25,10 @@ public class DateTimeUtil {
     public static String formatCurrency(String currency) {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("en_US"));
         return formatter.format(Float.parseFloat(currency));
+    }
+
+    public static Date convertStringToDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+       return format.parse(date);
     }
 }
