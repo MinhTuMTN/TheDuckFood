@@ -16,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -98,7 +96,6 @@ public class OrderManagementAPI {
         for (Object[] row : results) {
             Date date = (Date) row[0];
             Double totalAmount = (Double) row[1];
-            System.out.println(date.toString() + " - " + totalAmount.toString());
             statistics.add(new StoreStatistic(date, totalAmount));
         }
         return ResponseEntity.ok(

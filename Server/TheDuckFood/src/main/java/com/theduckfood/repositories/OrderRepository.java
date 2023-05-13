@@ -17,6 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Order getOrderByOrderId(Long orderId);
     Order getOrderByOrderIdAndStatus(Long orderId, String status);
     List<Order> getOrdersByUserProfile(UserProfile userProfile);
+    List<Order> getOrdersByUserProfileAndStatus(UserProfile userProfile, String status);
     List<Order> getOrdersByStoreAndStatus(Store store, String status);
     @Query("SELECT cast(o.createdAt as date), SUM(o.amount) " +
             "FROM Order o " +

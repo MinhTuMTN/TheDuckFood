@@ -101,7 +101,7 @@
         android:layout_width="@dimen/_7sdp"
         android:layout_height="@dimen/_7sdp"
         android:src="@drawable/icons8_filled_circle_50px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTrangThaiDonHang"
         app:layout_constraintStart_toStartOf="@+id/circleImageView2"
         app:layout_constraintTop_toTopOf="@+id/txtTrangThaiDonHang" />
 

@@ -11,10 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JWTUtil {
-    static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private static final String secret = "AJFE8GWBEGB873TI90FSVNEIJBEIGWHGIUslfwigkh3gifhewuyyreurywirwyrweureryeuywty43f2u375385ty";
     public static String generateJWTToken(String email, String role) {
-        System.out.println(key);
         return Jwts.builder()
                 .claim("email", email)
                 .claim("role", role)

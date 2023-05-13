@@ -12,6 +12,7 @@ import com.theduckfood.merchant.activities.OrderDetailsActivity;
 import com.theduckfood.merchant.databinding.ItemOrderBinding;
 import com.theduckfood.merchant.model.response.OrderItemResponse;
 import com.theduckfood.merchant.model.response.StoreOrderResponse;
+import com.theduckfood.merchant.util.Constant;
 import com.theduckfood.merchant.util.DateTimeUtil;
 
 import java.util.List;
@@ -57,6 +58,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         String orderId = "Đơn hàng " + orderResponse.getOrder().getOrderId();
         holder.binding.txtMaDonHang.setText(orderId);
+
+        String orderStatus = "";
+        switch (orderResponse.getOrder().getStatus()) {
+            case Constant.ORDER_STATUS_SUCCESS:
+                orderStatus = "Đã đến nơi";
+                break;
+            case Constant.ORDER_STATUS_USER_CANCELED:
+                orderStatus = "Bị hủy";
+                break;
+            case Constant.ORDER_STATUS_PROCESSING:
+                orderStatus = "Đang chuẩn bị";
+                break;
+            default:
+                orderStatus = "Đang giao hàng";
+                break;
+        }
+        holder.binding.txtTrangThaiDonHang.setText(orderStatus);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), OrderDetailsActivity.class);
