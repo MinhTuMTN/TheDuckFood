@@ -25,6 +25,7 @@
     <string name="home">Trang chủ</string>
     <string name="search">Tìm kiếm</string>
     <string name="order">Đơn hàng</string>
+    <string name="orders">Danh sách đơn hàng</string>
     <string name="account">Tài khoản</string>
     <string name="account_information">Thông tin tài khoản</string>
     <string name="update_profile">Cập nhật thông tin cá nhân</string>

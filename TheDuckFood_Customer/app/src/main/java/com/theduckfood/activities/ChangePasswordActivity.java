@@ -23,6 +23,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
         binding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         addEvents();
     }
 
@@ -66,7 +67,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
         switchToMainActivity();
     }
 
-    private void switchToMainActivity() {
+    public void switchToMainActivity() {
         Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

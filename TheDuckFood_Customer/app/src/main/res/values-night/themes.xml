@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red_pink_1</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorAccent">#E97777</item>
     </style>
 
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">

@@ -12,8 +12,8 @@ public class Store {
     private float rate;
     private Long reviewCount;
     private String status;
-    private Date createdAt = new Date();
-    private Date updatedAt = new Date();
+    private Date createdAt;
+    private Date updatedAt;
 
     public Store() {
     }

@@ -1,5 +1,6 @@
 package com.theduckfood.fragments;
 
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,14 +78,14 @@ public class ProfileFragment extends Fragment implements IProfileView {
     }
 
     private void logOut(View view) {
-        final Dialog dialog = new Dialog(view.getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        PopupLogoutConfirmBinding popupLogoutConfirmBinding = PopupLogoutConfirmBinding.inflate(LayoutInflater.from(view.getContext()));
+        PopupLogoutConfirmBinding popupLogoutConfirmBinding = PopupLogoutConfirmBinding.inflate(LayoutInflater.from(getActivity()));
         dialog.setContentView(popupLogoutConfirmBinding.getRoot());
 
         popupLogoutConfirmBinding.btnClose.setOnClickListener(v -> dialog.dismiss());
         popupLogoutConfirmBinding.btnLogout.setOnClickListener(v -> {
-            new SharedPreferenceManager(v.getContext()).clear();
+            new SharedPreferenceManager(getActivity()).clear();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -101,14 +103,18 @@ public class ProfileFragment extends Fragment implements IProfileView {
         startActivity(intent);
     }
     private void loadUserData(View view) {
-        GetProfilePresenter getProfilePresenter = new GetProfilePresenter(this, getContext());
+        GetProfilePresenter getProfilePresenter = new GetProfilePresenter(this, getActivity());
         getProfilePresenter.getProfile();
     }
 
     @Override
     public void getProfile(GetProfileResponse getProfileResponse) {
         if (getProfileResponse == null) {
-            Toast.makeText(getContext(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
+            if(getActivity() == null) {
+                Log.d("ProfileFragment", "Không tìm thấy activity!");
+                return;
+            }
+            Toast.makeText(getActivity(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 

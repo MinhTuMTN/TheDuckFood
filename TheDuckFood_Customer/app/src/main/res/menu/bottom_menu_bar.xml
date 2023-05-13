@@ -11,7 +11,7 @@
         android:icon="@drawable/icons8_search_100px"/>
 
     <item
-        android:id="@+id/menu_order"
+        android:id="@+id/menu_orders"
         android:title="@string/order"
         android:icon="@drawable/icons8_purchase_order_100px"/>
 

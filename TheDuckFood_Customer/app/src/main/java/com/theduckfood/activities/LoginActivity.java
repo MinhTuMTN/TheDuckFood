@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.R;
 import com.theduckfood.databinding.ActivityLoginBinding;
 import com.theduckfood.model.respone.LoginResponse;
@@ -23,8 +22,6 @@ import com.theduckfood.presenter.LoginPresenter;
 import com.theduckfood.presenter.contact.ILoginView;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.SharedPreferenceManager;
-
-import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
     ActivityLoginBinding binding;
