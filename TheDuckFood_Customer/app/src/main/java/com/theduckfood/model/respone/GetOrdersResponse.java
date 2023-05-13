@@ -2,9 +2,10 @@ package com.theduckfood.model.respone;
 
 import com.theduckfood.model.Order;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GetOrdersResponse {
+public class GetOrdersResponse implements Serializable {
     private boolean error;
     private String message;
     private List<OrderResponse> orders;

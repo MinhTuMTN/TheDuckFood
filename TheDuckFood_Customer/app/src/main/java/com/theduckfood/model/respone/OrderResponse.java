@@ -2,9 +2,10 @@ package com.theduckfood.model.respone;
 
 import com.theduckfood.model.Order;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OrderResponse {
+public class OrderResponse implements Serializable {
     private Order order;
     private String address;
     private List<OrderItemResponse> orderItems;

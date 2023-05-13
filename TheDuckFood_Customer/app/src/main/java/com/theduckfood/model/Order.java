@@ -1,8 +1,9 @@
 package com.theduckfood.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable {
     private Long orderId;
     private Double amount;
     private Double shipFee;
