@@ -27,6 +27,12 @@
             android:name=".activities.WalletActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.AddCouponActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CouponsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ReviewActivity"
             android:exported="false" />
         <activity

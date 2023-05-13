@@ -316,7 +316,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/txtPhanTramGiam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Giảm tối thiểu 5% - tối đa 50%"
@@ -474,7 +474,7 @@
                 android:background="@color/gray_background">
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/txtGiamToiTa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lượt khuyến mãi"
@@ -492,7 +492,7 @@
                     android:layout_marginTop="@dimen/_9sdp"
                     android:background="#D1D0D0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtGiamToiTa" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

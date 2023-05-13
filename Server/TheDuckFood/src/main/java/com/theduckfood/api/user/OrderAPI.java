@@ -235,6 +235,13 @@ public class OrderAPI {
                             orderItem.getFoodPrice()));
                 OrderResponse orderResponse = new OrderResponse();
                 orderResponse.setOrder(order);
+
+                Store store = order.getStore();
+                orderResponse.setStore(
+                        new StoreResponse(
+                                store.getStoreId(),
+                                store.getStoreName(),
+                                store.getAddress()));
                 orderResponse.setAddress(order.getUserAddress().getStreetAddress());
                 orderResponse.setOrderItems(orderItemResponses);
                 orderResponses.add(orderResponse);
