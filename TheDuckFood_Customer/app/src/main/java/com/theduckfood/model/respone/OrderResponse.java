@@ -7,16 +7,26 @@ import java.util.List;
 
 public class OrderResponse implements Serializable {
     private Order order;
+    private StoreResponse store;
     private String address;
-    private List<OrderItemResponse> orderItems;
+    List<OrderItemResponse> orderItems;
 
     public OrderResponse() {
     }
 
-    public OrderResponse(Order order, String address, List<OrderItemResponse> orderItems) {
+    public OrderResponse(Order order, StoreResponse store, String address, List<OrderItemResponse> orderItems) {
         this.order = order;
+        this.store = store;
         this.address = address;
         this.orderItems = orderItems;
+    }
+
+    public StoreResponse getStore() {
+        return store;
+    }
+
+    public void setStore(StoreResponse store) {
+        this.store = store;
     }
 
     public Order getOrder() {

@@ -59,7 +59,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_SUCCESS)) {
             holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_success_14px, 0, 0, 0);
             holder.binding.txtStatus.setText("Đã nhận");
-            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.lime_green));
+            holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.green_dark));
         } else if (orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_USER_CANCELED)) {
             holder.binding.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icons8_cancelled_14px, 0, 0, 0);
             holder.binding.txtStatus.setText("Đã hủy");

@@ -84,7 +84,7 @@
             android:drawablePadding="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:text="Đang giao"
-            android:textColor="@color/lime_green"
+            android:textColor="@color/green_dark"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

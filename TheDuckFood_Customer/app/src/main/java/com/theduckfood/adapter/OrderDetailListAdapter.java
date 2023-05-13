@@ -43,7 +43,7 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
 
         holder.binding.txtFoodName.setText(orderItemResponse.getFoodName());
 
-        String amount = String.valueOf(orderItemResponse.getAmount());
+        String amount = "x" + orderItemResponse.getAmount();
         holder.binding.txtAmount.setText(amount);
     }
 

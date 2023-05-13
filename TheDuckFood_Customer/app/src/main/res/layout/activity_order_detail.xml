@@ -54,11 +54,13 @@
             app:layout_constraintVertical_bias="0.454">
 
             <TextView
+                android:id="@+id/txtDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="13/05/2023" />
 
             <TextView
+                android:id="@+id/txtTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="17:00" />
@@ -87,7 +89,6 @@
                 android:orientation="vertical"
                 android:gravity="center">
 
-
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="wrap_content"
@@ -99,6 +100,7 @@
                     android:layout_marginTop="@dimen/_12sdp"/>
 
                 <RatingBar
+                    android:isIndicator="true"
                     android:numStars="5"
                     android:rating="0"
                     android:progressTint="@color/coral_pink"
@@ -109,6 +111,104 @@
                     android:layout_marginTop="@dimen/_12sdp"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/coral" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Chi tiết giao hàng"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/txtStoreName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên quán ăn"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.134"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtStoreAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/icons8_cutlery_24px"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:text="1 Võ Văn Ngân"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtStoreName"
+                        app:layout_constraintVertical_bias="0.0"
+                        android:gravity="bottom"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icons8_dots_vertical_24px"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:layout_marginTop="12sp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/txtAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Địa chỉ khách hàng"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.134"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtUserAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/icons8_position_24px"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:text="484A Lê Văn Việt"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtAddress"
+                        app:layout_constraintVertical_bias="0.0"
+                        android:gravity="bottom"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
@@ -120,26 +220,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Danh Sách Món Ăn"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
                 android:layout_gravity="center"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_order_detail_list"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="32dp"
-                android:paddingBottom="175dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                android:layout_marginBottom="20dp" />
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
@@ -151,7 +243,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Chi tiết thanh toán"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -260,7 +351,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginHorizontal="@dimen/_5sdp">
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
 
                 <TextView
                     android:id="@+id/txtTotalPriceLabel"
@@ -302,7 +394,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp"
-                app:cornerRadius="@dimen/_15sdp" />
+                app:cornerRadius="@dimen/_15sdp"/>
         </LinearLayout>
 
     </ScrollView>
