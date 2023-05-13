@@ -16,6 +16,11 @@ public class DateTimeUtil {
         return formatter.format(date);
     }
 
+    public static String formatShortDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM");
+        return formatter.format(date);
+    }
+
     public static String formatCurrency(String currency) {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("en_US"));
         return formatter.format(Float.parseFloat(currency));

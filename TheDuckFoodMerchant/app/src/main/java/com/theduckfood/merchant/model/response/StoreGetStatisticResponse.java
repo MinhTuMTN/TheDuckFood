@@ -2,28 +2,13 @@ package com.theduckfood.merchant.model.response;
 
 import com.theduckfood.merchant.model.Store;
 
-public class GetStoreProfileResponse {
+import java.util.List;
+
+public class StoreGetStatisticResponse {
     private boolean error;
     private String message;
     private Store store;
-    private Double amount;
-    private Long orderCount;
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public Long getOrderCount() {
-        return orderCount;
-    }
-
-    public void setOrderCount(Long orderCount) {
-        this.orderCount = orderCount;
-    }
+    private List<StoreStatistic> statistics;
 
     public boolean isError() {
         return error;
@@ -47,5 +32,13 @@ public class GetStoreProfileResponse {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public List<StoreStatistic> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<StoreStatistic> statistics) {
+        this.statistics = statistics;
     }
 }

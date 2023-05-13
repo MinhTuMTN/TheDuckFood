@@ -3,6 +3,7 @@ package com.theduckfood.repositories;
 import com.theduckfood.entity.Order;
 import com.theduckfood.entity.Store;
 import com.theduckfood.entity.UserProfile;
+import com.theduckfood.util.Constants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,10 +21,13 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT cast(o.createdAt as date), SUM(o.amount) " +
             "FROM Order o " +
             "WHERE o.createdAt between ?1 AND ?2 AND o.store = ?3 " +
+            "AND o.status != 'user_canceled' AND o.status != 'waiting'" +
             "GROUP BY cast(o.createdAt as date) ")
     List<Object[]> findOrderAmountByDateBetween(Date startDate, Date endDate, Store store);
     @Query("SELECT SUM(o.amount), count(*) " +
             "FROM Order o " +
-            "WHERE cast(o.createdAt as date ) = cast(GETDATE() as date) ")
+            "WHERE cast(o.createdAt as date ) = cast(GETDATE() as date) " +
+            "AND o.status != 'user_canceled' AND o.status != 'waiting'"
+    )
     List<Object[]> findOrderAmountAndOrderCountToday(Store store);
 }

@@ -33,6 +33,7 @@ import com.theduckfood.merchant.model.response.GetStoreProfileResponse;
 import com.theduckfood.merchant.presenter.HomePresenter;
 import com.theduckfood.merchant.presenter.contact.IHomeView;
 import com.theduckfood.merchant.util.Constant;
+import com.theduckfood.merchant.util.DateTimeUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -125,6 +126,11 @@ public class HomeFragment extends Fragment implements IHomeView {
         Store store = storeProfileResponse.getStore();
         binding.txtTen.setText(store.getStoreName());
         binding.txtDiaChi.setText(store.getAddress());
+
+        String amount = DateTimeUtil.formatCurrency(storeProfileResponse.getAmount().toString()) + " VND";
+        binding.txtSoTien.setText(amount);
+
+        binding.txtSoDonTrongNgay.setText(String.valueOf(storeProfileResponse.getOrderCount()));
         if (getContext() != null) {
             Glide.with(getContext())
                     .load(store.getAvatar())

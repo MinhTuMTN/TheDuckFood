@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BarLineChartBase;
@@ -19,10 +20,16 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityWalletBinding;
+import com.theduckfood.merchant.model.response.StoreGetStatisticResponse;
+import com.theduckfood.merchant.model.response.StoreStatistic;
+import com.theduckfood.merchant.presenter.WalletPresenter;
+import com.theduckfood.merchant.presenter.contact.IWalletView;
+import com.theduckfood.merchant.util.DateTimeUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class WalletActivity extends AppCompatActivity {
+public class WalletActivity extends AppCompatActivity implements IWalletView {
     ActivityWalletBinding binding;
 
     @Override
@@ -30,44 +37,47 @@ public class WalletActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWalletBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
-        setData();
+
+        WalletPresenter walletPresenter = new WalletPresenter(this, this);
+        walletPresenter.getStatistic();
     }
 
-    private void setData() {
+    private void setChartData(List<StoreStatistic> storeStatistics) {
         BarChart barChart = findViewById(R.id.chart);
         barChart.setScaleEnabled(false);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 1000)); // Doanh thu ngày 1
-        entries.add(new BarEntry(1, 1500)); // Doanh thu ngày 2
-        entries.add(new BarEntry(2, 2000)); // Doanh thu ngày 3
-        entries.add(new BarEntry(3, 1800)); // Doanh thu ngày 4
-        entries.add(new BarEntry(4, 2500)); // Doanh thu ngày 5
-        entries.add(new BarEntry(5, 3000)); // Doanh thu ngày 6
-        entries.add(new BarEntry(6, 35000)); // Doanh thu ngày 7
+        ArrayList<String> labels = new ArrayList<>();
+        for (int i = 0; i < storeStatistics.size(); i++) {
+            entries.add(new BarEntry(i, storeStatistics.get(i).getAmount().floatValue()));
+            labels.add(DateTimeUtil.formatShortDate(storeStatistics.get(i).getDate()));
+        }
 
         BarDataSet dataSet = new BarDataSet(entries, "Doanh thu");
         dataSet.setColor(ContextCompat.getColor(this, R.color.pink_1));
         dataSet.setValueTextSize(12f);
 
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("15/03");
-        labels.add("16/03");
-        labels.add("17/03");
-        labels.add("18/03");
-        labels.add("19/03");
-        labels.add("20/03");
-        labels.add("21/03");
-
         BarData data = new BarData(dataSet);
         barChart.setData(data);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+        barChart.getXAxis().setLabelCount(storeStatistics.size());
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getDescription().setEnabled(false);
         barChart.getAxisRight().setEnabled(false);
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getLegend().setEnabled(false);
         barChart.animateY(1000);
+    }
+
+    @Override
+    public void getStatisticResponse(StoreGetStatisticResponse statisticResponse) {
+        if (statisticResponse == null || statisticResponse.isError()) {
+            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        binding.txtStoreName.setText(statisticResponse.getStore().getStoreName());
+        binding.txtBalance.setText(DateTimeUtil.formatCurrency(String.valueOf(statisticResponse.getStore().getBalance())));
+        setChartData(statisticResponse.getStatistics());
     }
 }
