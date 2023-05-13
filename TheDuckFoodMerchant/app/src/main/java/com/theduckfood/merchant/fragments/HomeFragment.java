@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.CouponsActivity;
 import com.theduckfood.merchant.activities.MainActivity;
 import com.theduckfood.merchant.activities.ReviewActivity;
 import com.theduckfood.merchant.activities.WalletActivity;
@@ -80,6 +81,8 @@ public class HomeFragment extends Fragment implements IHomeView {
             homePresenter.changeStatus(isChecked);
         });
 
+        binding.btnKhuyenMai.setOnClickListener(v -> requireContext()
+                .startActivity(new Intent(getContext(), CouponsActivity.class)));
         binding.btnVi.setOnClickListener(v -> requireContext()
                 .startActivity(new Intent(getContext(), WalletActivity.class)));
         binding.btnDanhGia.setOnClickListener(v -> requireContext()
