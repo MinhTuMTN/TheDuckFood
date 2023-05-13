@@ -1,6 +1,7 @@
 package com.theduckfood.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.theduckfood.api.APIUtil;
 import com.theduckfood.api.UserAccountEndpoint;
@@ -21,7 +22,7 @@ public class GetFoodDetailPresenter {
         this.context = context;
     }
 
-    public void getFoodDetail (Long foodId) {
+    public void getFoodDetail(Long foodId) {
         final SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context);
         UserAccountEndpoint userAccountEndpoint = APIUtil.getRetrofit().create(UserAccountEndpoint.class);
         Call<FoodDetailResponse> call = userAccountEndpoint.getFoodDetail(

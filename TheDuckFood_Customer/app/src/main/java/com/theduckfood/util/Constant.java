@@ -28,6 +28,7 @@ public class Constant {
     public final static String ORDER_STATUS_PROCESSING = "processing";
     public final static String ORDER_STATUS_STORE_CANCELED = "store_canceled";
     public final static String ORDER_STATUS_SHIPPING= "shipping";
+    public final static String ORDER_STATUS_WAITING= "waiting";
 
     public final static String COUPON_STATUS_ACTIVATED = "activated";
     public final static String COUPON_STATUS_DELETED = "deleted";

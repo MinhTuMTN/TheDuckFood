@@ -4,26 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.R;
 import com.theduckfood.databinding.ActivityMainBinding;
+import com.theduckfood.fragments.OrdersFragment;
 import com.theduckfood.fragments.ProfileFragment;
-import com.theduckfood.presenter.LoginPresenter;
 import com.theduckfood.presenter.MainPresenter;
 import com.theduckfood.presenter.contact.IMainView;
-import com.theduckfood.services.FirebaseCloudMessagingService;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
-
     ActivityMainBinding binding;
 
     @Override
@@ -41,11 +34,13 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             switch (item.getItemId()) {
                 case R.id.menu_home:
                     break;
+                case R.id.menu_orders:
+                    replaceFragment(OrdersFragment.newInstance());
+                    break;
                 case R.id.menu_profile:
                     replaceFragment(ProfileFragment.newInstance());
                     break;
                 default:
-                    replaceFragment(ProfileFragment.newInstance());
                     break;
             }
             return true;

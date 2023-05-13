@@ -18,18 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.theduckfood.R;
 
-import com.theduckfood.databinding.FoodItemBinding;
-import com.theduckfood.databinding.PopupFoodDetailBinding;
+import com.theduckfood.databinding.ItemFoodBinding;
 import com.theduckfood.model.Food;
-import com.theduckfood.model.respone.FoodDetailResponse;
-import com.theduckfood.presenter.contact.IGetFoodDetailView;
 import com.theduckfood.util.Constant;
 
 import java.util.List;
 
-public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder> implements IGetFoodDetailView {
-    FoodItemBinding foodItemBinding;
-    PopupFoodDetailBinding foodDetailBinding;
+public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>{
+    ItemFoodBinding itemFoodBinding;
     private Activity context;
     private List<Food> foods;
 
@@ -41,12 +37,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     @NonNull
     @Override
     public FoodListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        foodItemBinding = FoodItemBinding.inflate(
+        itemFoodBinding = ItemFoodBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
-        return new FoodListViewHolder(foodItemBinding);
+
+        return new FoodListViewHolder(itemFoodBinding);
     }
 
     @Override
@@ -56,55 +53,62 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         String urlImage = food.getImage().startsWith("http") ? food.getImage() : Constant.IMAGE_BASE_URL + food.getImage();
         Glide.with(context)
                 .load(urlImage)
-                .into(holder.binding.imgAvatarFood);
-        holder.binding.txtFoodName.setText(food.getFoodName());
-        holder.binding.txtPrice.setText(Math.round(food.getPrice()) + " VNĐ");
-        holder.itemView.setOnClickListener(v -> showPopUpFoodDetail());
+                .into(holder.itemFoodBinding.imgAvatarFood);
+        holder.itemFoodBinding.txtFoodName.setText(food.getFoodName());
+        holder.itemFoodBinding.txtPrice.setText(Math.round(food.getPrice()) + " đ");
+        holder.itemView.setOnClickListener(v -> showPopUpFoodDetail(food));
 
     }
 
-    public void showPopUpFoodDetail() {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        foodDetailBinding = PopupFoodDetailBinding.inflate(LayoutInflater.from(context));
-
+    public void showPopUpFoodDetail(Food food) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE );
         View view = inflater.inflate(R.layout.popup_food_detail, null);
 
         final Dialog popUpFoodDetail = new Dialog(
-                view.getContext(),
+                context,
                 R.style.MaterialDialogSheet);
         popUpFoodDetail.setContentView(view);
+
         popUpFoodDetail.setCancelable(true);
         popUpFoodDetail.getWindow().setLayout(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         popUpFoodDetail.getWindow().setGravity(Gravity.BOTTOM);
         popUpFoodDetail.show();
+        loadFoodData(food, view);
     }
+
+    private void loadFoodData(Food food, View view) {
+        if(food == null){
+            Toast.makeText(context, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ImageView imgAvatarFoodPopup = (ImageView) view.findViewById(R.id.imgAvatarFoodPopup);
+        TextView txtFoodNamePopup = (TextView) view.findViewById(R.id.txtFoodNamePopup);
+        TextView txtPricePopup = (TextView) view.findViewById(R.id.txtPricePopup);
+        TextView txtDescPopup = (TextView) view.findViewById(R.id.txtDescPopup);
+
+        String urlImage = food.getImage().startsWith("http") ? food.getImage() : Constant.IMAGE_BASE_URL + food.getImage();
+        Glide.with(context)
+                .load(urlImage)
+                .into(imgAvatarFoodPopup);
+        txtFoodNamePopup.setText(food.getFoodName());
+        txtPricePopup.setText(Math.round(food.getPrice()) + " VNĐ");
+        txtDescPopup.setText(food.getDescription());
+    }
+
     @Override
     public int getItemCount() {
         return foods.size();
     }
 
-    @Override
-    public void getFoodDetail(FoodDetailResponse foodDetailResponse) {
-        if(foodDetailResponse == null){
-            Toast.makeText(context, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
-        }
-        String urlImage = foodDetailResponse.getFood().getImage().startsWith("http") ? foodDetailResponse.getFood().getImage() : Constant.IMAGE_BASE_URL + foodDetailResponse.getFood().getImage();
-        Glide.with(context)
-                .load(urlImage)
-                .into(foodDetailBinding.imgAvatarFood);
-        foodDetailBinding.txtFoodName.setText(foodDetailResponse.getFood().getFoodName());
-        foodDetailBinding.txtPrice.setText(Math.round(foodDetailResponse.getFood().getPrice()) + "VNĐ");
-        foodDetailBinding.txtDesc.setText(foodDetailResponse.getFood().getDescription());
-    }
-
     public class FoodListViewHolder extends RecyclerView.ViewHolder {
-        FoodItemBinding binding;
+        ItemFoodBinding itemFoodBinding;
 
-        public FoodListViewHolder(FoodItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public FoodListViewHolder(ItemFoodBinding itemFoodBinding) {
+            super(itemFoodBinding.getRoot());
+            this.itemFoodBinding = itemFoodBinding;
         }
     }
 }

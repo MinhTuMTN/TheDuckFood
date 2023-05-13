@@ -10,8 +10,8 @@ public class Food {
     private float price;
     private float pricePromotion;
     private String status;
-    private Date createdAt = new Date();
-    private Date updatedAt = new Date();
+    private Date createdAt;
+    private Date updatedAt;
 
     public Food() {
     }
