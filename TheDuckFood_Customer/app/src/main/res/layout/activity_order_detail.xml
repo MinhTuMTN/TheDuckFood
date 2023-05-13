@@ -33,6 +33,7 @@
                 android:textSize="@dimen/_14sdp"/>
 
             <TextView
+                android:id="@+id/txtOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mã đơn hàng: 1" />
@@ -100,6 +101,7 @@
                     android:layout_marginTop="@dimen/_12sdp"/>
 
                 <RatingBar
+                    android:id="@+id/ratingBarReview"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:rating="0"

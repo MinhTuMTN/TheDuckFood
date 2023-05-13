@@ -4,6 +4,7 @@ import com.theduckfood.model.request.ChangePasswordRequest;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.request.SignUpRequest;
 import com.theduckfood.model.request.UpdateProfileRequest;
+import com.theduckfood.model.request.UserReviewRequest;
 import com.theduckfood.model.respone.FoodDetailResponse;
 import com.theduckfood.model.respone.GetOrdersResponse;
 import com.theduckfood.model.respone.GetProfileResponse;
@@ -51,6 +52,9 @@ public interface UserAccountEndpoint {
     @GET("/api/foods")
     Call<FoodDetailResponse> getFoodDetail(@Query("foodId") Long foodId, @Header("Authorization") String authToken);
 
-    @GET("api/orders")
+    @GET("/api/orders")
     Call<GetOrdersResponse> getAllOrders(@Header("Authorization") String authToken);
+
+    @POST("/api/store/review")
+    Call<SimpleMessageResponse> review(@Body UserReviewRequest userReviewRequest, @Header("Authorization") String authToken);
 }
