@@ -1,5 +1,6 @@
 package com.theduckfood.merchant.api;
 
+import com.theduckfood.merchant.model.request.ChangePasswordRequest;
 import com.theduckfood.merchant.model.request.StoreLoginRequest;
 import com.theduckfood.merchant.model.request.StoreUpdateInfoRequest;
 import com.theduckfood.merchant.model.response.GetStoreProfileResponse;
@@ -29,5 +30,11 @@ public interface StoreAccountEndpoint {
     Call<SimpleMessageResponse> updateMerchantProfile(
             @Header("Authorization") String bearerToken,
             @Body StoreUpdateInfoRequest updateInfoRequest
+    );
+
+    @POST("/api/merchant/change-password")
+    Call<SimpleMessageResponse> changePassword(
+            @Header("Authorization") String bearerToken,
+            @Body ChangePasswordRequest changePasswordRequest
     );
 }
