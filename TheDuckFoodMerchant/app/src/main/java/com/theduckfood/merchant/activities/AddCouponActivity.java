@@ -185,7 +185,7 @@ public class AddCouponActivity extends AppCompatActivity implements IAddCouponVi
             return;
         }
         
-        if (startAt.compareTo(endAt) > 0) {
+        if (startAt.compareTo(endAt) >= 0) {
             Toast.makeText(this, "Ngày bắt đầu phải trước ngày kết thúc ít nhất 1 ngày", Toast.LENGTH_SHORT).show();
             binding.cardNgayBatDau.performClick();
             return;
@@ -197,8 +197,8 @@ public class AddCouponActivity extends AppCompatActivity implements IAddCouponVi
                 maxDiscount,
                 minPrice,
                 amount,
-                startDay,
-                endDay
+                startAt,
+                endAt
         );
         addCouponPresenter.addCoupon(addCouponRequest);
     }
