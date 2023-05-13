@@ -678,7 +678,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"/>
         </androidx.cardview.widget.CardView>
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

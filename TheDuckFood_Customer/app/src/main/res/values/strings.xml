@@ -29,4 +29,6 @@
     <string name="account_information">Thông tin tài khoản</string>
     <string name="update_profile">Cập nhật thông tin cá nhân</string>
     <string name="add">Thêm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
