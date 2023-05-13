@@ -9,6 +9,7 @@ import com.theduckfood.model.request.StoreUpdateInfoRequest;
 import com.theduckfood.model.response.GetStoreProfileResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.model.response.StoreLoginResponse;
+import com.theduckfood.repositories.OrderRepository;
 import com.theduckfood.repositories.StoreAccountRepository;
 import com.theduckfood.repositories.StoreRepository;
 import com.theduckfood.util.Constants;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -28,10 +30,14 @@ public class StoreManagementAPI {
 
     @Autowired
     StoreRepository storeRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
     @PostMapping("/login")
-    public ResponseEntity<StoreLoginResponse> storeLogin (
+    public ResponseEntity<StoreLoginResponse> storeLogin(
             @RequestBody StoreLoginRequest storeLoginRequest
-            ) {
+    ) {
         StoreAccount storeAccount = storeAccountRepository
                 .findStoreAccountByEmailAndPasswordAndStatusNotContaining(
                         storeLoginRequest.getEmail(),
@@ -60,8 +66,7 @@ public class StoreManagementAPI {
 
     @GetMapping("/profile")
     public ResponseEntity<GetStoreProfileResponse> getStoreProfile(
-            @RequestHeader("Authorization") String bearerToken)
-    {
+            @RequestHeader("Authorization") String bearerToken) {
         String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
         StoreAccount storeAccount = storeAccountRepository.findStoreAccountByEmailAndStatusNotContaining(
                 email,
@@ -72,20 +77,26 @@ public class StoreManagementAPI {
                     .body(new GetStoreProfileResponse(
                             true,
                             "Đã có lỗi xảy ra",
-                            null
+                            null,
+                            0D,
+                            0L
                     ));
+
         Store store = storeAccount.getStore();
+        List<Object[]> results = orderRepository.findOrderAmountAndOrderCountToday(store);
         return ResponseEntity
                 .ok(new GetStoreProfileResponse(
                         false,
                         "Thành công",
-                        store));
+                        store,
+                        (Double) results.get(0)[0],
+                        (Long) results.get(0)[1]
+                ));
     }
 
     @PostMapping("/update-profile")
     public ResponseEntity<SimpleMessageResponse> updateProfile(@RequestHeader("Authorization") String bearerToken,
-                                                               @RequestBody StoreUpdateInfoRequest updateInfoRequest)
-    {
+                                                               @RequestBody StoreUpdateInfoRequest updateInfoRequest) {
         try {
             Store store = getStoreFromToken(bearerToken);
             if (store == null)
@@ -142,8 +153,7 @@ public class StoreManagementAPI {
                     .body(new SimpleMessageResponse(true, "JWT Token không hợp lệ"));
         if (status) {
             store.setStatus(Constants.STORE_STATUS_OPENING);
-        }
-        else
+        } else
             store.setStatus(Constants.STORE_STATUS_CLOSED);
         storeRepository.save(store);
         return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật thành công"));

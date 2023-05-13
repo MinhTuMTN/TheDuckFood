@@ -6,6 +6,24 @@ public class GetStoreProfileResponse {
     private boolean error;
     private String message;
     private Store store;
+    private Double amount;
+    private Long orderCount;
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Long getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(Long orderCount) {
+        this.orderCount = orderCount;
+    }
 
     public boolean isError() {
         return error;

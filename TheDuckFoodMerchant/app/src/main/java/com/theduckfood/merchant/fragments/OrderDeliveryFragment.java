@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.adapter.OrderAdapter;
-import com.theduckfood.merchant.databinding.FragmentCurrentOrderBinding;
 import com.theduckfood.merchant.databinding.FragmentDeliveryBinding;
 import com.theduckfood.merchant.model.response.StoreGetOrdersResponse;
 import com.theduckfood.merchant.presenter.OrderPresenter;
@@ -22,7 +20,7 @@ import com.theduckfood.merchant.presenter.contact.IOrderView;
 import com.theduckfood.merchant.util.Constant;
 
 
-public class DeliveryFragment extends Fragment implements IOrderView {
+public class OrderDeliveryFragment extends Fragment implements IOrderView {
     FragmentDeliveryBinding binding;
     OrderPresenter orderPresenter;
 
@@ -54,7 +52,10 @@ public class DeliveryFragment extends Fragment implements IOrderView {
 
         binding.imgKhongDonHang.setVisibility(View.GONE);
         binding.listDonHang.setVisibility(View.VISIBLE);
-        OrderAdapter orderAdapter = new OrderAdapter(getContext(), ordersResponse.getOrders());
+        OrderAdapter orderAdapter = new OrderAdapter(
+                getContext(),
+                ordersResponse.getOrders(),
+                ordersResponse.getStoreName());
         binding.listDonHang.setAdapter(orderAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(

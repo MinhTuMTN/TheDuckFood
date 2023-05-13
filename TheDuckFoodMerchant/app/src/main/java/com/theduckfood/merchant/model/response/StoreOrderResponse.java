@@ -3,9 +3,10 @@ package com.theduckfood.merchant.model.response;
 
 import com.theduckfood.merchant.model.Order;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class StoreOrderResponse {
+public class StoreOrderResponse implements Serializable {
     private Order order;
     private String address;
     private String userName;

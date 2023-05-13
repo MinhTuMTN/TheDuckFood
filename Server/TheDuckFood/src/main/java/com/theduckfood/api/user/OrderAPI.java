@@ -94,6 +94,7 @@ public class OrderAPI {
         boolean couponIsValid = coupon != null
                 && coupon.getUsed() < coupon.getAmount()
                 && coupon.getMinPrice() <= amount_before_coupon
+                && (new Date()).after(coupon.getStartAt())
                 && (new Date()).before(coupon.getExpiredAt());
 
         double amount = amount_before_coupon;
@@ -159,7 +160,6 @@ public class OrderAPI {
             );
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            System.out.println(e.getMessage());
             return ResponseEntity.status(400)
                     .body(
                             new CreateOrderResponse(
@@ -182,7 +182,7 @@ public class OrderAPI {
             String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
             UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
 
-            Order order = orderRepository.getOrderByOrderIdAndStatus(orderId, Constants.ORDER_STATUS_PROCESSING);
+            Order order = orderRepository.getOrderByOrderIdAndStatus(orderId, Constants.ORDER_STATUS_WAITING);
             if (order == null || !Objects.equals(
                     userProfile.getUserId(),
                     order.getUserProfile().getUserId()))
@@ -200,7 +200,6 @@ public class OrderAPI {
             ));
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            System.out.println(e.getMessage());
             return ResponseEntity.status(400).body(new SimpleMessageResponse(
                     true,
                     "Không thể hủy đơn hàng này"
@@ -210,13 +209,19 @@ public class OrderAPI {
 
     @GetMapping
     public ResponseEntity<UserGetAllOrderResponse> getAllOrders(
-            @RequestHeader("Authorization") String bearerToken
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam(value = "status", required = false) String status
     ) {
         try {
             String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
             UserProfile userProfile = userAccountRepository.findUserAccountByEmail(email).getUser();
 
-            List<Order> orders = orderRepository.getOrdersByUserProfile(userProfile);
+            List<Order> orders;
+            if (status == null)
+                orders = orderRepository.getOrdersByUserProfile(userProfile);
+            else
+                orders = orderRepository.getOrdersByUserProfileAndStatus(userProfile, status);
+
             if (orders == null || orders.size() == 0)
                 throw new Exception();
 
@@ -226,7 +231,8 @@ public class OrderAPI {
                 for (OrderItem orderItem : order.getOrderItems())
                     orderItemResponses.add(new OrderItemResponse(
                             orderItem.getFood().getFoodName(),
-                            orderItem.getAmount()));
+                            orderItem.getAmount(),
+                            orderItem.getFoodPrice()));
                 OrderResponse orderResponse = new OrderResponse();
                 orderResponse.setOrder(order);
                 orderResponse.setAddress(order.getUserAddress().getStreetAddress());
@@ -239,7 +245,6 @@ public class OrderAPI {
                     orderResponses
             ));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.status(400).body(new UserGetAllOrderResponse(
                     true,
                     "Đã có lỗi xảy ra",

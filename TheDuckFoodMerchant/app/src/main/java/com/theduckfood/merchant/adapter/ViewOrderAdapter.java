@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.theduckfood.merchant.fragments.CurrentOrderFragment;
-import com.theduckfood.merchant.fragments.DeliveryFragment;
+import com.theduckfood.merchant.fragments.OrderCurrentFragment;
+import com.theduckfood.merchant.fragments.OrderDeliveryFragment;
 import com.theduckfood.merchant.fragments.OrderCancelledFragment;
 import com.theduckfood.merchant.fragments.OrderCompletedFragment;
 
@@ -19,9 +19,9 @@ public class ViewOrderAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new CurrentOrderFragment();
+                return new OrderCurrentFragment();
             case 1:
-                return new DeliveryFragment();
+                return new OrderDeliveryFragment();
             case 2:
                 return new OrderCompletedFragment();
             default:

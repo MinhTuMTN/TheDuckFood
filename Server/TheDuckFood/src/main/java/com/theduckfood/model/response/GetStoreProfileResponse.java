@@ -12,4 +12,6 @@ public class GetStoreProfileResponse {
     private boolean error;
     private String message;
     private Store store;
+    private Double amount;
+    private Long orderCount;
 }

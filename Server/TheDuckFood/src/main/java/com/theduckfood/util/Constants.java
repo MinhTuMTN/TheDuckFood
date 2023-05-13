@@ -18,6 +18,7 @@ public class Constants {
     public final static String ORDER_STATUS_SUCCESS = "success";
     public final static String ORDER_STATUS_USER_CANCELED = "user_canceled";
     public final static String ORDER_STATUS_PROCESSING = "processing";
+    public final static String ORDER_STATUS_WAITING = "waiting";
     public final static String ORDER_STATUS_STORE_CANCELED = "store_canceled";
     public final static String ORDER_STATUS_SHIPPING= "shipping";
 

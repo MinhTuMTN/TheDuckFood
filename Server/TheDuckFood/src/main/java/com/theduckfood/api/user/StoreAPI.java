@@ -108,7 +108,6 @@ public class StoreAPI {
             ));
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            System.out.println(e.getMessage());
             return ResponseEntity.status(400).body(new SimpleMessageResponse(
                     true,
                     "Đã có lỗi xảy ra"));

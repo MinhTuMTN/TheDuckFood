@@ -19,7 +19,8 @@
     <color name="red_pink_pro_max">#FFE3E1</color>
     <color name="gray_light">#e0e0e0</color>
     <color name="lime_green">#32CD32</color>
-    <color name="gray_hint">#999696</color>
     <color name="red">#FF0000</color>
     <color name="yellow_dark">#D8C200</color>
+    <color name="gray_background">#F4F4F4</color>
+    <color name="gray_hint">#FF9E9B9B</color>
 </resources>

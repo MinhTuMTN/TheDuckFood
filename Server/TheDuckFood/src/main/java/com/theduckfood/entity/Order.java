@@ -31,7 +31,7 @@ public class Order  implements Serializable {
     private Date createdAt = new Date();
     private Date updatedAt = new Date();
 
-    private String status = Constants.ORDER_STATUS_PROCESSING;
+    private String status = Constants.ORDER_STATUS_WAITING;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
