@@ -620,31 +620,33 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardNgayKetThuc"
                 android:layout_width="@dimen/_285sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_17sdp"
+                android:backgroundTint="@color/gray_background"
                 app:strokeColor="@color/black"
-                app:strokeWidth="@dimen/_1sdp"
-                android:backgroundTint="@color/gray_background">
+                app:strokeWidth="@dimen/_1sdp">
+
                 <TextView
                     android:id="@+id/txtNgayKetThuc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:padding="@dimen/_10sdp"
                     android:hint="Chọn ngày kết thúc"
                     android:inputType="number"
-                    android:textColorHint="@color/gray_hint"
-                    />
+                    android:padding="@dimen/_10sdp"
+                    android:textColorHint="@color/gray_hint" />
+
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/icons8_sort_down_50px"
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/_9sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"/>
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/icons8_sort_down_50px" />
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
@@ -667,16 +669,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTaoCoupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tạo mã khuyến mãi"
+                android:background="@color/coral"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
+                android:text="Tạo mã khuyến mãi"
                 android:textAllCaps="false"
-                android:background="@color/coral"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp"/>
+                android:textSize="@dimen/_14sdp" />
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
