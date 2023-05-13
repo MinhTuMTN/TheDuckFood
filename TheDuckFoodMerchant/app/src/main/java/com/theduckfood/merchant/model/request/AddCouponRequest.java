@@ -21,10 +21,6 @@ public class AddCouponRequest {
         this.expiredAt = expiredAt;
     }
 
-    public AddCouponRequest() {
-
-    }
-
     public String getCouponCode() {
         return couponCode;
     }

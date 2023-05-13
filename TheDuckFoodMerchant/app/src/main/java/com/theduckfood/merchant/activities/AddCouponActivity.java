@@ -3,6 +3,7 @@ package com.theduckfood.merchant.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,16 +15,22 @@ import android.widget.Toast;
 
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityAddCouponBinding;
+import com.theduckfood.merchant.model.request.AddCouponRequest;
+import com.theduckfood.merchant.model.response.SimpleMessageResponse;
+import com.theduckfood.merchant.presenter.AddCouponPresenter;
+import com.theduckfood.merchant.presenter.contact.IAddCouponView;
 import com.theduckfood.merchant.util.DateTimeUtil;
 
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddCouponActivity extends AppCompatActivity {
+public class AddCouponActivity extends AppCompatActivity implements IAddCouponView {
 
     ActivityAddCouponBinding binding;
     DatePickerDialog.OnDateSetListener dateSetListener1, dateSetListener2;
+    Date startDay, endDay;
+    AddCouponPresenter addCouponPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +43,13 @@ public class AddCouponActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+        addCouponPresenter = new AddCouponPresenter(this, this);
         dateSetListener1 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 String date = day + "/" + month + "/" + year;
+                startDay = DateTimeUtil.getDate(day, month, year);
                 binding.txtNgayBatDau.setText(date);
             }
         };
@@ -49,6 +58,7 @@ public class AddCouponActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 String date = day + "/" + month + "/" + year;
+                endDay = DateTimeUtil.getDate(day, month, year);
                 binding.txtNgayKetThuc.setText(date);
             }
         };
@@ -181,5 +191,33 @@ public class AddCouponActivity extends AppCompatActivity {
             return;
         }
 
+        AddCouponRequest addCouponRequest = new AddCouponRequest(
+                couponCode,
+                (float) percent / 100,
+                maxDiscount,
+                minPrice,
+                amount,
+                startDay,
+                endDay
+        );
+        addCouponPresenter.addCoupon(addCouponRequest);
+    }
+
+    @Override
+    public void addCouponResponse(SimpleMessageResponse response) {
+        if (response == null) {
+            Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (response.isError()) {
+            Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Toast.makeText(this, "Thêm Coupon thành công", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, CouponsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

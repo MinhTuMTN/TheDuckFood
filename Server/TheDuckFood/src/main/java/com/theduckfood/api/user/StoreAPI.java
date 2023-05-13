@@ -10,6 +10,7 @@ import com.theduckfood.model.response.UserGetListStore;
 import com.theduckfood.repositories.*;
 import com.theduckfood.util.Constants;
 import com.theduckfood.util.JWTUtil;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -96,7 +97,8 @@ public class StoreAPI {
                     order);
             reviewRepository.save(review);
 
-            Store store = order.getStore();
+            Store store = Hibernate.unproxy(order.getStore(), Store.class);
+
             store.setRate((store.getRate() * store.getReviewCount() + reviewRequest.getRate())
                     / (store.getReviewCount() + 1));
             store.setReviewCount(store.getReviewCount() + 1);

@@ -13,6 +13,7 @@ import java.util.List;
 public class OrderResponse {
     private Order order;
     private StoreResponse store;
+    private ReviewResponse review;
     private String address;
     List<OrderItemResponse> orderItems;
 }

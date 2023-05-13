@@ -244,6 +244,13 @@ public class OrderAPI {
                                 store.getAddress()));
                 orderResponse.setAddress(order.getUserAddress().getStreetAddress());
                 orderResponse.setOrderItems(orderItemResponses);
+
+                if (order.getReview() != null)
+                    orderResponse.setReview(
+                            new ReviewResponse(
+                                    order.getReview().getRate(),
+                                    order.getReview().getReviewContent()
+                            ));
                 orderResponses.add(orderResponse);
             }
             return ResponseEntity.ok(new UserGetAllOrderResponse(
@@ -252,6 +259,7 @@ public class OrderAPI {
                     orderResponses
             ));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(400).body(new UserGetAllOrderResponse(
                     true,
                     "Đã có lỗi xảy ra",

@@ -3,6 +3,7 @@ package com.theduckfood.merchant.util;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,5 +31,14 @@ public class DateTimeUtil {
     public static Date convertStringToDate(String date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
        return format.parse(date);
+    }
+
+    public static Date getDate(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        return  calendar.getTime();
     }
 }

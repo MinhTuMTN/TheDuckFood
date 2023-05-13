@@ -54,6 +54,10 @@ public class Store {
 
     @OneToMany(mappedBy = "store")
     @JsonBackReference
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store")
+    @JsonBackReference
     private List<Food> foods = new ArrayList<>();
 
     public Store(String storeName, String address, String phone, String avatar) {
