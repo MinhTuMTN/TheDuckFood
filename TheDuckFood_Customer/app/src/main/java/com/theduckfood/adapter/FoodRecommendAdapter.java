@@ -26,7 +26,7 @@ public class FoodRecommendAdapter extends RecyclerView.Adapter<FoodRecommendAdap
     @NonNull
     @Override
     public FoodRecommendAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_food_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend_food,parent,false));
     }
 
     @Override

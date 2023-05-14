@@ -57,8 +57,8 @@ public class HomeFragment extends Fragment {
         FoodRecommendAdapter foodRecommendAdapter = new FoodRecommendAdapter(getContext(),foodRecommendList);
         binding.recyclerFoods.setAdapter(foodRecommendAdapter);
         binding.recyclerFoods.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
-        binding.recyclerFoods.setHasFixedSize(true);
-        binding.recyclerFoods.setNestedScrollingEnabled(false);
+//        binding.recyclerFoods.setHasFixedSize(true);
+//        binding.recyclerFoods.setNestedScrollingEnabled(false);
 
     }
 
