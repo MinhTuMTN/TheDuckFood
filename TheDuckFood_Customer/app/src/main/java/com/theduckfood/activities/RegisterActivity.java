@@ -87,6 +87,11 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
             dialog.dismiss();
             return;
         }
+        if (signUpResponse.isError()) {
+            Toast.makeText(this, signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        }
         Toast.makeText(this, signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switchToMainActivity();
     }

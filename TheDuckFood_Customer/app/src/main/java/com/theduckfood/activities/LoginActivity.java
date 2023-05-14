@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         }
     }
 
-
     private void addEvents() {
         binding.txtRegister.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
@@ -87,6 +86,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void login(LoginResponse loginResponse) {
         if (loginResponse == null) {
             Toast.makeText(this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        }
+        if (loginResponse.isError()) {
+            Toast.makeText(this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
             dialog.dismiss();
             return;
         }

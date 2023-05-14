@@ -117,6 +117,10 @@ public class ProfileFragment extends Fragment implements IProfileView {
             Toast.makeText(getActivity(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (getProfileResponse.isError()) {
+            Toast.makeText(getActivity(), getProfileResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         binding.txtFullName.setText(getProfileResponse.getUserProfile().getFullName());
         binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());

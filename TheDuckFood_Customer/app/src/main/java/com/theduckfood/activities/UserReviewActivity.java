@@ -69,7 +69,10 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
             Toast.makeText(this, "Đơn hàng đã được đánh giá!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (simpleMessageResponse.isError()) {
+            Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switchToMainActivity();
     }
