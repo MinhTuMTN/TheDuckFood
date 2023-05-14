@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +16,17 @@ import android.view.ViewGroup;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.R;
+import com.theduckfood.adapter.FoodRecommendAdapter;
 import com.theduckfood.adapter.SliderAdapter;
 import com.theduckfood.databinding.FragmentHomeBinding;
+import com.theduckfood.model.respone.FoodRecommend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
+
 
     public HomeFragment() {
     }
@@ -36,6 +42,24 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         handleSlider();
+        handleFoodRecommend();
+    }
+
+    private void handleFoodRecommend() {
+        List<FoodRecommend> foodRecommendList = new ArrayList<>();
+        foodRecommendList.add(new FoodRecommend(R.drawable.bubble_tea,"Trà sữa"));
+        foodRecommendList.add(new FoodRecommend(R.drawable.fast_food,"Fast food"));
+        foodRecommendList.add(new FoodRecommend(R.drawable.bread,"Bánh mì"));
+        foodRecommendList.add(new FoodRecommend(R.drawable.pho,"Phở/Bún"));
+        foodRecommendList.add(new FoodRecommend(R.drawable.rice_bowl,"Cơm Việt"));
+        foodRecommendList.add(new FoodRecommend(R.drawable.basket,"Trái cây"));
+
+        FoodRecommendAdapter foodRecommendAdapter = new FoodRecommendAdapter(getContext(),foodRecommendList);
+        binding.recyclerFoods.setAdapter(foodRecommendAdapter);
+        binding.recyclerFoods.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
+        binding.recyclerFoods.setHasFixedSize(true);
+        binding.recyclerFoods.setNestedScrollingEnabled(false);
+
     }
 
     private void handleSlider() {
