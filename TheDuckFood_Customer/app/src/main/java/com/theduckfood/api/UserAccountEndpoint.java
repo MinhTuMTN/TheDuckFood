@@ -14,9 +14,11 @@ import com.theduckfood.model.respone.LoginResponse;
 import com.theduckfood.model.respone.SignUpResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
+import com.theduckfood.model.respone.UserAddressResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -62,4 +64,13 @@ public interface UserAccountEndpoint {
 
     @POST("/api/orders/create")
     Call<CreateOrderResponse> createOrder(@Body CreateOrderRequest createOrderRequest, @Header("Authorization") String authToken);
+
+    @GET("/api/users/address")
+    Call<UserAddressResponse> getUserAddress(@Header("Authorization") String authToken);
+
+    @POST("/api/users/add-address")
+    Call<SimpleMessageResponse> addUserAddress(@Query("streetAddress") String streetAddress, @Header("Authorization") String authToken);
+
+    @DELETE("/api/users/delete-address")
+    Call<UserAddressResponse> deleteUserAddress(@Query("userAddressId") Long userAddressId, @Header("Authorization") String authToken);
 }
