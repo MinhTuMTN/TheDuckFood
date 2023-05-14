@@ -154,33 +154,115 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view"/>
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/discount_coupon"
+                    app:layout_constraintEnd_toStartOf="@+id/textView1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerFoods" />
+
                 <TextView
                     android:id="@+id/textView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerFoods"
-                    android:background="#79F87B"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:text="Quán Ngon Deal Hot"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_text"
+                    app:layout_constraintBottom_toBottomOf="@+id/img1"
+                    app:layout_constraintStart_toEndOf="@+id/img1"
+                    app:layout_constraintTop_toTopOf="@+id/img1" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:src="@drawable/flame"
+                    app:layout_constraintStart_toEndOf="@+id/textView1"
+                    app:layout_constraintTop_toTopOf="@+id/textView1" />
+
                 <TextView
                     android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ăn ngon cả ngày, hầu bao nhẹ nhõm"
+                    app:layout_constraintStart_toStartOf="@+id/img1"
+                    app:layout_constraintTop_toBottomOf="@id/textView1"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerQuanNgon"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    app:layout_constraintTop_toBottomOf="@id/textView1"
-                    android:background="@color/coral_pink"/>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textView2"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"/>
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/shop_new"
+                    app:layout_constraintEnd_toStartOf="@+id/textView1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerQuanNgon" />
+
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    app:layout_constraintTop_toBottomOf="@id/textView2"
-                    android:background="#FFEB3B"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:text="Quán Ngon Deal Hot"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_text"
+                    app:layout_constraintBottom_toBottomOf="@+id/img3"
+                    app:layout_constraintStart_toEndOf="@+id/img3"
+                    app:layout_constraintTop_toTopOf="@+id/img3" />
+
+                <ImageView
+                    android:id="@+id/img4"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:src="@drawable/bibimbap"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView3"/>
+
                 <TextView
                     android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Toàn quán tuyển đảm bảo bạn sẽ ghiền!!!"
+                    app:layout_constraintStart_toStartOf="@+id/img1"
+                    app:layout_constraintTop_toBottomOf="@id/textView3"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerQuanMoiNhat"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    app:layout_constraintTop_toBottomOf="@id/textView3"
-                    android:background="@color/purple_200"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
