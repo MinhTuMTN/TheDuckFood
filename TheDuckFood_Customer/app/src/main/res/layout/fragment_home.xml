@@ -226,7 +226,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:text="Quán Ngon Deal Hot"
+                    android:text="Quán Mới Nên Thử"
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     android:textColor="@color/black_text"

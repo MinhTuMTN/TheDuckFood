@@ -12,6 +12,7 @@ import com.theduckfood.model.respone.LoginResponse;
 import com.theduckfood.model.respone.SignUpResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
+import com.theduckfood.model.respone.UserGetListStore;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -57,4 +58,12 @@ public interface UserAccountEndpoint {
 
     @POST("/api/store/review")
     Call<SimpleMessageResponse> review(@Body UserReviewRequest userReviewRequest, @Header("Authorization") String authToken);
+
+    @GET("/api/store/list-store")
+    Call<UserGetListStore> getListStore(@Header("Authorization") String authToken,
+                                        @Query("page") int page,
+                                        @Query("limit") int limit,
+                                        @Query("sort") String sortParam,
+                                        @Query("sortType") String sortType
+                                       );
 }
