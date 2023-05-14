@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/_12sdp"
+    android:layout_marginEnd="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_6sdp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF6000"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/imgMonAn"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/com_tam_shop"
+                android:scaleType="centerCrop"/>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp">
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="1"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:progressTint="#FFA559"
+                android:rating="1"
+                android:layout_gravity="start"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.7"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black_text"
+                android:layout_marginEnd="@dimen/_4sdp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <ImageView
+        android:id="@+id/imgSale"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:src="@drawable/tag_home"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ưu đãi dành cho bạn"
+        android:textColor="@color/coral"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSale"
+        app:layout_constraintStart_toEndOf="@+id/imgSale"
+        app:layout_constraintTop_toTopOf="@+id/imgSale" />
+
+    <TextView
+        android:id="@+id/txtTenQuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxWidth="@dimen/_190sdp"
+        android:maxLines="1"
+        android:text="Cơm tấm Lái Thiêu Siêu Ngon Bổ Rẻ"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintStart_toStartOf="@+id/imgSale"
+        app:layout_constraintTop_toBottomOf="@+id/imgSale" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="#E3E1E1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTenQuan"
+        app:layout_constraintTop_toBottomOf="@+id/txtTenQuan" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giao hàng trong 30 phút"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtTenQuan"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/imgCircle"
+        android:layout_width="@dimen/_2sdp"
+        android:layout_height="@dimen/_2sdp"
+        android:src="@drawable/icons8_filled_circle_30px"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.0 km"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@+id/imgCircle"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
