@@ -48,14 +48,6 @@ public class OrderCurrentFragment extends Fragment implements IGetOrdersView{
         if (getOrdersResponse == null) {
             binding.recyclerCurrentOrders.setVisibility(View.GONE);
             binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (getOrdersResponse.isError()) {
-            binding.recyclerCurrentOrders.setVisibility(View.GONE);
-            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), getOrdersResponse.getMessage(), Toast.LENGTH_SHORT).show();
             return;
         }
 

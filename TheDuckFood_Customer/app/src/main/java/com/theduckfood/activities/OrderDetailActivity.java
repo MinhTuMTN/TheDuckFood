@@ -61,16 +61,21 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         binding.txtStoreAddress.setText(orderDetail.getStore().getStoreAddress());
 
-        binding.ratingBarReview.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    switchToUserReviewActivity(orderDetail);
-                }
-                return true;
+        if (orderDetail.getReview() == null) {
+            if (orderDetail.getOrder().getStatus().equals(Constant.ORDER_STATUS_SUCCESS)) {
+                binding.ratingBarReview.setOnTouchListener((v, event) -> {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        switchToUserReviewActivity(orderDetail);
+                    }
+                    return true;
+                });
+            } else {
+                binding.txtReviewLabel.setText("Bạn không thể đánh giá đơn hàng này");
             }
-        });
-
+        } else {
+            binding.ratingBarReview.setRating(orderDetail.getReview().getRate());
+            binding.txtReviewLabel.setText("Cảm ơn! Bạn đã đánh giá đơn hàng này!");
+        }
         binding.txtUserAddress.setText(orderDetail.getAddress());
 
         binding.btnBack.setOnClickListener(v -> switchToMainActivity());

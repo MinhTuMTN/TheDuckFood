@@ -49,16 +49,9 @@ public class OrderHistoryFragment extends Fragment implements IGetOrdersView {
         if (getOrdersResponse == null) {
             binding.recyclerHistoryOrders.setVisibility(View.GONE);
             binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (getOrdersResponse.isError()) {
-            binding.recyclerHistoryOrders.setVisibility(View.GONE);
-            binding.layoutNotFoundOrder.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), getOrdersResponse.getMessage(), Toast.LENGTH_SHORT).show();
-            return;
-        }
         getHistoryOrders(getOrdersResponse);
 
         if (historyOrders == null || historyOrders.size() == 0){
