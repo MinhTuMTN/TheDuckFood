@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -18,7 +19,8 @@ import com.theduckfood.presenter.contact.IMainView;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
     ActivityMainBinding binding;
-
+    private static final int SEARCH_ACTIVITY_REQUEST_CODE = 1;
+    int menuId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
         addEvents();
         replaceFragment(new HomeFragment());
+        this.menuId = R.id.menu_home;
         getAndUpdateFCMToken();
     }
 
@@ -34,12 +37,19 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_home:
+                    this.menuId = R.id.menu_home;
                     replaceFragment(new HomeFragment());
                     break;
+                case R.id.menu_search:
+                    Intent searchIntent = new Intent(this, SearchActivity.class);
+                    startActivityForResult(searchIntent, SEARCH_ACTIVITY_REQUEST_CODE);
+                    break;
                 case R.id.menu_orders:
+                    this.menuId = R.id.menu_orders;
                     replaceFragment(OrdersFragment.newInstance());
                     break;
                 case R.id.menu_profile:
+                    this.menuId = R.id.menu_profile;
                     replaceFragment(ProfileFragment.newInstance());
                     break;
                 default:
@@ -47,6 +57,14 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             }
             return true;
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SEARCH_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            binding.bottomNavigationView.setSelectedItemId(menuId);
+        }
     }
 
     private  void replaceFragment(Fragment fragment) {
