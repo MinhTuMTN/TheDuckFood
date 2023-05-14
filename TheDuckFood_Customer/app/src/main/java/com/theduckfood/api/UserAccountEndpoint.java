@@ -1,10 +1,12 @@
 package com.theduckfood.api;
 
 import com.theduckfood.model.request.ChangePasswordRequest;
+import com.theduckfood.model.request.CreateOrderRequest;
 import com.theduckfood.model.request.LoginRequest;
 import com.theduckfood.model.request.SignUpRequest;
 import com.theduckfood.model.request.UpdateProfileRequest;
 import com.theduckfood.model.request.UserReviewRequest;
+import com.theduckfood.model.respone.CreateOrderResponse;
 import com.theduckfood.model.respone.FoodDetailResponse;
 import com.theduckfood.model.respone.GetOrdersResponse;
 import com.theduckfood.model.respone.GetProfileResponse;
@@ -57,4 +59,7 @@ public interface UserAccountEndpoint {
 
     @POST("/api/store/review")
     Call<SimpleMessageResponse> review(@Body UserReviewRequest userReviewRequest, @Header("Authorization") String authToken);
+
+    @POST("/api/orders/create")
+    Call<CreateOrderResponse> createOrder(@Body CreateOrderRequest createOrderRequest, @Header("Authorization") String authToken);
 }
