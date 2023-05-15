@@ -21,6 +21,7 @@ import com.theduckfood.R;
 import com.theduckfood.databinding.ItemFoodBinding;
 import com.theduckfood.model.Food;
 import com.theduckfood.util.Constant;
+import com.theduckfood.util.DateTimeUtil;
 
 import java.util.List;
 
@@ -55,7 +56,8 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
                 .load(urlImage)
                 .into(holder.itemFoodBinding.imgAvatarFood);
         holder.itemFoodBinding.txtFoodName.setText(food.getFoodName());
-        holder.itemFoodBinding.txtPrice.setText(Math.round(food.getPrice()) + " đ");
+        String price  = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
+        holder.itemFoodBinding.txtPrice.setText(price);
         holder.itemView.setOnClickListener(v -> showPopUpFoodDetail(food));
 
     }
