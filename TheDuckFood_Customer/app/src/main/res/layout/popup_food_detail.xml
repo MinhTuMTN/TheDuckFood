@@ -66,11 +66,39 @@
         android:id="@+id/txtDescPopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_35sdp"
         android:text="Mô tả"
+        android:maxLines="1"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_gravity="center"/>
+    <LinearLayout
+        android:id="@+id/layoutAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/_24sdp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDecrease"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:background="@drawable/icons8_minus_36px"
+            app:cornerRadius="@dimen/_10sdp" />
+        <TextView
+            android:id="@+id/txtAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnIncrease"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:background="@drawable/icons8_plus_36px"
+            app:cornerRadius="@dimen/_10sdp" />
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAdd"
