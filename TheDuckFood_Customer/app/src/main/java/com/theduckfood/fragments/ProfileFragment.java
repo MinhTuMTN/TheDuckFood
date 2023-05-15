@@ -122,6 +122,11 @@ public class ProfileFragment extends Fragment implements IProfileView {
             return;
         }
 
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(getContext());
+        sharedPreferenceManager.setStringValue(
+                SharedPreferenceManager.USER_PROFILE_FULL_NAME_KEY,
+                getProfileResponse.getUserProfile().getFullName()
+        );
         binding.txtFullName.setText(getProfileResponse.getUserProfile().getFullName());
         binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());
         binding.txtPhone.setText(getProfileResponse.getUserProfile().getPhone());
