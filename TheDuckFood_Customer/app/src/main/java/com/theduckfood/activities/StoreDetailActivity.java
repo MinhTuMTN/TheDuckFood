@@ -51,8 +51,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         storeDetailPresenter.getStoreDetail(storeId);
     }
 
-    private void getFoods(List<Food> foods) {
-        foodListAdapter = new FoodListAdapter(StoreDetailActivity.this, foods);
+    private void getFoods(List<Food> foods, Long storeId) {
+        foodListAdapter = new FoodListAdapter(StoreDetailActivity.this, foods, storeId);
         binding.recyclerFoods.setAdapter(foodListAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(StoreDetailActivity.this);
@@ -81,7 +81,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         binding.ratingBar.setRating(storeDetailResponse.getStore().getRate());
         binding.txtRate.setText(String.valueOf(round(storeDetailResponse.getStore().getRate(), 1)));
 
-        getFoods(storeDetailResponse.getFoods());
+        getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore().getStoreId());
     }
 
     private void chkFavoriteClick(StoreDetailPresenter storeDetailPresenter) {

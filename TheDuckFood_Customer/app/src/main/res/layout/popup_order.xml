@@ -29,17 +29,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/txtFoodNamePopup"
+                android:id="@+id/txtAmountFoodPopup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="1 món"
+                android:text="0 món"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/txtPricePopup"
+                android:id="@+id/txtStoreNamePopup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp"
