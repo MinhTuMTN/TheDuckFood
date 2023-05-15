@@ -1,5 +1,6 @@
 package com.theduckfood.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.R;
+import com.theduckfood.activities.SearchActivity;
 import com.theduckfood.adapter.FoodRecommendAdapter;
 import com.theduckfood.adapter.HomeStoreAdapter;
 import com.theduckfood.adapter.SliderAdapter;
@@ -48,6 +50,13 @@ public class HomeFragment extends Fragment implements IHomeView {
         handleSlider();
         handleFoodRecommend();
         handleStore();
+        addListener();
+    }
+
+    private void addListener() {
+        binding.cardView1.setOnClickListener(v ->
+                startActivity(new Intent(getContext(), SearchActivity.class))
+        );
     }
 
     private void handleStore() {

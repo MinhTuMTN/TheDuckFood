@@ -56,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <EditText
+            android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -69,16 +70,50 @@
             android:textSize="@dimen/_15sdp" />
     </androidx.cardview.widget.CardView>
 
+    <LinearLayout
+        android:layout_marginTop="@dimen/_8sdp"
+        android:id="@+id/layout_button"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFood"
+            app:backgroundTint="@color/white"
+            android:text="Món ăn"
+            android:textColor="@color/coral"
+            app:cornerRadius="@dimen/_10sdp"
+            android:textAllCaps="false"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStore"
+            app:backgroundTint="@color/white"
+            android:text="Quán ăn"
+            android:textColor="@color/black"
+            app:cornerRadius="@dimen/_10sdp"
+            android:textAllCaps="false"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_not_found"
         android:visibility="visible"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/layout_button">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -107,9 +142,10 @@
 
 
     <LinearLayout
+        android:id="@+id/layout_list"
         android:visibility="gone"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,44 +160,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/layout_button"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        app:backgroundTint="@color/white"
-                        android:text="Món ăn"
-                        android:textColor="@color/coral"
-                        app:cornerRadius="@dimen/_10sdp"
-                        android:textAllCaps="false"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <com.google.android.material.button.MaterialButton
-                        app:backgroundTint="@color/white"
-                        android:text="Quán ăn"
-                        android:textColor="@color/black"
-                        app:cornerRadius="@dimen/_10sdp"
-                        android:textAllCaps="false"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_item"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_16sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_button"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

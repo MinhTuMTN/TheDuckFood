@@ -1,6 +1,7 @@
 package com.theduckfood.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theduckfood.R;
+import com.theduckfood.activities.SearchActivity;
 import com.theduckfood.model.respone.FoodRecommend;
 
 import java.util.List;
@@ -31,8 +33,30 @@ public class FoodRecommendAdapter extends RecyclerView.Adapter<FoodRecommendAdap
 
     @Override
     public void onBindViewHolder(@NonNull FoodRecommendAdapter.ViewHolder holder, int position) {
-        holder.imageView.setImageResource(list.get(position).getImage());
-        holder.textView.setText(list.get(position).getName());
+        FoodRecommend foodRecommend = list.get(position);
+
+        holder.imageView.setImageResource(foodRecommend.getImage());
+        holder.textView.setText(foodRecommend.getName());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SearchActivity.class);
+            String searchParam = null;
+            switch (foodRecommend.getName().trim().toLowerCase()) {
+                case "phở/bún":
+                    searchParam = "Bún";
+                    break;
+                case "fast food":
+                    searchParam = "Pizza";
+                    break;
+                case "cơm việt":
+                    searchParam = "Cơm";
+                    break;
+                default:
+                    searchParam = foodRecommend.getName();
+                    break;
+            }
+            intent.putExtra("search", searchParam);
+            context.startActivity(intent);
+        });
     }
 
     @Override

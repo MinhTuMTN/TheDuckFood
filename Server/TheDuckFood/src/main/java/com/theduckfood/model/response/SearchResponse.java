@@ -15,5 +15,5 @@ public class SearchResponse {
     private boolean error;
     private String message;
     private List<Store> stores;
-    private List<Food> foods;
+    private List<FoodSearchResponse> foods;
 }
