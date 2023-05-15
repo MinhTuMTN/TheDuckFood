@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityMainBinding;
 import com.theduckfood.merchant.fragments.AccountFragment;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         addEvents();
         loadFragment();
-//        getAndUpdateFCMToken();
+        getAndUpdateFCMToken();
     }
 
     private void loadFragment() {
@@ -77,12 +79,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void getAndUpdateFCMToken() {
-//        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateFCMToken);
-//    }
+    private void getAndUpdateFCMToken() {
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateFCMToken);
+    }
 
-//    private void updateFCMToken(String fcmToken) {
-//        MainPresenter mainPresenter = new MainPresenter(this, this);
-//        mainPresenter.updateFCMToken(fcmToken);
-//    }
+    private void updateFCMToken(String fcmToken) {
+        Log.d("FCM", fcmToken);
+    }
 }

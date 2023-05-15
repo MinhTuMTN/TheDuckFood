@@ -63,6 +63,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
             Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (simpleMessageResponse.isError()) {
+            Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switchToMainActivity();
     }

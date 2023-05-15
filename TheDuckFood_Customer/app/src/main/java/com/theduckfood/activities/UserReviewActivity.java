@@ -18,7 +18,6 @@ import com.theduckfood.presenter.contact.IUserReviewView;
 public class UserReviewActivity extends AppCompatActivity implements IUserReviewView {
     ActivityReviewBinding binding;
     OrderResponse orderDetail;
-    float rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +39,15 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
     }
     private void addEvents() {
         binding.btnBack.setOnClickListener(v -> switchToMainActivity());
-        binding.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                rate = rating;
-            }
-        });
+        binding.btnSend.setOnClickListener(v -> btnSendClick());
+    }
+
+    private void btnSendClick() {
+        int rate = (int) binding.ratingBar.getRating();
         String review = binding.txtReview.getText().toString();
 
         UserReviewRequest userReviewRequest = new UserReviewRequest(rate, review, orderDetail.getOrder().getOrderId());
-        binding.btnSend.setOnClickListener(v -> btnSendClick(userReviewRequest));
-    }
 
-    private void btnSendClick(UserReviewRequest userReviewRequest) {
         UserReviewPresenter userReviewPresenter = new UserReviewPresenter(this, UserReviewActivity.this);
         userReviewPresenter.review(userReviewRequest);
     }
@@ -66,10 +61,13 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
     @Override
     public void review(SimpleMessageResponse simpleMessageResponse) {
         if (simpleMessageResponse == null) {
-            Toast.makeText(this, "Đơn hàng đã được đánh giá!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (simpleMessageResponse.isError()) {
+            Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switchToMainActivity();
     }

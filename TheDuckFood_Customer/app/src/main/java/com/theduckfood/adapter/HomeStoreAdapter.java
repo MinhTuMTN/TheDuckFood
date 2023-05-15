@@ -1,6 +1,7 @@
 package com.theduckfood.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.theduckfood.activities.StoreDetailActivity;
 import com.theduckfood.databinding.ItemShopHomePageBinding;
 import com.theduckfood.model.Store;
 import com.theduckfood.util.Constant;
@@ -44,6 +46,11 @@ public class HomeStoreAdapter extends RecyclerView.Adapter<HomeStoreAdapter.Home
                 .load(urlAvatar)
                 .into(holder.binding.imgMonAn);
         holder.binding.txtTenQuan.setText(store.getStoreName());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, StoreDetailActivity.class);
+            intent.putExtra("store", store.getStoreId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

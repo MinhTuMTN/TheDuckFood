@@ -47,7 +47,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
     }
 
     private void loadStoreDetail(StoreDetailPresenter storeDetailPresenter) {
-        Long storeId = Long.valueOf(18);
+        Long storeId = getIntent().getLongExtra("store", 18L);
         storeDetailPresenter.getStoreDetail(storeId);
     }
 
@@ -76,7 +76,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         binding.txtName.setText(storeDetailResponse.getStore().getStoreName());
         binding.txtPhone.setText(storeDetailResponse.getStore().getPhone());
         binding.txtAddress.setText(storeDetailResponse.getStore().getAddress());
-        binding.txtReviewCount.setText(storeDetailResponse.getStore().getReviewCount().toString() + " đánh giá");
+        String reviewCount = "(" + storeDetailResponse.getStore().getReviewCount() + "+)";
+        binding.txtReviewCount.setText(reviewCount);
+        binding.ratingBar.setRating(storeDetailResponse.getStore().getRate());
         binding.txtRate.setText(String.valueOf(round(storeDetailResponse.getStore().getRate(), 1)));
 
         getFoods(storeDetailResponse.getFoods());

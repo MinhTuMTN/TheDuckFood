@@ -1,5 +1,6 @@
 package com.theduckfood.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,14 +17,19 @@ import android.view.ViewGroup;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.R;
+import com.theduckfood.activities.SearchActivity;
 import com.theduckfood.adapter.FoodRecommendAdapter;
 import com.theduckfood.adapter.HomeStoreAdapter;
 import com.theduckfood.adapter.SliderAdapter;
 import com.theduckfood.databinding.FragmentHomeBinding;
+import com.theduckfood.model.CartItem;
+import com.theduckfood.model.Food;
 import com.theduckfood.model.respone.FoodRecommend;
 import com.theduckfood.model.respone.UserGetListStore;
 import com.theduckfood.presenter.HomePresenter;
 import com.theduckfood.presenter.contact.IHomeView;
+import com.theduckfood.util.Constant;
+import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +54,13 @@ public class HomeFragment extends Fragment implements IHomeView {
         handleSlider();
         handleFoodRecommend();
         handleStore();
+        addListener();
+    }
+
+    private void addListener() {
+        binding.cardView1.setOnClickListener(v ->
+                startActivity(new Intent(getContext(), SearchActivity.class))
+        );
     }
 
     private void handleStore() {
@@ -75,6 +88,10 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     private void handleSlider() {
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(getContext());
+        String userName = sharedPreferenceManager.getStringValue(SharedPreferenceManager.USER_PROFILE_FULL_NAME_KEY) + "!";
+        binding.txtTen.setText(userName);
+
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(R.drawable.slider_1);
         arrayList.add(R.drawable.slider_2);

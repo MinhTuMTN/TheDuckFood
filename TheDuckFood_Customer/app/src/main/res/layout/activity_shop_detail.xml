@@ -16,171 +16,146 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollview"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:cardCornerRadius="15dp"
+            app:strokeColor="@color/coral"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Food Shop"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="@id/materialCardView"
+            app:layout_constraintStart_toEndOf="@+id/materialCardView" />
 
-                <LinearLayout
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/materialCardView"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="10dp"
-                        app:cardCornerRadius="15dp"
-                        app:strokeColor="@color/coral"
-                        app:strokeWidth="1dp">
+        <TextView
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/txtPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_phone_15px"
+            android:drawablePadding="@dimen/_8sdp"
+            android:text="0123456789"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-                        <ImageView
-                            android:id="@+id/imgAvatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="left|center"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:drawableStart="@drawable/icons8_address_16px"
+            android:drawablePadding="@dimen/_8sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="1 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtName"
+            app:layout_constraintStart_toStartOf="@+id/txtPhone"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
 
-                        <TextView
-                            android:id="@+id/txtName"
-                            android:layout_width="250dp"
-                            android:layout_height="wrap_content"
-                            android:text="Food Shop"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16sdp"
-                            android:textStyle="bold" />
+        <RatingBar
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="4"
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-                        <TextView
-                            android:id="@+id/txtPhone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/icons8_phone_15px"
-                            android:drawablePadding="@dimen/_8sdp"
-                            android:text="0123456789"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"/>
-                        <TextView
-                            android:id="@+id/txtAddress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="1 Võ Văn Ngân"
-                            android:drawableStart="@drawable/icons8_address_16px"
-                            android:gravity="center_horizontal"
-                            android:drawablePadding="@dimen/_8sdp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
 
-                    </LinearLayout>
-                </LinearLayout>
+        <TextView
+            android:id="@+id/txtRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="4.1"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView3"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAddress"
-                    app:strokeColor="@color/coral"
-                    app:strokeWidth="1dp">
+        <TextView
+            android:id="@+id/txtReviewCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="(400)"
+            app:layout_constraintStart_toEndOf="@id/txtRate"
+            app:layout_constraintTop_toTopOf="@id/txtRate"
+            app:layout_constraintBottom_toBottomOf="@id/txtRate"
+            android:textSize="14sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/txtRate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/_20sdp"
-                            android:drawableStart="@drawable/icons8_star_filled_30px"
-                            android:drawablePadding="@dimen/_8sdp"
-                            android:gravity="center"
-                            android:padding="@dimen/_8sdp"
-                            android:text="10"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Danh Sách Món Ăn"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="fill_parent"
-                            android:background="@color/coral" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_foods"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                        <TextView
-                            android:id="@+id/txtReviewCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_20sdp"
-                            android:drawableStart="@drawable/icons8_review_30px"
-                            android:drawablePadding="@dimen/_8sdp"
-                            android:gravity="center"
-                            android:padding="@dimen/_8sdp"
-                            android:text="400 đánh giá"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Danh Sách Món Ăn"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
-                    android:layout_gravity="center"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_foods"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:paddingBottom="175dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        </LinearLayout>
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <CheckBox
         android:id="@+id/chk_favorite"
         android:layout_width="42dp"
         android:layout_height="43dp"
         android:button="@drawable/checkbox_favorite_custom"
-        app:layout_constraintBottom_toTopOf="@+id/scrollview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toEndOf="@+id/btnBack"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginEnd="@dimen/_16sdp"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
 </androidx.constraintlayout.widget.ConstraintLayout>

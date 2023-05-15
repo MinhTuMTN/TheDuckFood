@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -86,9 +88,7 @@ public class UserAccountAPI {
     public ResponseEntity<SimpleMessageResponse> updateFCMToken(@RequestHeader("Authorization") String bearerToken,
                                                                 @RequestBody String fcmToken) {
         try {
-            String fcmTokenValue = fcmToken.replace("fcmToken=", "");
-//            if (fcmTokenValue == null)
-//                return ResponseEntity.ok(new SimpleMessageResponse(true, "Vui lòng cung cấp fcmToken"));
+            String fcmTokenValue = URLDecoder.decode(fcmToken, StandardCharsets.UTF_8).replace("fcmToken=", "");
 
             String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
             UserAccount userAccount = userAccountRepository.findUserAccountByEmail(email);

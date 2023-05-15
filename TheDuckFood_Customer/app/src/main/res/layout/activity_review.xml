@@ -73,7 +73,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtName"
+                    android:id="@+id/txtReviewLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -91,6 +91,7 @@
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:numStars="5"
                     android:progressTint="@color/coral_pink"
+                    android:stepSize="1"
                     android:rating="0" />
 
             </LinearLayout>

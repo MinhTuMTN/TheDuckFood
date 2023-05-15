@@ -9,16 +9,27 @@ public class OrderResponse implements Serializable {
     private Order order;
     private StoreResponse store;
     private String address;
+    private ReviewResponse review;
+
     List<OrderItemResponse> orderItems;
 
     public OrderResponse() {
     }
 
-    public OrderResponse(Order order, StoreResponse store, String address, List<OrderItemResponse> orderItems) {
+    public OrderResponse(Order order, StoreResponse store, String address, ReviewResponse review, List<OrderItemResponse> orderItems) {
         this.order = order;
         this.store = store;
         this.address = address;
+        this.review = review;
         this.orderItems = orderItems;
+    }
+
+    public ReviewResponse getReview() {
+        return review;
+    }
+
+    public void setReview(ReviewResponse review) {
+        this.review = review;
     }
 
     public StoreResponse getStore() {

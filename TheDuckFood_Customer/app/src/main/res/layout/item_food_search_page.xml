@@ -41,10 +41,10 @@
         android:id="@+id/imgSale"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
-        android:src="@drawable/dinner"
         android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view"/>
+        android:src="@drawable/dinner"
+        app:layout_constraintStart_toStartOf="@+id/txtTenMonAn"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <View
         android:id="@+id/view"
@@ -56,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTenMonAn" />
 
     <TextView
+        android:id="@+id/txtTenQuan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_2sdp"
@@ -82,7 +83,6 @@
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
             android:layout_gravity="start"
             android:numStars="1"
             android:progressTint="#FFA559"
@@ -112,7 +112,6 @@
         android:id="@+id/txtTenMonAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_="@dimen/_8sdp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:ellipsize="end"

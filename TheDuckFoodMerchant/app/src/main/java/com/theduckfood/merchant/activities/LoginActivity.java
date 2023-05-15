@@ -1,9 +1,11 @@
 package com.theduckfood.merchant.activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -14,6 +16,8 @@ import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.databinding.ActivityLoginBinding;
@@ -43,16 +47,23 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    Constant.GENERAL_NOTIFICATION_CHANNEL_ID,
-                    Constant.GENERAL_NOTIFICATION_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_HIGH);
-
-            getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS},101);
+            }
+        }
+        else {
+            NotificationChannel channel = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                channel = new NotificationChannel(
+                        Constant.GENERAL_NOTIFICATION_CHANNEL_ID,
+                        Constant.GENERAL_NOTIFICATION_CHANNEL_NAME,
+                        NotificationManager.IMPORTANCE_HIGH);
+                getSystemService(NotificationManager.class).createNotificationChannel(channel);
+            }
         }
     }
-
 
     private void addEvents() {
 //        binding.txtForgetPassword.setOnClickListener(v ->

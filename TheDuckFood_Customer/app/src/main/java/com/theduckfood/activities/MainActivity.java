@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.theduckfood.R;
@@ -31,6 +32,16 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         replaceFragment(new HomeFragment());
         this.menuId = R.id.menu_home;
         getAndUpdateFCMToken();
+        getData();
+    }
+
+    private void getData() {
+        boolean switchToOrders = getIntent().getBooleanExtra("order", false);
+        Log.d("MAIN", switchToOrders ? "true" : "false");
+        if (switchToOrders) {
+            this.menuId = R.id.menu_orders;
+            binding.bottomNavigationView.setSelectedItemId(R.id.menu_orders);
+        }
     }
 
     private void addEvents() {

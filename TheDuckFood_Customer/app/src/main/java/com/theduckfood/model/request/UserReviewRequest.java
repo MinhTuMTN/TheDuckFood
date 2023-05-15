@@ -1,14 +1,14 @@
 package com.theduckfood.model.request;
 
 public class UserReviewRequest {
-    private float rate;
+    private int rate;
     private String review_content;
     private Long orderId;
 
     public UserReviewRequest() {
     }
 
-    public UserReviewRequest(float rate, String review_content, Long orderId) {
+    public UserReviewRequest(int rate, String review_content, Long orderId) {
         this.rate = rate;
         this.review_content = review_content;
         this.orderId = orderId;
@@ -18,7 +18,7 @@ public class UserReviewRequest {
         return rate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
