@@ -70,8 +70,8 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/coral"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@color/gray_background"
         android:layout_marginTop="@dimen/_5sdp"/>
 
     <ScrollView
@@ -116,8 +116,8 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/coral" />
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/gray_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -213,8 +213,8 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/coral" />
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/gray_background" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -230,14 +230,13 @@
                 android:id="@+id/recycler_order_detail_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="20dp" />
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/coral"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/gray_background"
                 android:layout_marginTop="@dimen/_5sdp"/>
             <TextView
                 android:id="@+id/textView"
@@ -346,7 +345,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
+                android:layout_height="@dimen/_2sdp"
                 android:background="@drawable/horizontal_dashed_line"
                 android:layout_marginVertical="@dimen/_8sdp"/>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -362,7 +361,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tổng"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -374,7 +373,7 @@
                     android:layout_height="wrap_content"
                     android:text="107000 đ"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -385,16 +384,20 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/coral"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/gray_background"
                 android:layout_marginTop="@dimen/_5sdp"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_17sdp"
+                android:paddingHorizontal="@dimen/_40sdp"
+                android:paddingVertical="@dimen/_4sdp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:text="Trở về trang chủ"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
+                android:textAllCaps="false"
                 android:textSize="@dimen/_13sdp"
                 app:cornerRadius="@dimen/_15sdp"/>
         </LinearLayout>

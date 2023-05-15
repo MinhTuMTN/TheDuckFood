@@ -16,6 +16,7 @@ import com.theduckfood.databinding.ItemOrderBinding;
 import com.theduckfood.model.respone.OrderItemResponse;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.Constant;
+import com.theduckfood.util.DateTimeUtil;
 
 import java.util.List;
 
@@ -40,10 +41,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderResponse orderResponse = orderResponses.get(position);
 
-        String orderId = "Mã đơn hàng: " + orderResponse.getOrder().getOrderId();
-        holder.binding.txtOrderId.setText(orderId);
-
-        String price = Math.round(orderResponse.getOrder().getAmount()) + " đ";
+        String price = DateTimeUtil.formatCurrency(String.valueOf(orderResponse.getOrder().getAmount())) + " đ";
         holder.binding.txtPrice.setText(price);
 
         int amount = 0;
@@ -52,7 +50,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
             for (OrderItemResponse orderItemResponse : orderResponse.getOrderItems())
                 amount += orderItemResponse.getAmount();
         }
-        amountFood = "Đã đặt " + amount + " món";
+        amountFood = amount + " món";
         holder.binding.txtAmount.setText(amountFood);
 
         String status;
@@ -91,12 +89,14 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         holder.binding.txtStatus.setText(status);
         holder.binding.txtStatus.setTextColor(ContextCompat.getColor(context, textColor));
 
-        holder.binding.btnDetail.setOnClickListener(v -> orderDetail(v, orderResponse));
+        holder.itemView.setOnClickListener(v -> orderDetail(v, orderResponse));
+        holder.binding.txtStoreName.setText(orderResponse.getStore().getStoreName());
+        holder.binding.txtDate.setText(DateTimeUtil.formatDate(orderResponse.getOrder().getCreatedAt()));
+        holder.binding.txtTime.setText(DateTimeUtil.formatTime(orderResponse.getOrder().getCreatedAt()));
     }
 
     private void orderDetail(View view, OrderResponse orderResponse) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("orderDetail", orderResponse);
         context.startActivity(intent);
     }
