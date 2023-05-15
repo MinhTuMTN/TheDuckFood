@@ -22,7 +22,7 @@
             android:paddingBottom="@dimen/_4sdp">
 
             <TextView
-                android:id="@+id/txtTenCoupon"
+                android:id="@+id/txtMaHoaDon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -42,8 +42,8 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:src="@drawable/icons8_filled_circle_96px"
-                app:layout_constraintStart_toStartOf="@+id/txtTenCoupon"
-                app:layout_constraintTop_toBottomOf="@+id/txtTenCoupon" />
+                app:layout_constraintStart_toStartOf="@+id/txtMaHoaDon"
+                app:layout_constraintTop_toBottomOf="@+id/txtMaHoaDon" />
 
             <TextView
                 android:id="@+id/txtPhanTramGiam"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:src="@drawable/icons8_filled_circle_96px"
-                app:layout_constraintStart_toStartOf="@+id/txtTenCoupon"
+                app:layout_constraintStart_toStartOf="@+id/txtMaHoaDon"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:src="@drawable/icons8_filled_circle_96px"
-                app:layout_constraintStart_toStartOf="@+id/txtTenCoupon"
+                app:layout_constraintStart_toStartOf="@+id/txtMaHoaDon"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <TextView
