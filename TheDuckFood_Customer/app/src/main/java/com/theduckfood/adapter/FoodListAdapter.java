@@ -98,7 +98,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
 
     }
 
-    private void increaseAmount(int amount) {
+    private void decreaseAmount(int amount) {
         amount = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
         if (amount > 1) {
             amount -= 1;
@@ -106,7 +106,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         }
     }
 
-    private void decreaseAmount(int amount) {
+    private void increaseAmount(int amount) {
         amount = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
         amount += 1;
         popupFoodDetailBinding.txtAmount.setText(String.valueOf(amount));
