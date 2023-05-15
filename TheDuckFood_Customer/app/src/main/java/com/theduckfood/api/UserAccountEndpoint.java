@@ -15,6 +15,7 @@ import com.theduckfood.model.respone.SignUpResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
 import com.theduckfood.model.respone.UserAddressResponse;
+import com.theduckfood.model.respone.UserGetListStore;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -73,4 +74,11 @@ public interface UserAccountEndpoint {
 
     @DELETE("/api/users/delete-address")
     Call<UserAddressResponse> deleteUserAddress(@Query("userAddressId") Long userAddressId, @Header("Authorization") String authToken);
+    @GET("/api/store/list-store")
+    Call<UserGetListStore> getListStore(@Header("Authorization") String authToken,
+                                        @Query("page") int page,
+                                        @Query("limit") int limit,
+                                        @Query("sort") String sortParam,
+                                        @Query("sortType") String sortType
+                                       );
 }
