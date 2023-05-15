@@ -103,6 +103,7 @@ public class SearchActivity extends AppCompatActivity implements ISearchView {
                 binding.layoutList.setVisibility(View.GONE);
             }
         });
+        binding.btnBack4.setOnClickListener(v -> onBackPressed());
     }
     @Override
     public void onBackPressed() {

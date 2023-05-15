@@ -15,6 +15,7 @@ import com.theduckfood.model.Order;
 import com.theduckfood.model.respone.OrderItemResponse;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.Constant;
+import com.theduckfood.util.DateTimeUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -45,16 +46,22 @@ public class OrderDetailActivity extends AppCompatActivity {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         binding.txtTime.setText(timeFormat.format(orderDetail.getOrder().getCreatedAt()));
 
-        String amount = Math.round(orderDetail.getOrder().getAmount()) + " đ";
+        String amount = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getAmount())) + " đ";
         binding.txtPrice.setText(amount);
 
-        String shipFee = Math.round(orderDetail.getOrder().getShipFee()) + " đ";
+        String shipFee = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getShipFee())) + " đ";
         binding.txtShipFee.setText(shipFee);
 
-        String serviceFee = Math.round(orderDetail.getOrder().getServiceFee()) + " đ";
+        String serviceFee = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getServiceFee())) + " đ";
         binding.txtServiceFee.setText(serviceFee);
 
-        String total = Math.round(orderDetail.getOrder().getAmount() + orderDetail.getOrder().getShipFee() + orderDetail.getOrder().getServiceFee()) + " đ";
+        String total = DateTimeUtil.formatCurrency(
+                String.valueOf(
+                        orderDetail.getOrder().getAmount()
+                                + orderDetail.getOrder().getShipFee()
+                                + orderDetail.getOrder().getServiceFee()
+                )
+        ) + " đ";
         binding.txtTotalPrice.setText(total);
 
         binding.txtStoreName.setText(orderDetail.getStore().getStoreName());
@@ -96,7 +103,6 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void switchToUserReviewActivity(OrderResponse orderDetail) {
         Intent intent = new Intent(this, UserReviewActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("orderDetail", orderDetail);
         startActivity(intent);
     }

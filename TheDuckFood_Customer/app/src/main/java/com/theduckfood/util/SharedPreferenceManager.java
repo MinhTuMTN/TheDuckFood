@@ -67,6 +67,13 @@ public class SharedPreferenceManager {
         editor.apply();
     }
 
+    public void setLongValue(String key, Long value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
+        editor.apply();
+    }
+
     public float getFloatValue(String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(key, 0f);
@@ -95,20 +102,27 @@ public class SharedPreferenceManager {
     public void addCartItem(CartItem cartItem, Long storeId) {
         List<CartItem> cartItems;
         if (!Objects.equals(storeId, getLongValue(KEY_CART_SHOP_ID))) {
+            setLongValue(KEY_CART_SHOP_ID, storeId);
             cartItems = new ArrayList<>();
-            cartItems.add(cartItem);
+
+            if (cartItem.getAmount() > 0)
+                cartItems.add(cartItem);
         } else {
             cartItems = getCartItems();
             boolean isExists = false;
             for (CartItem item : cartItems) {
                 if (Objects.equals(item.getFood().getFoodId(), cartItem.getFood().getFoodId())) {
                     isExists = true;
-                    item.setAmount(cartItem.getAmount());
+
+                    if (cartItem.getAmount() <= 0)
+                        cartItems.remove(cartItem);
+                    else
+                        item.setAmount(cartItem.getAmount());
                     break;
                 }
             }
 
-            if (!isExists)
+            if (!isExists && cartItem.getAmount() > 0)
                 cartItems.add(cartItem);
         }
         saveCartItems(cartItems);
