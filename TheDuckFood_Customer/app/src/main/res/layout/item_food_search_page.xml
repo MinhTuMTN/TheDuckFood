@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/_12sdp"
+    android:layout_marginEnd="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_6sdp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF6000"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/imgMonAn"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/com_tam_shop"
+                android:scaleType="centerCrop"/>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imgSale"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:src="@drawable/dinner"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="1dp"
+        android:background="#E3E1E1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTenMonAn"
+        app:layout_constraintTop_toBottomOf="@+id/txtTenMonAn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:text="Cơm tấm Lái Thiêu"
+        android:textColor="@color/coral"
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSale"
+        app:layout_constraintStart_toEndOf="@+id/imgSale"
+        app:layout_constraintTop_toTopOf="@+id/imgSale" />
+
+    <LinearLayout
+        android:id="@+id/linearDanhGia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintStart_toStartOf="@+id/imgSale"
+        app:layout_constraintTop_toBottomOf="@+id/imgSale">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_gravity="start"
+            android:numStars="1"
+            android:progressTint="#FFA559"
+            android:rating="1" />
+
+        <TextView
+            android:id="@+id/txtDanhGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.7"
+            android:textColor="@color/gray_hint"
+            android:textSize="@dimen/_10sdp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtSoLuotDanhGia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_1sdp"
+        android:text="(400+)"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintStart_toEndOf="@+id/linearDanhGia"
+        app:layout_constraintTop_toTopOf="@+id/linearDanhGia"/>
+
+    <TextView
+        android:id="@+id/txtTenMonAn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_="@dimen/_8sdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxWidth="@dimen/_190sdp"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/_3sdp"
+        android:text="Cơm tấm sườn bì trứng ốp la"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgCircle"
+        android:layout_width="@dimen/_2sdp"
+        android:layout_height="@dimen/_2sdp"
+
+        android:src="@drawable/icons8_filled_circle_30px"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@+id/txtSoLuotDanhGia"
+        app:layout_constraintTop_toTopOf="@+id/txtSoLuotDanhGia"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSoLuotDanhGia"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.0 km"
+        android:textColor="@color/gray_hint"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@+id/imgCircle"
+        app:layout_constraintTop_toTopOf = "@+id/txtSoLuotDanhGia"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
