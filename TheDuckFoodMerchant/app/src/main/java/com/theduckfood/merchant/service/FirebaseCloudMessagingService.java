@@ -1,4 +1,4 @@
-package com.theduckfood.services;
+package com.theduckfood.merchant.service;
 
 import android.Manifest;
 import android.app.PendingIntent;
@@ -9,18 +9,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.theduckfood.R;
-import com.theduckfood.activities.LoginActivity;
-import com.theduckfood.activities.MainActivity;
-import com.theduckfood.util.Constant;
+import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.MainActivity;
+import com.theduckfood.merchant.util.Constant;
 
 import java.util.Objects;
 
@@ -44,7 +41,8 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Constant.GENERAL_NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(
+                        R.drawable.icon)
                 .setContentTitle(Objects.requireNonNull(message.getNotification()).getTitle())
                 .setContentText(message.getNotification().getBody())
                 .setContentIntent(pendingIntent)
@@ -56,22 +54,6 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         }
 
 
-        notificationManager.notify(101, builder.build());
-
-
-
-        if (message.getData().size() > 0) {
-            if (Objects.equals(message.getData().get("type"), "order_details")){
-                updateOrderDetails(message);
-            }
-        }
-    }
-
-    private void updateOrderDetails(RemoteMessage message) {
-        Log.d("FCM", message.getData().get("order_status"));
-
-        Intent intent = new Intent("com.theduckfood.UPDATE_ORDER_STATUS");
-        intent.putExtra("order_status", message.getData().get("order_status"));
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        notificationManager.notify(102, builder.build());
     }
 }

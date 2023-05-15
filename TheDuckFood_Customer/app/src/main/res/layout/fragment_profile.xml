@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:text="@string/account_information"
         android:textColor="@color/black"
-        android:textSize="@dimen/_17sdp"
+        android:textSize="@dimen/_18sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnBack3"
         app:layout_constraintStart_toEndOf="@+id/btnBack3"
@@ -187,8 +187,10 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_log_out"
+        android:id="@+id/card_become_our_partner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentPadding="@dimen/_10sdp"
@@ -197,6 +199,47 @@
         app:layout_constraintTop_toBottomOf="@+id/card_notification"
         app:strokeColor="@color/red_pink_pro_max"
         app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/partner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="Trở thành đối tác của chúng tôi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_log_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_become_our_partner"
+        app:strokeColor="@color/red_pink_pro_max"
+        app:strokeWidth="@dimen/_1sdp">
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

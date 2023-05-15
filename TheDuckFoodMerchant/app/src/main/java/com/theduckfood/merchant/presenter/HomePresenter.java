@@ -68,4 +68,26 @@ public class HomePresenter {
             }
         });
     }
+
+    public void updateFCMToken(String fcmToken) {
+        StoreAccountEndpoint storeAccountEndpoint = APIUtil.getRetrofit().create(StoreAccountEndpoint.class);
+        Call<SimpleMessageResponse> call = storeAccountEndpoint.updateFCMToken(fcmToken,
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY)
+        );
+        call.enqueue(new Callback<SimpleMessageResponse>() {
+            @Override
+            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response) {
+                SimpleMessageResponse simpleMessageResponse = response.body();
+
+                if (simpleMessageResponse == null || !simpleMessageResponse.isError()) {
+                    sharedPreferenceManager.setStringValue(SharedPreferenceManager.USER_PROFILE_FCM_TOKEN_KEY, fcmToken);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleMessageResponse> call, Throwable t) {
+                Log.e("MainActivityUpdateFCMToken", t.getMessage());
+            }
+        });
+    }
 }
