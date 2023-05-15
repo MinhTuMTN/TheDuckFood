@@ -9,6 +9,8 @@ import com.theduckfood.merchant.model.response.StoreLoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -36,5 +38,12 @@ public interface StoreAccountEndpoint {
     Call<SimpleMessageResponse> changePassword(
             @Header("Authorization") String bearerToken,
             @Body ChangePasswordRequest changePasswordRequest
+    );
+
+    @FormUrlEncoded
+    @POST("/api/merchant/update-fcm-token")
+    Call<SimpleMessageResponse> updateFCMToken(
+            @Field("fcmToken") String fcmToken,
+            @Header("Authorization") String authToken
     );
 }

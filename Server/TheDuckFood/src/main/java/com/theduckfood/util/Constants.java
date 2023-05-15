@@ -1,6 +1,8 @@
 package com.theduckfood.util;
 
 public class Constants {
+    public final static String MERCHANT_API_KEY = "AAAARQfpBIY:APA91bGApaMmoFJ_wH7L6n7UzPlpsCciRNazMCpqNbyT_Efy7czgUUcOspKEXdxl3NkhljaUmeF4Pjh6WsI5YJnCnDiHN5UNUyVroEHgCjEBHmeplk9ecTqn37E1_l39wuDyIFSXHRza";
+    public final static String USER_API_KEY = "AAAA2ckBkhI:APA91bGXyDC77QxstBR13oXoWk-qpl99ZrcdncsH2gwr9S88ZD2BC8vZppfk2956fesyYivkukBemd8Se5quJrwPljKte74aVuk7MRCxRWd1vK8IyJ2PRi51OD0XNjjQQqICk466mya-";
     public final static String USER_ACCOUNT_STATUS_ACTIVATED = "activated";
     public final static String USER_ACCOUNT_STATUS_DELETED = "deleted";
 

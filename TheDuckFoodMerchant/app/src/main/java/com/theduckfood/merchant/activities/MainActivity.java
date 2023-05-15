@@ -17,6 +17,7 @@ import com.theduckfood.merchant.fragments.AccountFragment;
 import com.theduckfood.merchant.fragments.HomeFragment;
 import com.theduckfood.merchant.fragments.MenuFragment;
 import com.theduckfood.merchant.fragments.OrdersFragment;
+import com.theduckfood.merchant.presenter.HomePresenter;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         addEvents();
         loadFragment();
         getAndUpdateFCMToken();
+        getIntentData();
+    }
+
+    private void getIntentData() {
+        boolean isSwitch = getIntent().getBooleanExtra("order", false);
+        if (isSwitch)
+            changeBottomBar(R.id.menu_orders);
     }
 
     private void loadFragment() {
@@ -85,5 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFCMToken(String fcmToken) {
         Log.d("FCM", fcmToken);
+        new HomePresenter(null, this).updateFCMToken(fcmToken);
     }
 }
