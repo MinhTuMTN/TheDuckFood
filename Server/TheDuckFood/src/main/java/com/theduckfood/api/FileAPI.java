@@ -18,9 +18,13 @@ import java.util.Objects;
 public class FileAPI {
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> getImage(@RequestParam("id") String id) throws IOException {
-        File file = new File("C:\\Images\\" + id);
-        byte[] bytes = Files.readAllBytes(file.toPath());
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(bytes);
+        try {
+            File file = new File("C:\\Images\\" + id);
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(bytes);
+        } catch (Exception e) {
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(null);
+        }
     }
 
 
