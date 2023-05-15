@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:text="@string/account_information"
         android:textColor="@color/black"
-        android:textSize="@dimen/_17sdp"
+        android:textSize="@dimen/_18sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnBack3"
         app:layout_constraintStart_toEndOf="@+id/btnBack3"

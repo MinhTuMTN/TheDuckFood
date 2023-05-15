@@ -42,20 +42,22 @@
                 android:layout_height="wrap_content"
                 android:text="Mời bạn đánh giá"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                android:layout_marginEnd="@dimen/_17sdp"/>
 
             <TextView
                 android:id="@+id/txtOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mã đơn hàng: 1" />
+                android:text="Mã đơn hàng: 1"
+                android:layout_marginEnd="@dimen/_17sdp"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/coral" />
 
@@ -77,7 +79,7 @@
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="Bạn thấy cửa hàng như thế nào?"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_17sdp"
                     android:textStyle="bold" />
 
                 <RatingBar
@@ -95,7 +97,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/_2sdp"
                 android:background="@color/coral" />
 
             <com.google.android.material.card.MaterialCardView
