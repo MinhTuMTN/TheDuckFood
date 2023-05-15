@@ -65,13 +65,14 @@
                 android:layout_gravity="start"/>
 
             <TextView
+                android:id="@+id/txtRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
                 android:text="4.7"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
                 android:textColor="@color/black_text"
-                android:layout_marginEnd="@dimen/_4sdp"/>
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

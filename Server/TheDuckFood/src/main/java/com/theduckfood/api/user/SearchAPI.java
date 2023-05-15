@@ -2,6 +2,7 @@ package com.theduckfood.api.user;
 
 import com.theduckfood.entity.Food;
 import com.theduckfood.entity.Store;
+import com.theduckfood.model.response.FoodSearchResponse;
 import com.theduckfood.model.response.SearchResponse;
 import com.theduckfood.repositories.FoodRepository;
 import com.theduckfood.repositories.StoreRepository;
@@ -42,12 +43,15 @@ public class SearchAPI {
                             Constants.FOOD_STATUS_SELLING,
                             pageable
                     );
-//            List<Store> stores =  storeRepository
-//                    .findStoresByStoreNameContainingIgnoreCaseAndStatusNotContains(
-//                    query,
-//                    Constants.STORE_STATUS_DELETED,
-//                    pageable
-//                    );
+            List<FoodSearchResponse> foodSearchResponses = new ArrayList<>();
+            for (Food food : foods)
+                foodSearchResponses.add(new FoodSearchResponse(
+                        food,
+                        food.getStore().getStoreId(),
+                        food.getStore().getStoreName(),
+                        food.getStore().getRate(),
+                        food.getStore().getReviewCount()
+                ));
 
             Page<Store> storePages = storeRepository.findStoresByKeywordAndStatusNotContains(
                     query,
@@ -59,7 +63,7 @@ public class SearchAPI {
                     storePages != null && storePages.hasContent()
                     ? storePages.getContent()
                     : new ArrayList<>(),
-                    foods));
+                    foodSearchResponses));
 
         } catch (Exception e) {
             return  ResponseEntity.status(400).body(new SearchResponse(true,

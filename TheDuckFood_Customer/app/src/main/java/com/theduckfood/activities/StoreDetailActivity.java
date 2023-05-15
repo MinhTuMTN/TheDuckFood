@@ -47,7 +47,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
     }
 
     private void loadStoreDetail(StoreDetailPresenter storeDetailPresenter) {
-        Long storeId = Long.valueOf(18);
+        Long storeId = getIntent().getLongExtra("store", 18L);
         storeDetailPresenter.getStoreDetail(storeId);
     }
 

@@ -11,6 +11,7 @@ import com.theduckfood.model.respone.FoodDetailResponse;
 import com.theduckfood.model.respone.GetOrdersResponse;
 import com.theduckfood.model.respone.GetProfileResponse;
 import com.theduckfood.model.respone.LoginResponse;
+import com.theduckfood.model.respone.SearchResponse;
 import com.theduckfood.model.respone.SignUpResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
@@ -80,5 +81,12 @@ public interface UserAccountEndpoint {
                                         @Query("limit") int limit,
                                         @Query("sort") String sortParam,
                                         @Query("sortType") String sortType
-                                       );
+    );
+
+    @GET("/api/search")
+    Call<SearchResponse> search(@Header("Authorization") String authToken,
+                                @Query("page") int page,
+                                @Query("limit") int limit,
+                                @Query("q") String searchParam
+    );
 }
