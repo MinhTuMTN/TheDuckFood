@@ -192,7 +192,6 @@
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:background="@color/gray_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recycler_foods"/>
