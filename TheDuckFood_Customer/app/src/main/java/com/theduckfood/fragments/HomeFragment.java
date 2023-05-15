@@ -17,14 +17,18 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderView;
 import com.theduckfood.R;
 import com.theduckfood.adapter.FoodRecommendAdapter;
+import com.theduckfood.adapter.HomeStoreAdapter;
 import com.theduckfood.adapter.SliderAdapter;
 import com.theduckfood.databinding.FragmentHomeBinding;
 import com.theduckfood.model.respone.FoodRecommend;
+import com.theduckfood.model.respone.UserGetListStore;
+import com.theduckfood.presenter.HomePresenter;
+import com.theduckfood.presenter.contact.IHomeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements IHomeView {
     FragmentHomeBinding binding;
 
 
@@ -43,6 +47,14 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         handleSlider();
         handleFoodRecommend();
+        handleStore();
+    }
+
+    private void handleStore() {
+        HomePresenter homePresenter = new HomePresenter(this, getContext());
+        homePresenter.getListStore("rate", "DESC", 0, 7);
+        homePresenter.getListStore("date", "DESC", 0, 7);
+
     }
 
     private void handleFoodRecommend() {
@@ -79,5 +91,27 @@ public class HomeFragment extends Fragment {
         binding.sliderView.setIndicatorUnselectedColor(Color.GRAY);
         binding.sliderView.startAutoCycle();
         binding.sliderView.setScrollTimeInSec(5);
+    }
+
+    private boolean isOk(UserGetListStore userGetListStore) {
+        return userGetListStore != null && !userGetListStore.isError();
+    }
+
+    @Override
+    public void getRecommendStores(UserGetListStore userGetListStore) {
+        if (isOk(userGetListStore)) {
+            HomeStoreAdapter ratingStoreAdapter = new HomeStoreAdapter(getContext(), userGetListStore.getStores());
+            binding.recyclerQuanNgon.setAdapter(ratingStoreAdapter);
+            binding.recyclerQuanNgon.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        }
+    }
+
+    @Override
+    public void getNewestStores(UserGetListStore userGetListStore) {
+        if (isOk(userGetListStore)) {
+            HomeStoreAdapter newestStoreAdapter = new HomeStoreAdapter(getContext(), userGetListStore.getStores());
+            binding.recyclerQuanMoiNhat.setAdapter(newestStoreAdapter);
+            binding.recyclerQuanMoiNhat.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        }
     }
 }

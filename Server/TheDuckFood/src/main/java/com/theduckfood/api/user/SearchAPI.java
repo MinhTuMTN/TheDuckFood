@@ -7,6 +7,7 @@ import com.theduckfood.repositories.FoodRepository;
 import com.theduckfood.repositories.StoreRepository;
 import com.theduckfood.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,15 +42,23 @@ public class SearchAPI {
                             Constants.FOOD_STATUS_SELLING,
                             pageable
                     );
-            List<Store> stores =  storeRepository
-                    .findStoresByStoreNameContainingIgnoreCaseAndStatusNotContains(
+//            List<Store> stores =  storeRepository
+//                    .findStoresByStoreNameContainingIgnoreCaseAndStatusNotContains(
+//                    query,
+//                    Constants.STORE_STATUS_DELETED,
+//                    pageable
+//                    );
+
+            Page<Store> storePages = storeRepository.findStoresByKeywordAndStatusNotContains(
                     query,
                     Constants.STORE_STATUS_DELETED,
                     pageable
-                    );
+            );
             return ResponseEntity.ok(new SearchResponse(false,
                     "Thành công",
-                    stores,
+                    storePages != null && storePages.hasContent()
+                    ? storePages.getContent()
+                    : new ArrayList<>(),
                     foods));
 
         } catch (Exception e) {
