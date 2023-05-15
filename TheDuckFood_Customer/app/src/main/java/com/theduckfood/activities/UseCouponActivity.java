@@ -1,8 +1,10 @@
-package com.theduckfood;
+package com.theduckfood.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.theduckfood.R;
 
 public class UseCouponActivity extends AppCompatActivity {
 
