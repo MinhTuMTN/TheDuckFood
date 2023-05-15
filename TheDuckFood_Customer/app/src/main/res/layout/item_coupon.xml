@@ -120,29 +120,27 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <TextView
-                android:id="@+id/textView1"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnSuDungCoupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:text="Số lượng:"
-                android:textColor="#1B9830"
-                android:textSize="@dimen/_9sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/txtSoLuongCoupon" />
-
-            <TextView
-                android:id="@+id/txtSoLuongCoupon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:text="100"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView1" />
+                app:layout_constraintEnd_toEndOf="@id/txtHanDungCoupon"
+                app:layout_constraintBottom_toBottomOf="@id/txtDonToiThieu"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/gray_hint"
+                app:strokeWidth="@dimen/_1sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:textColor="@color/gray_hint"
+                    android:textSize="@dimen/_7sdp"
+                    android:text="Sử dụng"
+                    android:layout_marginBottom="@dimen/_1sdp"/>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </com.google.android.material.card.MaterialCardView>
 
