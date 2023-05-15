@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
@@ -157,6 +159,22 @@ public class StoreManagementAPI {
             store.setStatus(Constants.STORE_STATUS_CLOSED);
         storeRepository.save(store);
         return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật thành công"));
+    }
+
+    @PostMapping("/update-fcm-token")
+    public ResponseEntity<SimpleMessageResponse> updateFCMToken(@RequestHeader("Authorization") String bearerToken,
+                                                                @RequestBody String fcmToken) {
+        try {
+            String fcmTokenValue = URLDecoder.decode(fcmToken, StandardCharsets.UTF_8).replace("fcmToken=", "");
+
+            Store store = getStoreFromToken(bearerToken);
+            assert store != null;
+            store.setFcmToken(fcmTokenValue);
+            storeRepository.save(store);
+            return ResponseEntity.ok(new SimpleMessageResponse(false, "Cập nhật FCM Token thành công"));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new SimpleMessageResponse(true, e.getMessage()));
+        }
     }
 
 

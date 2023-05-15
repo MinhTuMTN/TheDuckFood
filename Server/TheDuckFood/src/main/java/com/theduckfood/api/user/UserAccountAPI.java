@@ -89,8 +89,6 @@ public class UserAccountAPI {
                                                                 @RequestBody String fcmToken) {
         try {
             String fcmTokenValue = URLDecoder.decode(fcmToken, StandardCharsets.UTF_8).replace("fcmToken=", "");
-//            if (fcmTokenValue == null)
-//                return ResponseEntity.ok(new SimpleMessageResponse(true, "Vui lòng cung cấp fcmToken"));
 
             String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
             UserAccount userAccount = userAccountRepository.findUserAccountByEmail(email);

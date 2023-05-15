@@ -65,8 +65,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                     getSystemService(NotificationManager.class).createNotificationChannel(channel);
                 }
             }
-
-
     }
 
     private void addEvents() {
