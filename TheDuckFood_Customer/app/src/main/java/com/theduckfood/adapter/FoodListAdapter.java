@@ -2,15 +2,10 @@ package com.theduckfood.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -64,8 +59,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     }
 
     public void showPopUpFoodDetail(Food food) {
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE );
-//        View view = inflater.inflate(R.layout.popup_food_detail, null);
         popUpFoodDetail = new Dialog(
                 context,
                 R.style.MaterialDialogSheet);
@@ -86,12 +79,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
             Toast.makeText(context, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
-
-//        ImageView imgAvatarFoodPopup = (ImageView) view.findViewById(R.id.imgAvatarFoodPopup);
-//        TextView txtFoodNamePopup = (TextView) view.findViewById(R.id.txtFoodNamePopup);
-//        TextView txtPricePopup = (TextView) view.findViewById(R.id.txtPricePopup);
-//        TextView txtDescPopup = (TextView) view.findViewById(R.id.txtDescPopup);
-//        Button btnAdd =(Button) view.findViewById(R.id.btnAdd);
 
         String urlImage = food.getImage().startsWith("http") ? food.getImage() : Constant.IMAGE_BASE_URL + food.getImage();
         Glide.with(context)
