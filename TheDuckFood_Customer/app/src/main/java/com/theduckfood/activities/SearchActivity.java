@@ -114,10 +114,11 @@ public class SearchActivity extends AppCompatActivity implements ISearchView {
     @Override
     public void searchResponse(SearchResponse searchResponse) {
         loading(false);
-        if (searchResponse == null
-                || searchResponse.isError()
-                || (position == 0 && searchResponse.getFoods().size() == 0)
-                || (position == 1 && searchResponse.getStores().size() == 0)
+        foodSearchAdapter.setFoodSearchResponses(searchResponse.getFoods());
+        storeSearchAdapter.setStores(searchResponse.getStores());
+        if (searchResponse.isError()
+                || position == 0 && searchResponse.getFoods().size() == 0
+                || position == 1 && searchResponse.getStores().size() == 0
         ) {
             binding.layoutNotFound.setVisibility(View.VISIBLE);
             binding.layoutList.setVisibility(View.GONE);
@@ -126,8 +127,6 @@ public class SearchActivity extends AppCompatActivity implements ISearchView {
 
         binding.layoutList.setVisibility(View.VISIBLE);
         binding.layoutNotFound.setVisibility(View.GONE);
-        foodSearchAdapter.setFoodSearchResponses(searchResponse.getFoods());
-        storeSearchAdapter.setStores(searchResponse.getStores());
         if (position == 0) {
             binding.listItem.setAdapter(foodSearchAdapter);
         } else
