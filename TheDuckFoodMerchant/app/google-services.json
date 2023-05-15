@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "296485454982",
+    "project_id": "the-duck-food-merchant",
+    "storage_bucket": "the-duck-food-merchant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296485454982:android:dd924efd21f8198cd23d07",
+        "android_client_info": {
+          "package_name": "com.theduckfood.merchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296485454982-t6k29mv23tbf4kkupg7aolss09o87qm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByvxCJVdqz-b2a4-oAD1JutXrI0J7u7CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296485454982-t6k29mv23tbf4kkupg7aolss09o87qm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

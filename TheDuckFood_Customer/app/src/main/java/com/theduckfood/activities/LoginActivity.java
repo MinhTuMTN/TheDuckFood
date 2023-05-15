@@ -1,11 +1,16 @@
 package com.theduckfood.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -32,8 +37,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        createNotificationChannel();
-        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            createNotificationChannel();
+        }
+
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(this);
         if (sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY) != null) {
             switchToMainActivity();
@@ -42,15 +49,24 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         addEvents();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    Constant.GENERAL_NOTIFICATION_CHANNEL_ID,
-                    Constant.GENERAL_NOTIFICATION_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_HIGH);
+            if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS},101);
+            }
+            else {
+                NotificationChannel channel = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    channel = new NotificationChannel(
+                            Constant.GENERAL_NOTIFICATION_CHANNEL_ID,
+                            Constant.GENERAL_NOTIFICATION_CHANNEL_NAME,
+                            NotificationManager.IMPORTANCE_HIGH);
+                    getSystemService(NotificationManager.class).createNotificationChannel(channel);
+                }
+            }
 
-            getSystemService(NotificationManager.class).createNotificationChannel(channel);
-        }
+
     }
 
     private void addEvents() {
