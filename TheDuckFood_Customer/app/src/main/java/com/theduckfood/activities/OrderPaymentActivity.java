@@ -68,7 +68,7 @@ public class OrderPaymentActivity extends AppCompatActivity {
 
     private void switchToStoreDetailActivity(Long storeId) {
         Intent intent = new Intent(this, StoreDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("store", storeId);
         startActivity(intent);
     }
