@@ -278,11 +278,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:text="Tổng cộng"
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.3" />
@@ -292,14 +292,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="@dimen/_4sdp"
-                    android:text="25.777"
+                    android:text="100.000"
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.3" />
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -310,42 +308,76 @@
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.3" />
+                    app:layout_constraintTop_toTopOf="@+id/txtTongTamTinh" />
 
                 <TextView
+                    android:id="@+id/textview11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="Chiết khấu"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:text="Giảm giá"
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="@+id/textView12"
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
+                    android:id="@+id/txtTienGiamCoupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:paddingEnd="@dimen/_4sdp"
-                    android:text="-2.000"
+                    android:text="-40.000"
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="@+id/txtTongTamTinh"
                     app:layout_constraintTop_toBottomOf="@+id/txtTongTamTinh" />
 
                 <TextView
+                    android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:paddingEnd="@dimen/_17sdp"
                     android:text="đ"
                     android:textColor="@color/purple_700"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chiết khấu"
+                    android:textColor="@color/purple_700"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                    app:layout_constraintEnd_toEndOf="@+id/textview11"
+                    app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_4sdp"
+                    android:text="-2.000"
+                    android:textColor="@color/purple_700"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/txtTienGiamCoupon"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTienGiamCoupon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_17sdp"
+                    android:text="đ"
+                    android:textColor="@color/purple_700"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -379,7 +411,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="@dimen/_4sdp"
-                    android:text="25.777"
+                    android:text="58.000"
                     android:textColor="#009688"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
