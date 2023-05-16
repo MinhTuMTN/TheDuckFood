@@ -80,6 +80,12 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
             return;
         }
 
+        if (userAddressResponse.getUserAddresses().isEmpty()) {
+            binding.recyclerAddress.setVisibility(View.GONE);
+            binding.constraintKhongTimThay.setVisibility(View.VISIBLE);
+            return;
+        }
+
         binding.recyclerAddress.setVisibility(View.VISIBLE);
         binding.constraintKhongTimThay.setVisibility(View.GONE);
 

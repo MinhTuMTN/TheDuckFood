@@ -3,6 +3,7 @@ package com.theduckfood.model;
 import java.util.Date;
 
 public class Coupon {
+
     private Long couponId;
 
     private String couponCode;

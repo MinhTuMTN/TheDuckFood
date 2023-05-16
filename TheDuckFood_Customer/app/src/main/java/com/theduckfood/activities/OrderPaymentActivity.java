@@ -5,15 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
-import com.theduckfood.R;
-import com.theduckfood.adapter.OrderDetailListAdapter;
 import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Store;
-import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.List;
@@ -39,6 +35,13 @@ public class OrderPaymentActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
         binding.btnAddMoreFoods.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
         binding.btnChangeAddress.setOnClickListener(v -> switchToUserAddressActivity());
+        binding.cardCoupon.setOnClickListener(v -> switchToUseCouponActivity(store.getStoreId()));
+    }
+
+    private void switchToUseCouponActivity(Long storeId) {
+        Intent intent = new Intent(this, UseCouponActivity.class);
+        intent.putExtra("storeId", storeId);
+        startActivity(intent);
     }
 
     private void switchToUserAddressActivity() {

@@ -8,6 +8,7 @@ import com.theduckfood.model.request.UpdateProfileRequest;
 import com.theduckfood.model.request.UserReviewRequest;
 import com.theduckfood.model.respone.CreateOrderResponse;
 import com.theduckfood.model.respone.FoodDetailResponse;
+import com.theduckfood.model.respone.GetCouponsResponse;
 import com.theduckfood.model.respone.GetOrdersResponse;
 import com.theduckfood.model.respone.GetProfileResponse;
 import com.theduckfood.model.respone.LoginResponse;
@@ -89,4 +90,6 @@ public interface UserAccountEndpoint {
                                 @Query("limit") int limit,
                                 @Query("q") String searchParam
     );
+    @GET("/api/coupon")
+    Call<GetCouponsResponse> getCoupons(@Query("storeId") Long storeId, @Header("Authorization") String authToken);
 }
