@@ -21,9 +21,14 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
     Context context;
     List<CartItem> cartItems;
 
-    public OrderPaymentAdapter(Context context, List<CartItem> cartItems) {
+    SharedPreferenceManager sharedPreferenceManager;
+    Long storeId;
+
+    public OrderPaymentAdapter(Context context, List<CartItem> cartItems, Long storeId) {
         this.context = context;
         this.cartItems = cartItems;
+        this.storeId = storeId;
+        this.sharedPreferenceManager = new SharedPreferenceManager(context);
     }
 
     @NonNull
@@ -59,12 +64,15 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
             amount -= 1;
             holder.binding.txtAmount.setText(String.valueOf(amount));
         }
+        sharedPreferenceManager.addCartItem(cartItem,storeId);
     }
 
     private void increaseAmount(@NonNull OrderPaymentViewHolder holder) {
         int amount =  Integer.parseInt(holder.binding.txtAmount.getText().toString());
         amount += 1;
         holder.binding.txtAmount.setText(String.valueOf(amount));
+
+        sharedPreferenceManager.addCartItem(cartItem,storeId);
 
     }
     @Override

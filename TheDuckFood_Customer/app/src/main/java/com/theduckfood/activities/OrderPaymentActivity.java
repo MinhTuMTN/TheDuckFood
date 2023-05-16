@@ -52,7 +52,7 @@ public class OrderPaymentActivity extends AppCompatActivity {
     private void getOrderItemList() {
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(this);
         List<CartItem> cartItems = sharedPreferenceManager.getCartItems();
-        orderPaymentAdapter = new OrderPaymentAdapter(this, cartItems);
+        orderPaymentAdapter = new OrderPaymentAdapter(this, cartItems, store.getStoreId());
         binding.recyclerFoods.setAdapter(orderPaymentAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

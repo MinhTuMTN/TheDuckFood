@@ -1,16 +1,21 @@
 package com.theduckfood.api.delivery;
 
+import com.theduckfood.entity.DeliveryManAccount;
 import com.theduckfood.entity.Order;
+import com.theduckfood.entity.UserAccount;
+import com.theduckfood.model.request.LoginRequest;
+import com.theduckfood.model.response.DeliveryLoginResponse;
+import com.theduckfood.model.response.LoginResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
+import com.theduckfood.repositories.DeliveryManAccountRepository;
 import com.theduckfood.repositories.OrderRepository;
 import com.theduckfood.util.Constants;
+import com.theduckfood.util.EncodingUtil;
 import com.theduckfood.util.FCMClient;
+import com.theduckfood.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -19,6 +24,32 @@ import java.io.IOException;
 public class DeliveryAPI {
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    DeliveryManAccountRepository deliveryManAccountRepository;
+
+    @PostMapping("/login")
+    public ResponseEntity<DeliveryLoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        DeliveryManAccount deliveryManAccount = deliveryManAccountRepository
+                .findDeliveryManAccountByEmailAndPasswordAndStatus(
+                        loginRequest.getEmail(),
+                        EncodingUtil.encoding(loginRequest.getPassword()),
+                        Constants.DELIVERY_MAN_ACCOUNT_STATUS_ACTIVATED
+                );
+
+        if (deliveryManAccount == null)
+            return  ResponseEntity.status(401).body(new DeliveryLoginResponse(
+                    true,
+                    "Tài khoản hoặc mật khẩu không chính xác",
+                    null,
+                    null)
+            );
+        return ResponseEntity.status(200).body(new DeliveryLoginResponse(
+                false,
+                "Đăng nhập thành công",
+                deliveryManAccount.getDeliveryMan().getFullName(),
+                JWTUtil.generateJWTToken(deliveryManAccount.getEmail(), "shipper")));
+    }
 
     @GetMapping
     public ResponseEntity<SimpleMessageResponse> updateStatus(

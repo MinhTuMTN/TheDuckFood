@@ -1,6 +1,6 @@
 package com.theduckfood.theduckfoodpartner.api;
 
-import com.theduckfood.util.Constant;
+import com.theduckfood.theduckfoodpartner.util.Constant;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
