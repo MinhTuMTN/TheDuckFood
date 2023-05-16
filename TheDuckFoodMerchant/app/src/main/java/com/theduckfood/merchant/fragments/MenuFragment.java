@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.theduckfood.merchant.R;
 import com.theduckfood.merchant.activities.AddFoodActivity;
+import com.theduckfood.merchant.activities.MainActivity;
 import com.theduckfood.merchant.adapter.FoodAdapter;
 import com.theduckfood.merchant.databinding.FragmentMenuBinding;
 import com.theduckfood.merchant.model.Food;
@@ -88,6 +89,13 @@ public class MenuFragment extends Fragment implements IMenuView {
             resetButton();
             binding.txtDangMo.setTextColor(requireContext().getColor(R.color.coral));
             menuPresenter.getListFoods(Constant.FOOD_STATUS_SELLING);
+        });
+        binding.btnBack.setOnClickListener(v -> {
+            try {
+                ((MainActivity) requireContext()).changeBottomBar(R.id.menu_home);
+            } catch (Exception ignored) {
+
+            }
         });
     }
 

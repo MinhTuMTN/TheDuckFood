@@ -8,8 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.theduckfood.databinding.ActivityOrderPaymentBinding;
 import com.theduckfood.databinding.ItemOrderPaymentBinding;
 import com.theduckfood.model.CartItem;
+import com.theduckfood.model.Coupon;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
 import com.theduckfood.util.SharedPreferenceManager;
@@ -23,12 +25,16 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
 
     SharedPreferenceManager sharedPreferenceManager;
     Long storeId;
+    ActivityOrderPaymentBinding activityOrderPaymentBinding;
+    int totalPrice;
+    Coupon coupon;
 
-    public OrderPaymentAdapter(Context context, List<CartItem> cartItems, Long storeId) {
+    public OrderPaymentAdapter(Context context, List<CartItem> cartItems, Long storeId, ActivityOrderPaymentBinding activityOrderPaymentBinding) {
         this.context = context;
         this.cartItems = cartItems;
         this.storeId = storeId;
         this.sharedPreferenceManager = new SharedPreferenceManager(context);
+        this.activityOrderPaymentBinding = activityOrderPaymentBinding;
     }
 
     @NonNull
@@ -70,7 +76,7 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         }
         cartItem.setAmount(amount);
         sharedPreferenceManager.addCartItem(cartItem, storeId);
-
+        updatePriceDetail();
     }
 
     private void increaseAmount(@NonNull OrderPaymentViewHolder holder, CartItem cartItem) {
@@ -79,7 +85,45 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         holder.binding.txtAmount.setText(String.valueOf(amount));
         cartItem.setAmount(amount);
         sharedPreferenceManager.addCartItem(cartItem, storeId);
+        updatePriceDetail();
+    }
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
+    }
+    public void updatePriceOrder() {
+        int price = 0;
+        for (CartItem cartItem : sharedPreferenceManager.getCartItems()) {
+            price += cartItem.getFood().getPrice() * cartItem.getAmount();
+        }
+        totalPrice = price;
+    }
 
+    public void updatePriceDetail() {
+        updatePriceOrder();
+        String priceCart = DateTimeUtil.formatCurrency(String.valueOf(totalPrice));
+        activityOrderPaymentBinding.txtTongGiaTienMonAn.setText(priceCart);
+
+        int shipFee = 15000;
+        int serviceFee = 2000;
+
+        int discount = 0;
+        if(coupon != null) {
+            if (totalPrice >= coupon.getMinPrice()) {
+                if (totalPrice * coupon.getDiscount() <= coupon.getMaxDiscount()) {
+                    discount = (int) (totalPrice * coupon.getDiscount());
+                } else {
+                    discount = (int) Math.round(coupon.getMaxDiscount());
+                }
+            } else {
+                coupon = null;
+                activityOrderPaymentBinding.txtCoupon.setText("Coupon không phù hợp!");
+            }
+        }
+        String discountOrder = DateTimeUtil.formatCurrency(String.valueOf(discount));
+        activityOrderPaymentBinding.txtTienGiamGia.setText(discountOrder);
+
+        String totalPriceOrder = DateTimeUtil.formatCurrency(String.valueOf(totalPrice + shipFee + serviceFee - discount));
+        activityOrderPaymentBinding.txtThanhTien.setText(totalPriceOrder);
     }
     @Override
     public int getItemCount() {
