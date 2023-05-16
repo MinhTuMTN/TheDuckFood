@@ -1,5 +1,7 @@
 package com.theduckfood.model.request;
 
+import com.theduckfood.model.CartItem;
+
 import java.util.List;
 
 public class CreateOrderRequest {

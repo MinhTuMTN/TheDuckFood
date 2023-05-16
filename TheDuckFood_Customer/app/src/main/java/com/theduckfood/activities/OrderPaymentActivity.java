@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
@@ -17,12 +18,18 @@ import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Coupon;
 import com.theduckfood.model.Store;
 import com.theduckfood.model.UserAddress;
+import com.theduckfood.model.request.CreateOrderRequest;
+import com.theduckfood.model.request.FoodRequest;
+import com.theduckfood.model.respone.CreateOrderResponse;
+import com.theduckfood.presenter.CreateOrderPresenter;
+import com.theduckfood.presenter.contact.ICreateOrderView;
 import com.theduckfood.util.DateTimeUtil;
 import com.theduckfood.util.SharedPreferenceManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrderPaymentActivity extends AppCompatActivity {
+public class OrderPaymentActivity extends AppCompatActivity implements ICreateOrderView {
     ActivityOrderPaymentBinding binding;
 
     OrderPaymentAdapter orderPaymentAdapter;
@@ -32,8 +39,10 @@ public class OrderPaymentActivity extends AppCompatActivity {
     List<CartItem> cartItems;
     int totalPrice;
     Coupon coupon;
+    UserAddress userAddress;
     Store store;
     SharedPreferenceManager sharedPreferenceManager;
+    CreateOrderPresenter createOrderPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,7 @@ public class OrderPaymentActivity extends AppCompatActivity {
         binding.btnAddMoreFoods.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
         binding.btnChangeAddress.setOnClickListener(v -> switchToUserAddressActivity());
         binding.cardCoupon.setOnClickListener(v -> switchToUseCouponActivity(store.getStoreId()));
+        binding.btnTaoDonHang.setOnClickListener(v -> btnTaoDonHangClick());
     }
 
     private void switchToUseCouponActivity(Long storeId) {
@@ -124,7 +134,7 @@ public class OrderPaymentActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
-                            UserAddress userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
+                            userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
                             if (userAddress != null)
                                 binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
                         }
@@ -163,5 +173,37 @@ public class OrderPaymentActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("store", storeId);
         startActivity(intent);
+    }
+
+    private void btnTaoDonHangClick() {
+        String couponCode = "";
+        if (coupon != null )
+            couponCode = coupon.getCouponCode();
+
+        Long storeId = store.getStoreId();
+        Long addressId;
+        if (userAddress == null) {
+            Toast.makeText(this, "Vui lòng chọn địa chỉ!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        addressId = userAddress.getUserAddressId();
+        List<FoodRequest> foodRequestList = new ArrayList<>();
+        for (CartItem cartItem : cartItems) {
+            FoodRequest foodRequest = new FoodRequest(cartItem.getFood().getFoodId(), cartItem.getAmount());
+            foodRequestList.add(foodRequest);
+        }
+        CreateOrderRequest createOrderRequest = new CreateOrderRequest(couponCode, storeId, addressId, foodRequestList);
+        createOrderPresenter = new CreateOrderPresenter(this, this);
+        createOrderPresenter.createOrder(createOrderRequest);
+    }
+    @Override
+    public void createOrder(CreateOrderResponse createOrderResponse) {
+        if (createOrderResponse == null) {
+            Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Toast.makeText(this, createOrderResponse.getMessage(), Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 }
