@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
+import com.theduckfood.fragments.OrderCurrentFragment;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Coupon;
 import com.theduckfood.model.Store;
@@ -188,6 +189,10 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
             FoodRequest foodRequest = new FoodRequest(cartItem.getFood().getFoodId(), cartItem.getAmount());
             foodRequestList.add(foodRequest);
         }
+        if (foodRequestList.isEmpty()){
+            Toast.makeText(this, "Đơn hàng rỗng! Chọn món đi!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(couponCode, storeId, addressId, foodRequestList);
         createOrderPresenter = new CreateOrderPresenter(this, this);
         createOrderPresenter.createOrder(createOrderRequest);
@@ -198,8 +203,9 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
             Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        sharedPreferenceManager.clearCartItems();
         Toast.makeText(this, createOrderResponse.getMessage(), Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
+
 }

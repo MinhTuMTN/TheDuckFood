@@ -29,8 +29,9 @@
                 android:text="yummy01"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
+                android:layout_marginStart="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSuDungAddress"
                 app:layout_constraintHorizontal_bias="0"
@@ -43,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSuDungAddress"
                 app:layout_constraintTop_toTopOf="parent"
@@ -57,13 +59,15 @@
                     android:paddingVertical="@dimen/_4sdp"
                     android:text="Xóa"
                     android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnSuDungAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_4sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -78,7 +82,7 @@
                     android:paddingVertical="@dimen/_4sdp"
                     android:text="Sử dụng"
                     android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
