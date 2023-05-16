@@ -1,8 +1,10 @@
 package com.theduckfood.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Coupon {
+public class Coupon implements Serializable {
+
     private Long couponId;
 
     private String couponCode;
