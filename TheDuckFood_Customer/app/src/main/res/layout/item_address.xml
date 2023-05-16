@@ -3,19 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_10sdp"
+    android:translationZ="0dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:translationZ="1dp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:strokeWidth="@dimen/_1sdp"
-        app:strokeColor="@color/purple_700"
-        app:cardCornerRadius="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_8sdp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,26 +28,32 @@
                 android:id="@+id/txtStreetAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="yummy01"
-                android:textAllCaps="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="yummy01 gì đó nữa còn ở đây và rất dài"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnSuDungAddress"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="@+id/btnSuDungAddress"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnXoaAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:backgroundTint="@color/coral_pink"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSuDungAddress"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStreetAddress"
                 app:strokeColor="@color/gray_hint"
                 app:strokeWidth="@dimen/_1sdp">
 
@@ -53,20 +61,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_1sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_20sdp"
                     android:paddingVertical="@dimen/_4sdp"
                     android:text="Xóa"
-                    android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnSuDungAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:backgroundTint="@color/green_dark"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnXoaAddress"
                 app:strokeColor="@color/gray_hint"
                 app:strokeWidth="@dimen/_1sdp">
 
@@ -77,8 +89,8 @@
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:paddingVertical="@dimen/_4sdp"
                     android:text="Sử dụng"
-                    android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -39,7 +39,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
 
     private void addEvents(StoreDetailPresenter storeDetailPresenter) {
         loadStoreDetail(storeDetailPresenter);
-        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
         binding.chkFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
