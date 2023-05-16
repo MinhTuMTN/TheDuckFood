@@ -1,5 +1,7 @@
 package com.theduckfood.filter;
 
+import com.theduckfood.entity.DeliveryManAccount;
+import com.theduckfood.repositories.DeliveryManAccountRepository;
 import com.theduckfood.repositories.StoreAccountRepository;
 import com.theduckfood.repositories.UserAccountRepository;
 import com.theduckfood.util.Constants;
@@ -23,6 +25,9 @@ public class SimpleFilter implements Filter {
     @Autowired
     StoreAccountRepository storeAccountRepository;
 
+    @Autowired
+    DeliveryManAccountRepository deliveryManAccountRepository;
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
@@ -32,7 +37,7 @@ public class SimpleFilter implements Filter {
                 || req.getRequestURI().equals("/api/users/register")
                 || req.getRequestURI().equals("/api/merchant/login")
                 || req.getRequestURI().contains("/api/file/image")
-                || req.getRequestURI().contains("/api/delivery")
+                || req.getRequestURI().contains("/api/delivery/login")
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
@@ -42,6 +47,9 @@ public class SimpleFilter implements Filter {
 
         if (req.getRequestURI().contains("/api/merchant"))
             role = "store";
+        else if (req.getRequestURI().contains("/api/delivery")) {
+            role = "shipper";
+        }
 
         if (!isValidJWTToken(req.getHeader("Authorization"), role)) {
             res.setStatus(401);
@@ -77,6 +85,11 @@ public class SimpleFilter implements Filter {
             return storeAccountRepository.findStoreAccountByEmailAndStatusNotContaining(
                     payload.get("email").toString(),
                     Constants.STORE_STATUS_DELETED
+            ) != null;
+        } else if (role.equals("shipper")) {
+            return deliveryManAccountRepository.findDeliveryManAccountByEmailAndStatusNotContaining(
+                    payload.get("email").toString(),
+                    Constants.DELIVERY_MAN_ACCOUNT_STATUS_DELETED
             ) != null;
         }
         return false;
