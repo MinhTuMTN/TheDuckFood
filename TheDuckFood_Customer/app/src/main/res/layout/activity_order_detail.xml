@@ -396,7 +396,7 @@
                 android:paddingVertical="@dimen/_4sdp"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
-                android:text="Trở về trang chủ"
+                android:text="Trở về"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_13sdp"
                 app:cornerRadius="@dimen/_15sdp"/>

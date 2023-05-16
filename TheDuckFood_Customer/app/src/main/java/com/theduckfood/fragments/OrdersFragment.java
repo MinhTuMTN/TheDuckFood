@@ -1,5 +1,8 @@
 package com.theduckfood.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.theduckfood.activities.MainActivity;
 import com.theduckfood.adapter.OrderFragmentAdapter;
 import com.theduckfood.databinding.FragmentOrdersBinding;
 
@@ -45,5 +49,13 @@ public class OrdersFragment extends Fragment {
                     }
                 }
         ).attach();
+        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
     }
+
+    public void switchToMainActivity() {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 }

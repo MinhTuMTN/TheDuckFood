@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide;
 import com.theduckfood.adapter.FoodListAdapter;
 import com.theduckfood.databinding.ActivityShopDetailBinding;
 import com.theduckfood.model.Food;
+import com.theduckfood.model.Store;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
+import com.theduckfood.model.respone.StoreResponse;
 import com.theduckfood.presenter.StoreDetailPresenter;
 import com.theduckfood.presenter.contact.IStoreDetailView;
 import com.theduckfood.util.Constant;
@@ -37,7 +39,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
 
     private void addEvents(StoreDetailPresenter storeDetailPresenter) {
         loadStoreDetail(storeDetailPresenter);
-        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
         binding.chkFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -51,8 +53,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         storeDetailPresenter.getStoreDetail(storeId);
     }
 
-    private void getFoods(List<Food> foods, Long storeId) {
-        foodListAdapter = new FoodListAdapter(StoreDetailActivity.this, foods, storeId);
+    private void getFoods(List<Food> foods, Store store) {
+        foodListAdapter = new FoodListAdapter(StoreDetailActivity.this, foods, store);
         binding.recyclerFoods.setAdapter(foodListAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(StoreDetailActivity.this);
@@ -81,7 +83,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         binding.ratingBar.setRating(storeDetailResponse.getStore().getRate());
         binding.txtRate.setText(String.valueOf(round(storeDetailResponse.getStore().getRate(), 1)));
 
-        getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore().getStoreId());
+        getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore());
     }
 
     private void chkFavoriteClick(StoreDetailPresenter storeDetailPresenter) {
@@ -102,5 +104,11 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         Intent intent = new Intent(StoreDetailActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }

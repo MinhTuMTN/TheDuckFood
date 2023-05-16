@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
+        android:id="@+id/txtGiaMonAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="40.000"
@@ -30,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtTenMonAn" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/imgMonAn"
+        android:id="@+id/cardMonAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_8sdp"
@@ -38,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgMonAn"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:src="@drawable/com_tam_shop" />
@@ -49,9 +51,9 @@
         android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="@id/imgMonAn"
-        app:layout_constraintStart_toStartOf="@id/imgMonAn"
-        app:layout_constraintTop_toBottomOf="@+id/imgMonAn">
+        app:layout_constraintEnd_toEndOf="@id/cardMonAn"
+        app:layout_constraintStart_toStartOf="@id/cardMonAn"
+        app:layout_constraintTop_toBottomOf="@+id/cardMonAn">
 
         <ImageView
             android:id="@+id/btnGiamSoLuong"
@@ -62,6 +64,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txtAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"

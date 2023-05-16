@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theduckfood.R;
+import com.theduckfood.activities.MainActivity;
 import com.theduckfood.activities.OrderDetailActivity;
 import com.theduckfood.databinding.ItemOrderBinding;
 import com.theduckfood.model.respone.OrderItemResponse;
@@ -93,6 +94,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         holder.binding.txtStoreName.setText(orderResponse.getStore().getStoreName());
         holder.binding.txtDate.setText(DateTimeUtil.formatDate(orderResponse.getOrder().getCreatedAt()));
         holder.binding.txtTime.setText(DateTimeUtil.formatTime(orderResponse.getOrder().getCreatedAt()));
+
     }
 
     private void orderDetail(View view, OrderResponse orderResponse) {
