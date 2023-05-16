@@ -41,18 +41,22 @@ public class StoreAPI {
     @Autowired
     UserFavoritesRepository userFavoritesRepository;
 
+    @Autowired
+    FoodRepository foodRepository;
+
     @GetMapping
     public ResponseEntity<StoreDetailsResponse> getStoreDetails(
             @RequestParam(value = "storeId", required = true) Long storeId) {
         Store store = storeRepository.getStoreByStoreIdAndStatusNotContains(
                 storeId,
                 Constants.STORE_STATUS_DELETED);
+        List<Food> foods = foodRepository.getFoodsByStoreAndStatus(store, Constants.FOOD_STATUS_SELLING);
         if (store != null)
             return ResponseEntity.ok(new StoreDetailsResponse(
                     false,
                     "Thành công",
                     store,
-                    store.getFoods()));
+                    foods));
         return ResponseEntity.status(404).body(new StoreDetailsResponse(
                 true,
                 "Không tìm thấy cửa hàng",

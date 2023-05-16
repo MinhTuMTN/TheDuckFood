@@ -41,8 +41,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         notifyDataSetChanged();
     }
     public void deleteUserAddress(int position) {
-        this.addresses.remove(position);
-        notifyItemRemoved(position);
+        try {
+            this.addresses.remove(position);
+            notifyItemRemoved(position);
+        } catch (Exception ignored) {
+
+        }
     }
     @NonNull
     @Override

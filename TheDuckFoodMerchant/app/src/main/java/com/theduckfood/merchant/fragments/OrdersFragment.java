@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.theduckfood.merchant.R;
+import com.theduckfood.merchant.activities.MainActivity;
 import com.theduckfood.merchant.adapter.ViewOrderAdapter;
 import com.theduckfood.merchant.databinding.FragmentOrdersBinding;
 
@@ -54,5 +55,16 @@ public class OrdersFragment extends Fragment {
                     }
                 }
         ).attach();
+        addEvent();
+    }
+
+    private void addEvent() {
+        binding.btnBack.setOnClickListener(v -> {
+            try {
+                ((MainActivity) requireContext()).changeBottomBar(R.id.menu_home);
+            } catch (Exception ignored) {
+
+            }
+        });
     }
 }

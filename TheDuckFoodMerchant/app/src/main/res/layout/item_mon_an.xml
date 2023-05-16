@@ -21,10 +21,10 @@
             android:id="@+id/constraintContener"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp">
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/layoutImgMonAn"

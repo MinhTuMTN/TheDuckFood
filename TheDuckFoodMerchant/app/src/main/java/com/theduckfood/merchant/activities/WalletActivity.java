@@ -40,6 +40,11 @@ public class WalletActivity extends AppCompatActivity implements IWalletView {
 
         WalletPresenter walletPresenter = new WalletPresenter(this, this);
         walletPresenter.getStatistic();
+        addEvent();
+    }
+
+    private void addEvent() {
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void setChartData(List<StoreStatistic> storeStatistics) {
