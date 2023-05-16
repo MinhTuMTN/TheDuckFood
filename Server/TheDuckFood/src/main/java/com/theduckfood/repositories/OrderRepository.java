@@ -1,5 +1,6 @@
 package com.theduckfood.repositories;
 
+import com.theduckfood.entity.DeliveryMan;
 import com.theduckfood.entity.Order;
 import com.theduckfood.entity.Store;
 import com.theduckfood.entity.UserProfile;
@@ -31,4 +32,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND o.status != 'user_canceled' AND o.status != 'waiting'"
     )
     List<Object[]> findOrderAmountAndOrderCountToday(Store store);
+
+    List<Order> findOrdersByDeliveryManAndStatus(DeliveryMan deliveryMan, String status);
+    List<Order> findOrdersByStatus(String status);
 }

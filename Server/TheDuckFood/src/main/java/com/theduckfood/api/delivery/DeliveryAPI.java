@@ -1,11 +1,10 @@
 package com.theduckfood.api.delivery;
 
-import com.theduckfood.entity.DeliveryManAccount;
-import com.theduckfood.entity.Order;
-import com.theduckfood.entity.UserAccount;
+import com.theduckfood.entity.*;
 import com.theduckfood.model.request.LoginRequest;
+import com.theduckfood.model.response.DeliveryGetOrdersResponse;
 import com.theduckfood.model.response.DeliveryLoginResponse;
-import com.theduckfood.model.response.LoginResponse;
+import com.theduckfood.model.response.DeliveryOrderResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.repositories.DeliveryManAccountRepository;
 import com.theduckfood.repositories.OrderRepository;
@@ -18,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/delivery")
@@ -53,10 +55,13 @@ public class DeliveryAPI {
 
     @GetMapping
     public ResponseEntity<SimpleMessageResponse> updateStatus(
+            @RequestHeader("Authorization") String bearerToken,
             @RequestParam("orderId") Long orderId,
             @RequestParam("status") String orderStatus
     ) {
         try {
+
+
             if (orderStatus.equals(Constants.ORDER_STATUS_PROCESSING)
                     || orderStatus.equals(Constants.ORDER_STATUS_SHIPPING)
                     || orderStatus.equals(Constants.ORDER_STATUS_SUCCESS)
@@ -109,5 +114,64 @@ public class DeliveryAPI {
                     "Trạng thái không hợp lệ"
             ));
         }
+    }
+
+    @GetMapping("/list-orders")
+    public ResponseEntity<DeliveryGetOrdersResponse> updateStatus(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestParam("type") String type
+    ) {
+        DeliveryMan deliveryMan = getDeliveryManFromToken(bearerToken);
+        List<Order> orders = new ArrayList<>();
+        if (Objects.equals(type, "waiting"))
+            orders = orderRepository.findOrdersByStatus(
+                    Constants.ORDER_STATUS_WAITING
+            );
+        else if (type.equals("current")) {
+            orders.addAll(orderRepository.findOrdersByDeliveryManAndStatus(
+                    deliveryMan,
+                    Constants.ORDER_STATUS_PROCESSING
+            ));
+            orders.addAll(orderRepository.findOrdersByDeliveryManAndStatus(
+                    deliveryMan,
+                    Constants.ORDER_STATUS_SHIPPING
+            ));
+        } else {
+            orders.addAll(orderRepository.findOrdersByDeliveryManAndStatus(
+                    deliveryMan,
+                    Constants.ORDER_STATUS_SUCCESS
+            ));
+            orders.addAll(orderRepository.findOrdersByDeliveryManAndStatus(
+                    deliveryMan,
+                    Constants.ORDER_STATUS_USER_CANCELED
+            ));
+        }
+
+        List<DeliveryOrderResponse> orderResponses = new ArrayList<>();
+        for (Order order: orders) {
+            orderResponses.add(new DeliveryOrderResponse(
+                    order,
+                    order.getStore().getStoreName(),
+                    order.getUserProfile().getFullName()
+            ));
+        }
+
+        return ResponseEntity.ok(new DeliveryGetOrdersResponse(
+                false,
+                "Thành công",
+                orderResponses
+        ));
+    }
+
+    private DeliveryMan getDeliveryManFromToken(String bearerToken) {
+        String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
+        DeliveryManAccount deliveryManAccount = deliveryManAccountRepository
+                .findDeliveryManAccountByEmailAndStatusNotContaining(
+                email,
+                Constants.DELIVERY_MAN_ACCOUNT_STATUS_DELETED);
+        if (deliveryManAccount == null)
+            return null;
+
+        return deliveryManAccount.getDeliveryMan();
     }
 }
