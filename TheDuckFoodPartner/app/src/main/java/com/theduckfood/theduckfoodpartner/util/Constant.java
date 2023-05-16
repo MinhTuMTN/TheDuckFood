@@ -4,6 +4,10 @@ public class Constant {
     public static final String BASE_URL = "https://b319-123-21-151-104.ngrok-free.app";
 
     public static final String IMAGE_BASE_URL = BASE_URL + "/api/file/image?id=";
+    public static final String ORDER_TYPE_NEW = "waiting";
+    public static final String ORDER_TYPE_CURRENT = "current";
+    public static final String ORDER_TYPE_HISTORY = "history";
+
 
     public static final String GENERAL_NOTIFICATION_CHANNEL_ID = "general_channel_id";
     public static final String GENERAL_NOTIFICATION_CHANNEL_NAME = "General";
