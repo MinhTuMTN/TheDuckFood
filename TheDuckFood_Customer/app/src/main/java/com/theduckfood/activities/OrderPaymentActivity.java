@@ -38,6 +38,12 @@ public class OrderPaymentActivity extends AppCompatActivity {
     private void addEvents() {
         binding.btnBack.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
         binding.btnAddMoreFoods.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
+        binding.btnChangeAddress.setOnClickListener(v -> switchToUserAddressActivity());
+    }
+
+    private void switchToUserAddressActivity() {
+        Intent intent = new Intent(this, UserAddressActivity.class);
+        startActivity(intent);
     }
 
     private void getDataIntent() {
