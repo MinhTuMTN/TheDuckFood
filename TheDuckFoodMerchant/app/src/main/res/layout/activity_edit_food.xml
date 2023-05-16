@@ -84,7 +84,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/btnThemHinhAnh">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -317,22 +316,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:gravity="center"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear1">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 app:cardCornerRadius="@dimen/_20sdp">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnXoaMon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:background="@color/red_pink_1"
                     android:paddingStart="@dimen/_16sdp"
@@ -342,19 +344,20 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
                 app:cardCornerRadius="@dimen/_20sdp">
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSuaMon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa"
+                    android:background="#F1C688"
                     android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_16sdp"
-                    android:textColor="@color/white"
-                    android:background="#F1C688"/>
+                    android:text="Chỉnh sửa"
+                    android:textColor="@color/white" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
