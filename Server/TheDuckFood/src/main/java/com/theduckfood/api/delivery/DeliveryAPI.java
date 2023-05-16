@@ -7,6 +7,7 @@ import com.theduckfood.model.response.DeliveryLoginResponse;
 import com.theduckfood.model.response.DeliveryOrderResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
 import com.theduckfood.repositories.DeliveryManAccountRepository;
+import com.theduckfood.repositories.DeliveryManRepository;
 import com.theduckfood.repositories.OrderRepository;
 import com.theduckfood.util.Constants;
 import com.theduckfood.util.EncodingUtil;
@@ -29,6 +30,9 @@ public class DeliveryAPI {
 
     @Autowired
     DeliveryManAccountRepository deliveryManAccountRepository;
+
+    @Autowired
+    DeliveryManRepository deliveryManRepository;
 
     @PostMapping("/login")
     public ResponseEntity<DeliveryLoginResponse> login(@RequestBody LoginRequest loginRequest) {
@@ -60,7 +64,7 @@ public class DeliveryAPI {
             @RequestParam("status") String orderStatus
     ) {
         try {
-
+            DeliveryMan deliveryMan = getDeliveryManFromToken(bearerToken);
 
             if (orderStatus.equals(Constants.ORDER_STATUS_PROCESSING)
                     || orderStatus.equals(Constants.ORDER_STATUS_SHIPPING)
@@ -74,6 +78,13 @@ public class DeliveryAPI {
                 String body = null;
                 switch (orderStatus) {
                     case Constants.ORDER_STATUS_PROCESSING -> {
+                        order.setDeliveryMan(deliveryMan);
+                        orderRepository.save(order);
+
+                        assert deliveryMan != null;
+                        deliveryMan.setBalance(deliveryMan.getBalance() + (Constants.SHIP_FEE - Constants.SERVICE_FEE));
+                        deliveryManRepository.save(deliveryMan);
+
                         title = "Đơn hàng đã được xác nhận";
                         body = "Đơn hàng của bạn đã được xác nhận. Tài xế đang trên đường đến nhà hàng";
                         FCMClient.merchantSendNotification(order.getStore().getFcmToken(),
