@@ -110,12 +110,15 @@ public class SharedPreferenceManager {
         } else {
             cartItems = getCartItems();
             boolean isExists = false;
-            for (CartItem item : cartItems) {
+
+            CartItem item;
+            for (int i = 0; i < cartItems.size(); i++) {
+                item = cartItems.get(i);
                 if (Objects.equals(item.getFood().getFoodId(), cartItem.getFood().getFoodId())) {
                     isExists = true;
 
                     if (cartItem.getAmount() <= 0)
-                        cartItems.remove(cartItem);
+                        cartItems.remove(i);
                     else
                         item.setAmount(cartItem.getAmount());
                     break;

@@ -3,6 +3,8 @@ package com.theduckfood.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,25 +22,32 @@ import com.theduckfood.R;
 import com.theduckfood.databinding.ItemFoodBinding;
 import com.theduckfood.databinding.PopupFoodDetailBinding;
 import com.theduckfood.databinding.PopupOrderBinding;
+import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Food;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
+import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder> {
     ItemFoodBinding itemFoodBinding;
     PopupFoodDetailBinding popupFoodDetailBinding;
     PopupOrderBinding popupOrderBinding;
     boolean isOrdering = false;
-    private Activity context;
+    private Context context;
     private List<Food> foods;
+    Long storeId;
     Dialog popUpFoodDetail;
     PopupWindow popUpOrder;
+    boolean isFirst = true;
+    SharedPreferenceManager sharedPreferenceManager;
 
-    public FoodListAdapter(Activity context, List<Food> foods) {
+    public FoodListAdapter(Context context, List<Food> foods, Long storeId) {
         this.context = context;
         this.foods = foods;
+        this.storeId = storeId;
     }
 
     @NonNull
@@ -49,6 +58,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
                 parent,
                 false
         );
+
         return new FoodListViewHolder(itemFoodBinding);
     }
 
@@ -61,9 +71,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
                 .load(urlImage)
                 .into(holder.itemFoodBinding.imgAvatarFood);
         holder.itemFoodBinding.txtFoodName.setText(food.getFoodName());
-        String price  = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
+        String price = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
         holder.itemFoodBinding.txtPrice.setText(price);
         holder.itemView.setOnClickListener(v -> showPopUpFoodDetail(food));
+
 
     }
 
@@ -81,9 +92,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popUpFoodDetail.getWindow().setGravity(Gravity.BOTTOM);
         popUpFoodDetail.show();
         loadFoodData(food);
-
-//        View anchor = findViewById(R.id.anchor_view);
-//        popUpOrder.showAtLocation(popupOrderBinding.getRoot(), Gravity.BOTTOM, 0, 0);
     }
 
     private void loadFoodData(Food food) {
@@ -99,56 +107,91 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popupFoodDetailBinding.txtFoodNamePopup.setText(food.getFoodName());
         popupFoodDetailBinding.txtDescPopup.setText(food.getDescription());
 
-        String price  = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
+        String price = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
         popupFoodDetailBinding.txtPricePopup.setText(price);
 
-        int amount = 1;
-        popupFoodDetailBinding.btnIncrease.setOnClickListener(v -> increaseAmount(amount));
-        popupFoodDetailBinding.btnDecrease.setOnClickListener(v -> decreaseAmount(amount));
+        int amount = 0;
+        sharedPreferenceManager = new SharedPreferenceManager(context);
+        List<CartItem> cartItems = sharedPreferenceManager.getCartItems();
+        CartItem item;
+        for (int i = 0; i < cartItems.size(); i++) {
+            item = (CartItem) cartItems.get(i);
+            if (Objects.equals(item.getFood().getFoodId(), food.getFoodId())) {
+                amount = item.getAmount();
+                break;
+            }
+        }
 
-        popupFoodDetailBinding.btnAdd.setOnClickListener(v -> btnAddClick());
+        int finalAmount = amount;
+        popupFoodDetailBinding.txtAmount.setText(String.valueOf(finalAmount));
+        popupFoodDetailBinding.btnIncrease.setOnClickListener(v -> increaseAmount());
+        popupFoodDetailBinding.btnDecrease.setOnClickListener(v -> decreaseAmount());
+
+        popupFoodDetailBinding.btnAdd.setOnClickListener(v -> btnAddClick(food));
 
     }
 
-    private void decreaseAmount(int amount) {
-        amount = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
-        if (amount > 1) {
+    private void decreaseAmount() {
+        int amount =  Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+        if (amount > 0) {
             amount -= 1;
             popupFoodDetailBinding.txtAmount.setText(String.valueOf(amount));
         }
     }
 
-    private void increaseAmount(int amount) {
-        amount = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+    private void increaseAmount() {
+        int amount =  Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
         amount += 1;
         popupFoodDetailBinding.txtAmount.setText(String.valueOf(amount));
 
     }
 
-    private void btnAddClick() {
+    private void btnAddClick(Food food) {
+        int amountFood = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+        CartItem cartItem = new CartItem(food, amountFood);
+        sharedPreferenceManager.addCartItem(cartItem, storeId);
+
         popUpFoodDetail.dismiss();
 
-        showPopUpOrder();
 
+        showPopUpOrder();
     }
 
     public void showPopUpOrder() {
-        if (isOrdering)
-            return;
 
-        isOrdering = true;
         View popupView = LayoutInflater.from(context).inflate(R.layout.popup_order, null);
         popUpOrder = new PopupWindow(popupView);
         popupOrderBinding = PopupOrderBinding.inflate(LayoutInflater.from(context));
+        popUpOrder.setContentView(popupOrderBinding.getRoot());
 
         int margin300SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._300sdp);
         int margin10SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._10sdp);
 
+        popUpOrder.setOutsideTouchable(false);
+        popUpOrder.setFocusable(false);
+        popUpOrder.setTouchable(true);
+
         popUpOrder.setWidth(margin300SDP);
         popUpOrder.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        int amount = 0;
+        for (CartItem cartItem : sharedPreferenceManager.getCartItems()) {
+            amount += cartItem.getAmount();
+        }
+
+        String amountCartItem = amount + " món";
+        popupOrderBinding.txtAmountFoodPopup.setText(amountCartItem);
+
         popUpOrder.showAtLocation(popupView, Gravity.BOTTOM, 0, margin10SDP);
+
+        popupOrderBinding.popupOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpOrder.dismiss();
+            }
+        });
     }
+
     @Override
     public int getItemCount() {
         return foods.size();
