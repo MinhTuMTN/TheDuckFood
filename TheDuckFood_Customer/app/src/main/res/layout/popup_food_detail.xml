@@ -1,113 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/popup_window"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_350sdp"
+    android:layout_height="@dimen/_270sdp"
     android:layout_gravity="bottom|center"
     android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".adapter.FoodListAdapter">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_17sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
-            android:layout_width="@dimen/_125sdp"
-            android:layout_height="@dimen/_125sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|center"
-            android:layout_margin="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_20sdp">
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgAvatarFoodPopup"
-                android:layout_width="@dimen/_125sdp"
-                android:layout_height="@dimen/_125sdp"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background" />
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_125sdp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtFoodNamePopup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Tên món ăn"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtFoodNamePopup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tên món ăn gì đó rất rất chi là dài luôn"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/materialCardView"
+            app:layout_constraintTop_toTopOf="@+id/materialCardView" />
 
-            <TextView
-                android:id="@+id/txtPricePopup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="10000 VNĐ"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtPricePopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10,000 VNĐ"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/txtFoodNamePopup"
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodNamePopup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txtDescPopup"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_35sdp"
-        android:text="Mô tả"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:ellipsize="end"
         android:maxLines="1"
+        android:text="Mô tả của món ăn có tên rất chi là dài ở phía trên"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_gravity="center"/>
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
     <LinearLayout
         android:id="@+id/layoutAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginVertical="@dimen/_24sdp">
+        android:gravity="center_vertical"
+        android:padding="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescPopup">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDecrease"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
             android:background="@drawable/icons8_minus_36px"
             app:cornerRadius="@dimen/_10sdp" />
+
         <TextView
             android:id="@+id/txtAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             android:text="0"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="@dimen/_20sdp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnIncrease"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:padding="@dimen/_8sdp"
             android:background="@drawable/icons8_plus_36px"
             app:cornerRadius="@dimen/_10sdp" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAdd"
-        android:layout_width="@dimen/_175sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_36sdp"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/_30sdp"
         android:text="@string/add"
         android:textSize="@dimen/_14sdp"
-        app:cornerRadius="@dimen/_10sdp" />
+        app:cornerRadius="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutAmount" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
