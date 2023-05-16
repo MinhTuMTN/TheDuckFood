@@ -54,25 +54,31 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         String price = DateTimeUtil.formatCurrency(String.valueOf(cartItem.getFood().getPrice())) + " đ";
         holder.binding.txtGiaMonAn.setText(price);
         holder.binding.txtAmount.setText(String.valueOf(cartItem.getAmount()));
-        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(holder));
-        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(holder));
+        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(holder, cartItem));
+        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(holder, cartItem));
 
     }
-    private void decreaseAmount(@NonNull OrderPaymentViewHolder holder) {
+    private void decreaseAmount(@NonNull OrderPaymentViewHolder holder, CartItem cartItem) {
         int amount =  Integer.parseInt(holder.binding.txtAmount.getText().toString());
-        if (amount > 0) {
+        if (amount > 1) {
             amount -= 1;
             holder.binding.txtAmount.setText(String.valueOf(amount));
+        }  else if (amount == 1) {
+            cartItems.remove(cartItem);
+            amount -= 1;
+            notifyDataSetChanged();
         }
-        sharedPreferenceManager.addCartItem(cartItem,storeId);
+        cartItem.setAmount(amount);
+        sharedPreferenceManager.addCartItem(cartItem, storeId);
+
     }
 
-    private void increaseAmount(@NonNull OrderPaymentViewHolder holder) {
+    private void increaseAmount(@NonNull OrderPaymentViewHolder holder, CartItem cartItem) {
         int amount =  Integer.parseInt(holder.binding.txtAmount.getText().toString());
         amount += 1;
         holder.binding.txtAmount.setText(String.valueOf(amount));
-
-        sharedPreferenceManager.addCartItem(cartItem,storeId);
+        cartItem.setAmount(amount);
+        sharedPreferenceManager.addCartItem(cartItem, storeId);
 
     }
     @Override

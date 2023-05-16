@@ -62,6 +62,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
                 false
         );
 
+        sharedPreferenceManager = new SharedPreferenceManager(context);
+        if (!sharedPreferenceManager.getCartItems().isEmpty()) {
+            showPopUpOrder();
+        }
         return new FoodListViewHolder(itemFoodBinding);
     }
 
@@ -114,7 +118,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popupFoodDetailBinding.txtPricePopup.setText(price);
 
         int amount = 0;
-        sharedPreferenceManager = new SharedPreferenceManager(context);
+
         List<CartItem> cartItems = sharedPreferenceManager.getCartItems();
         CartItem item;
         for (int i = 0; i < cartItems.size(); i++) {
@@ -161,7 +165,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     }
 
     public void showPopUpOrder() {
-
         View popupView = LayoutInflater.from(context).inflate(R.layout.popup_order, null);
         popUpOrder = new PopupWindow(popupView);
         popupOrderBinding = PopupOrderBinding.inflate(LayoutInflater.from(context));
@@ -196,7 +199,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popupOrderBinding.popupOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popUpOrder.dismiss();
                 switchToOrderPaymentActivity(store);
             }
         });

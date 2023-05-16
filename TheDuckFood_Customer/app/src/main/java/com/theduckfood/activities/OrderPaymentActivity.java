@@ -13,6 +13,7 @@ import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Store;
+import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.List;
@@ -35,8 +36,8 @@ public class OrderPaymentActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-        binding.btnBack.setOnClickListener(v -> onBackPressed());
-        binding.btnAddMoreFoods.setOnClickListener(v -> onBackPressed());
+        binding.btnBack.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
+        binding.btnAddMoreFoods.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
     }
 
     private void getDataIntent() {
@@ -63,5 +64,12 @@ public class OrderPaymentActivity extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
         super.onBackPressed();
+    }
+
+    private void switchToStoreDetailActivity(Long storeId) {
+        Intent intent = new Intent(this, StoreDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("store", storeId);
+        startActivity(intent);
     }
 }
