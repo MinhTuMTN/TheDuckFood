@@ -50,6 +50,13 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
 
     private void onAddButtonClicked() {
         String streetAddress = binding.edtAddress.getText().toString();
+        if (streetAddress.isEmpty()){
+            binding.edtAddress.setError("Vui lòng nhập địa chỉ");
+            binding.edtAddress.requestFocus();
+            return;
+        }
+        binding.edtAddress.getText().clear();
+        binding.edtAddress.clearFocus();
         userAddressPresenter.addUserAddress(streetAddress);
     }
 

@@ -109,8 +109,10 @@ public class OrderPaymentActivity extends AppCompatActivity {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             coupon = (Coupon) result.getData().getSerializableExtra("coupon");
-                            binding.txtCoupon.setText(coupon.getCouponCode());
-                            updatePriceDetail();
+                            if (coupon != null) {
+                                binding.txtCoupon.setText(coupon.getCouponCode());
+                                updatePriceDetail();
+                            }
                         }
 
                     }
@@ -123,7 +125,8 @@ public class OrderPaymentActivity extends AppCompatActivity {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             UserAddress userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
-                            binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
+                            if (userAddress != null)
+                                binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
                         }
 
                     }

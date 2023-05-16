@@ -63,7 +63,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         );
 
         sharedPreferenceManager = new SharedPreferenceManager(context);
-        if (!sharedPreferenceManager.getCartItems().isEmpty()) {
+        if (!sharedPreferenceManager.getCartItems().isEmpty() && sharedPreferenceManager.getLongValue(SharedPreferenceManager.KEY_CART_SHOP_ID) == store.getStoreId()) {
             showPopUpOrder();
         }
         return new FoodListViewHolder(itemFoodBinding);
