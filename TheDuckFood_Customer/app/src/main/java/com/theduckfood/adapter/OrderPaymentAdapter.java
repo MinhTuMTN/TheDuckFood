@@ -12,6 +12,7 @@ import com.theduckfood.databinding.ItemOrderPaymentBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
+import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.List;
 
@@ -20,9 +21,14 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
     Context context;
     List<CartItem> cartItems;
 
-    public OrderPaymentAdapter(Context context, List<CartItem> cartItems) {
+    SharedPreferenceManager sharedPreferenceManager;
+    Long storeId;
+
+    public OrderPaymentAdapter(Context context, List<CartItem> cartItems, Long storeId) {
         this.context = context;
         this.cartItems = cartItems;
+        this.storeId = storeId;
+        this.sharedPreferenceManager = new SharedPreferenceManager(context);
     }
 
     @NonNull
@@ -48,22 +54,25 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         String price = DateTimeUtil.formatCurrency(String.valueOf(cartItem.getFood().getPrice())) + " đ";
         holder.binding.txtGiaMonAn.setText(price);
         holder.binding.txtAmount.setText(String.valueOf(cartItem.getAmount()));
-        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(position));
-        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(position));
+        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(cartItem));
+        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(cartItem));
 
     }
-    private void decreaseAmount(int position) {
+    private void decreaseAmount(CartItem cartItem) {
         int amount =  Integer.parseInt(binding.txtAmount.getText().toString());
         if (amount > 0) {
             amount -= 1;
             binding.txtAmount.setText(String.valueOf(amount));
         }
+        sharedPreferenceManager.addCartItem(cartItem,storeId);
     }
 
-    private void increaseAmount(int position) {
+    private void increaseAmount(CartItem cartItem) {
         int amount =  Integer.parseInt(binding.txtAmount.getText().toString());
         amount += 1;
         binding.txtAmount.setText(String.valueOf(amount));
+
+        sharedPreferenceManager.addCartItem(cartItem,storeId);
 
     }
     @Override
