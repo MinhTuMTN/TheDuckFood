@@ -57,9 +57,9 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_17sdp"
                     android:src="@drawable/icons8_back_coral"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtStoreName"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/textView1" />
 
                 <View
                     android:id="@+id/view2"

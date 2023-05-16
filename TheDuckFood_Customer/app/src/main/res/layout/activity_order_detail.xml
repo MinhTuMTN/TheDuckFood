@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Chi tiết giao hàng"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     android:layout_gravity="center"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -222,7 +222,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Danh Sách Món Ăn"
-                android:textSize="16sp"
+                android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>
 
@@ -244,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Chi tiết thanh toán"
-                android:textSize="16sp"
+                android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -343,6 +343,38 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/txtPhiCoupon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giảm giá"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtTienGiamGia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-40000 đ"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/txtPhiCoupon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/_2sdp"
