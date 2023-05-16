@@ -146,11 +146,8 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
 
     private void loadData() {
         binding.txtTenQuan.setText(store.getStoreName());
-
         updatePriceDetail();
         getOrderItemList();
-
-
     }
 
     private void getOrderItemList() {
@@ -164,8 +161,10 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
+        Intent intent = new Intent(this, StoreDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("store", store.getStoreId());
+        startActivity(intent);
         super.onBackPressed();
     }
 
