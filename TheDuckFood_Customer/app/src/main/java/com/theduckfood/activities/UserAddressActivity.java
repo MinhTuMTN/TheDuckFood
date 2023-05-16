@@ -50,8 +50,14 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
 
     private void onAddButtonClicked() {
         String streetAddress = binding.edtAddress.getText().toString();
+        if (streetAddress.isEmpty()){
+            binding.edtAddress.setError("Vui lòng nhập địa chỉ");
+            binding.edtAddress.requestFocus();
+            return;
+        }
+        binding.edtAddress.getText().clear();
+        binding.edtAddress.clearFocus();
         userAddressPresenter.addUserAddress(streetAddress);
-        //userAddressPresenter.getUserAddress();
     }
 
     private void loadData() {
@@ -75,6 +81,12 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
     public void getUserAddress(UserAddressResponse userAddressResponse) {
         if (userAddressResponse == null) {
             Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+            binding.recyclerAddress.setVisibility(View.GONE);
+            binding.constraintKhongTimThay.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (userAddressResponse.getUserAddresses().isEmpty()) {
             binding.recyclerAddress.setVisibility(View.GONE);
             binding.constraintKhongTimThay.setVisibility(View.VISIBLE);
             return;

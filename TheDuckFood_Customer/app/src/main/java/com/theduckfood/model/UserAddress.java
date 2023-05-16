@@ -1,8 +1,9 @@
 package com.theduckfood.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserAddress {
+public class UserAddress implements Serializable {
     private Long userAddressId;
     private float latitude;
     private float longitude;
