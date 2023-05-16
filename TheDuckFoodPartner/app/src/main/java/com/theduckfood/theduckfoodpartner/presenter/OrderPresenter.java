@@ -6,6 +6,7 @@ import android.util.Log;
 import com.theduckfood.theduckfoodpartner.api.APIUtil;
 import com.theduckfood.theduckfoodpartner.api.DeliveryEndpoint;
 import com.theduckfood.theduckfoodpartner.model.response.DeliveryGetOrdersResponse;
+import com.theduckfood.theduckfoodpartner.model.response.SimpleMessageResponse;
 import com.theduckfood.theduckfoodpartner.presenter.contact.IOrderView;
 import com.theduckfood.theduckfoodpartner.util.SharedPreferenceManager;
 
@@ -41,6 +42,28 @@ public class OrderPresenter {
             public void onFailure(Call<DeliveryGetOrdersResponse> call, Throwable t) {
                 Log.e("GetOrders", t.getMessage());
                 iOrderView.getOrdersResponse(null);
+            }
+        });
+    }
+
+    public void updateOrder(Long orderId, String status, String type) {
+        DeliveryEndpoint deliveryEndpoint = APIUtil.getRetrofit().create(DeliveryEndpoint.class);
+        Call<SimpleMessageResponse> call = deliveryEndpoint.updateDeliveryStatus(
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY),
+                orderId,
+                status
+        );
+        call.enqueue(new Callback<SimpleMessageResponse>() {
+            @Override
+            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response) {
+                iOrderView.updateOrderResponse(response.body());
+                getOrders(type);
+            }
+
+            @Override
+            public void onFailure(Call<SimpleMessageResponse> call, Throwable t) {
+                Log.e("UpdateOrders", t.getMessage());
+                iOrderView.updateOrderResponse(null);
             }
         });
     }

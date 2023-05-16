@@ -18,7 +18,11 @@ public interface DeliveryEndpoint {
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @GET("/api/delivery")
-    Call<SimpleMessageResponse> getDeliveryStatus(@Query("orderId") Long orderId, @Query("status") String status);
+    Call<SimpleMessageResponse> updateDeliveryStatus(
+            @Header("Authorization") String bearerToken,
+            @Query("orderId") Long orderId,
+            @Query("status") String status
+    );
 
     @GET("/api/delivery/list-orders")
     Call<DeliveryGetOrdersResponse> getOrders(
