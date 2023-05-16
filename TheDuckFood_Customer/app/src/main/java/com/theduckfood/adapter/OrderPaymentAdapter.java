@@ -12,6 +12,7 @@ import com.theduckfood.databinding.ItemOrderPaymentBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
+import com.theduckfood.util.SharedPreferenceManager;
 
 import java.util.List;
 
@@ -48,22 +49,22 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         String price = DateTimeUtil.formatCurrency(String.valueOf(cartItem.getFood().getPrice())) + " đ";
         holder.binding.txtGiaMonAn.setText(price);
         holder.binding.txtAmount.setText(String.valueOf(cartItem.getAmount()));
-        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(position));
-        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(position));
+        holder.binding.btnTangSoLuong.setOnClickListener(v -> increaseAmount(holder));
+        holder.binding.btnGiamSoLuong.setOnClickListener(v -> decreaseAmount(holder));
 
     }
-    private void decreaseAmount(int position) {
-        int amount =  Integer.parseInt(binding.txtAmount.getText().toString());
+    private void decreaseAmount(@NonNull OrderPaymentViewHolder holder) {
+        int amount =  Integer.parseInt(holder.binding.txtAmount.getText().toString());
         if (amount > 0) {
             amount -= 1;
-            binding.txtAmount.setText(String.valueOf(amount));
+            holder.binding.txtAmount.setText(String.valueOf(amount));
         }
     }
 
-    private void increaseAmount(int position) {
-        int amount =  Integer.parseInt(binding.txtAmount.getText().toString());
+    private void increaseAmount(@NonNull OrderPaymentViewHolder holder) {
+        int amount =  Integer.parseInt(holder.binding.txtAmount.getText().toString());
         amount += 1;
-        binding.txtAmount.setText(String.valueOf(amount));
+        holder.binding.txtAmount.setText(String.valueOf(amount));
 
     }
     @Override
