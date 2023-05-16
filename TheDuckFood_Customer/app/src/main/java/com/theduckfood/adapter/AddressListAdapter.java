@@ -16,6 +16,7 @@ import com.theduckfood.model.respone.UserAddressResponse;
 import com.theduckfood.presenter.UserAddressPresenter;
 import com.theduckfood.presenter.contact.IUserAddressView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements IUserAddressView {
@@ -28,7 +29,11 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         this.context = context;
         this.addresses = addresses;
     }
-
+    public void setUserAddresses(List<UserAddress> userAddresses) {
+        this.addresses.clear();
+        this.addresses = userAddresses;
+        notifyDataSetChanged();
+    }
     public void addUserAddress(UserAddress userAddress) {
         this.addresses.add(userAddress);
         notifyDataSetChanged();

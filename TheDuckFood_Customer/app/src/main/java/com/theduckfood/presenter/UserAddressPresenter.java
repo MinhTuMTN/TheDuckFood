@@ -51,6 +51,7 @@ public class UserAddressPresenter {
             @Override
             public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response) {
                 iUserAddressView.addUserAddress(response.body());
+                getUserAddress();
             }
 
             @Override

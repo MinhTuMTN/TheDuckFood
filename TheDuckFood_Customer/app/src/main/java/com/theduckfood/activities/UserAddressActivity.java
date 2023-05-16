@@ -18,6 +18,7 @@ import com.theduckfood.model.respone.UserAddressResponse;
 import com.theduckfood.presenter.UserAddressPresenter;
 import com.theduckfood.presenter.contact.IUserAddressView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAddressActivity extends AppCompatActivity implements IUserAddressView {
@@ -33,8 +34,13 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
 
         userAddressPresenter = new UserAddressPresenter(this, UserAddressActivity.this);
         userAddressPresenter.getUserAddress();
+        init();
         loadData();
         addEvents();
+    }
+
+    private void init() {
+
     }
 
     private void addEvents() {
@@ -45,14 +51,15 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
     private void onAddButtonClicked() {
         String streetAddress = binding.edtAddress.getText().toString();
         userAddressPresenter.addUserAddress(streetAddress);
-        UserAddress userAddress = new UserAddress();
-
-        userAddress.setStreetAddress(streetAddress);
-        addressListAdapter.addUserAddress(userAddress);
+        //userAddressPresenter.getUserAddress();
     }
 
     private void loadData() {
+        addressListAdapter = new AddressListAdapter(this, new ArrayList<>());
+        binding.recyclerAddress.setAdapter(addressListAdapter);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        binding.recyclerAddress.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -77,10 +84,7 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
         binding.constraintKhongTimThay.setVisibility(View.GONE);
 
         userAddresses = userAddressResponse.getUserAddresses();
-        addressListAdapter = new AddressListAdapter(this, userAddressResponse.getUserAddresses());
-        binding.recyclerAddress.setAdapter(addressListAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        binding.recyclerAddress.setLayoutManager(linearLayoutManager);
+        addressListAdapter.setUserAddresses(userAddresses);
     }
 
 
