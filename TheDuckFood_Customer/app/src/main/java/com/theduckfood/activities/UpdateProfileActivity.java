@@ -33,7 +33,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements IUpdateP
 
     private void addEvents(UpdateProfilePresenter updateProfilePresenter) {
         binding.btnUpdateProfile.setOnClickListener(v -> btnUpdateProfileClick(updateProfilePresenter));
-        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void btnUpdateProfileClick(UpdateProfilePresenter updateProfilePresenter) {
@@ -82,5 +82,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements IUpdateP
 
         binding.edtFullName.setText(getProfileResponse.getUserProfile().getFullName());
         binding.edtPhone.setText(getProfileResponse.getUserProfile().getPhone());
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }

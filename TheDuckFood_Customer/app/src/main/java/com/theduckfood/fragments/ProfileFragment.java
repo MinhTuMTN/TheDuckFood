@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.theduckfood.activities.ChangePasswordActivity;
 import com.theduckfood.activities.LoginActivity;
+import com.theduckfood.activities.MainActivity;
 import com.theduckfood.activities.StoreDetailActivity;
 import com.theduckfood.activities.UpdateProfileActivity;
 import com.theduckfood.databinding.FragmentProfileBinding;
@@ -62,18 +63,12 @@ public class ProfileFragment extends Fragment implements IProfileView {
         binding.cardLogOut.setOnClickListener(this::logOut);
         binding.cardChangePassword.setOnClickListener(this::changePassword);
         binding.btnEditProfile.setOnClickListener(this::updateProfile);
-        binding.cardNotification.setOnClickListener(this::storeDetail);
+        binding.btnBack3.setOnClickListener(this::switchToMainActivity);
     }
 
-    private void storeDetail(View view) {
-        Intent intent = new Intent(getActivity(), StoreDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
 
     private void updateProfile(View view) {
         Intent intent = new Intent(getActivity(), UpdateProfileActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -99,7 +94,6 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
     private void changePassword(View view){
         Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     private void loadUserData(View view) {
@@ -110,15 +104,11 @@ public class ProfileFragment extends Fragment implements IProfileView {
     @Override
     public void getProfile(GetProfileResponse getProfileResponse) {
         if (getProfileResponse == null) {
-            if(getActivity() == null) {
-                Log.d("ProfileFragment", "Không tìm thấy activity!");
-                return;
-            }
-            Toast.makeText(getActivity(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Lỗi! Không thể lấy thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (getProfileResponse.isError()) {
-            Toast.makeText(getActivity(), getProfileResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getProfileResponse.getMessage(), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -130,6 +120,12 @@ public class ProfileFragment extends Fragment implements IProfileView {
         binding.txtFullName.setText(getProfileResponse.getUserProfile().getFullName());
         binding.txtEmail.setText(getProfileResponse.getUserAccount().getEmail());
         binding.txtPhone.setText(getProfileResponse.getUserProfile().getPhone());
+    }
+
+    public void switchToMainActivity(View view) {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }

@@ -15,7 +15,6 @@ import com.theduckfood.presenter.contact.IChangePasswordView;
 
 public class ChangePasswordActivity extends AppCompatActivity implements IChangePasswordView {
     ActivityChangePasswordBinding binding;
-    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
 
     private void addEvents() {
         binding.btnChangePass.setOnClickListener(v -> btnChangePassClick());
-        binding.btnBack3.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack3.setOnClickListener(v -> onBackPressed());
     }
 
     private void btnChangePassClick() {
@@ -68,12 +67,19 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
             return;
         }
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-        switchToMainActivity();
+        onBackPressed();
     }
 
     public void switchToMainActivity() {
         Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }

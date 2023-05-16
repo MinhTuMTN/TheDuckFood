@@ -3,6 +3,7 @@ package com.theduckfood.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -19,11 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.theduckfood.R;
 
+import com.theduckfood.activities.OrderPaymentActivity;
 import com.theduckfood.databinding.ItemFoodBinding;
 import com.theduckfood.databinding.PopupFoodDetailBinding;
 import com.theduckfood.databinding.PopupOrderBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Food;
+import com.theduckfood.model.Store;
+import com.theduckfood.model.respone.StoreResponse;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
 import com.theduckfood.util.SharedPreferenceManager;
@@ -38,16 +42,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     boolean isOrdering = false;
     private Context context;
     private List<Food> foods;
-    Long storeId;
+    private Store store;
     Dialog popUpFoodDetail;
     PopupWindow popUpOrder;
     boolean isFirst = true;
     SharedPreferenceManager sharedPreferenceManager;
 
-    public FoodListAdapter(Context context, List<Food> foods, Long storeId) {
+    public FoodListAdapter(Context context, List<Food> foods, Store store) {
         this.context = context;
         this.foods = foods;
-        this.storeId = storeId;
+        this.store = store;
     }
 
     @NonNull
@@ -148,11 +152,11 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
 
     private void btnAddClick(Food food) {
         int amountFood = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+
         CartItem cartItem = new CartItem(food, amountFood);
-        sharedPreferenceManager.addCartItem(cartItem, storeId);
+        sharedPreferenceManager.addCartItem(cartItem, store.getStoreId());
 
         popUpFoodDetail.dismiss();
-
 
         showPopUpOrder();
     }
@@ -175,21 +179,34 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popUpOrder.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
         int amount = 0;
+        int price = 0;
         for (CartItem cartItem : sharedPreferenceManager.getCartItems()) {
             amount += cartItem.getAmount();
+            price += cartItem.getFood().getPrice() * cartItem.getAmount();
         }
 
-        String amountCartItem = amount + " món";
-        popupOrderBinding.txtAmountFoodPopup.setText(amountCartItem);
+        String amountCart = amount + " món";
+        popupOrderBinding.txtAmountFoodPopup.setText(amountCart);
 
+        popupOrderBinding.txtStoreNamePopup.setText(store.getStoreName());
+
+        String priceCart = price + " đ";
+        popupOrderBinding.txtPriceOrderPopup.setText(priceCart);
         popUpOrder.showAtLocation(popupView, Gravity.BOTTOM, 0, margin10SDP);
 
         popupOrderBinding.popupOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popUpOrder.dismiss();
+                switchToOrderPaymentActivity(store);
             }
         });
+    }
+
+    private void switchToOrderPaymentActivity(Store store) {
+        Intent intent = new Intent(context, OrderPaymentActivity.class);
+        intent.putExtra("store", store);
+        context.startActivity(intent);
     }
 
     @Override

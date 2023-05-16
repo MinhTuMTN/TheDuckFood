@@ -85,7 +85,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
         binding.txtUserAddress.setText(orderDetail.getAddress());
 
-        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
 
         if (orderDetail.getOrderItems() == null || orderDetail.getOrderItems().size() == 0)
             return;
@@ -111,5 +111,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }
