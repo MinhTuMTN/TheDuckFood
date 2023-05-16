@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="@dimen/_12sdp"
-    android:layout_marginEnd="@dimen/_12sdp"
     android:layout_marginTop="@dimen/_6sdp"
     android:paddingBottom="@dimen/_6sdp">
 
@@ -23,12 +21,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginEnd="@dimen/_1sdp"
-            android:layout_marginBottom="@dimen/_1sdp"
-            app:cardCornerRadius="@dimen/_10sdp">
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imgMonAn"
+                android:layout_gravity="center"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:src="@drawable/com_tam_shop"

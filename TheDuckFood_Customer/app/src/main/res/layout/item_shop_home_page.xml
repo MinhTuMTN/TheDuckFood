@@ -27,6 +27,7 @@
                 android:id="@+id/imgMonAn"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_90sdp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/com_tam_shop"/>
         </com.google.android.material.card.MaterialCardView>
 
@@ -59,11 +60,10 @@
         android:ellipsize="end"
         android:maxWidth="@dimen/_94sdp"
         android:maxLines="1"
-        android:text="Cơm tấm Lái Thiêu Siêu Ngon Bổ Rẻ"
+        android:text="Cơm tấm"
         android:textColor="@color/black_text"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/imgSale" />
 
