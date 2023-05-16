@@ -49,17 +49,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         String amount = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getAmount())) + " đ";
         binding.txtPrice.setText(amount);
 
-        String shipFee = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getShipFee())) + " đ";
-        binding.txtShipFee.setText(shipFee);
-
-        String serviceFee = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getServiceFee())) + " đ";
-        binding.txtServiceFee.setText(serviceFee);
-
         String total = DateTimeUtil.formatCurrency(
                 String.valueOf(
-                        orderDetail.getOrder().getAmount()
-                                + orderDetail.getOrder().getShipFee()
-                                + orderDetail.getOrder().getServiceFee()
+                        orderDetail.getOrder().getAmount() + Constant.SERVICE_FEE + Constant.SHIP_FEE
                 )
         ) + " đ";
         binding.txtTotalPrice.setText(total);

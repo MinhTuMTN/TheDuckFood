@@ -42,7 +42,11 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderResponse orderResponse = orderResponses.get(position);
 
-        String price = DateTimeUtil.formatCurrency(String.valueOf(orderResponse.getOrder().getAmount())) + " đ";
+        String price = DateTimeUtil.formatCurrency(
+                String.valueOf(
+                orderResponse.getOrder().getAmount() + Constant.SERVICE_FEE + Constant.SHIP_FEE
+                )
+        ) + " đ";
         holder.binding.txtPrice.setText(price);
 
         int amount = 0;

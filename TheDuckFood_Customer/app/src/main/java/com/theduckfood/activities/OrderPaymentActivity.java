@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
+import com.theduckfood.fragments.OrderCurrentFragment;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Coupon;
 import com.theduckfood.model.Store;
@@ -23,6 +24,7 @@ import com.theduckfood.model.request.FoodRequest;
 import com.theduckfood.model.respone.CreateOrderResponse;
 import com.theduckfood.presenter.CreateOrderPresenter;
 import com.theduckfood.presenter.contact.ICreateOrderView;
+import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
 import com.theduckfood.util.SharedPreferenceManager;
 
@@ -56,16 +58,16 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
     }
 
     private void addEvents() {
-        binding.btnBack.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
-        binding.btnAddMoreFoods.setOnClickListener(v -> switchToStoreDetailActivity(store.getStoreId()));
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
+        binding.btnAddMoreFoods.setOnClickListener(v -> onBackPressed());
         binding.btnChangeAddress.setOnClickListener(v -> switchToUserAddressActivity());
-        binding.cardCoupon.setOnClickListener(v -> switchToUseCouponActivity(store.getStoreId()));
+        binding.cardCoupon.setOnClickListener(v -> switchToUseCouponActivity());
         binding.btnTaoDonHang.setOnClickListener(v -> btnTaoDonHangClick());
     }
 
-    private void switchToUseCouponActivity(Long storeId) {
+    private void switchToUseCouponActivity() {
         Intent intent = new Intent(this, UseCouponActivity.class);
-        intent.putExtra("storeId", storeId);
+        intent.putExtra("storeId", store.getStoreId());
         couponActivityResultLauncher.launch(intent);
     }
 
@@ -87,9 +89,6 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
         String priceCart = DateTimeUtil.formatCurrency(String.valueOf(totalPrice));
         binding.txtTongGiaTienMonAn.setText(priceCart);
 
-        int shipFee = 15000;
-        int serviceFee = 2000;
-
         int discount = 0;
         if(coupon != null) {
             if (totalPrice >= coupon.getMinPrice()) {
@@ -106,7 +105,11 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
         String discountOrder = DateTimeUtil.formatCurrency(String.valueOf(discount));
         binding.txtTienGiamGia.setText(discountOrder);
 
-        String totalPriceOrder = DateTimeUtil.formatCurrency(String.valueOf(totalPrice + shipFee + serviceFee - discount));
+        String totalPriceOrder = DateTimeUtil.formatCurrency(
+                String.valueOf(
+                        totalPrice + Constant.SERVICE_FEE + Constant.SHIP_FEE - discount
+                )
+        );
         binding.txtThanhTien.setText(totalPriceOrder);
     }
     private void getDataIntent() {
@@ -168,12 +171,6 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
         super.onBackPressed();
     }
 
-    private void switchToStoreDetailActivity(Long storeId) {
-        Intent intent = new Intent(this, StoreDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("store", storeId);
-        startActivity(intent);
-    }
 
     private void btnTaoDonHangClick() {
         String couponCode = "";
@@ -192,6 +189,10 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
             FoodRequest foodRequest = new FoodRequest(cartItem.getFood().getFoodId(), cartItem.getAmount());
             foodRequestList.add(foodRequest);
         }
+        if (foodRequestList.isEmpty()){
+            Toast.makeText(this, "Đơn hàng rỗng! Chọn món đi!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(couponCode, storeId, addressId, foodRequestList);
         createOrderPresenter = new CreateOrderPresenter(this, this);
         createOrderPresenter.createOrder(createOrderRequest);
@@ -202,8 +203,9 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
             Toast.makeText(this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        sharedPreferenceManager.clearCartItems();
         Toast.makeText(this, createOrderResponse.getMessage(), Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
+
 }

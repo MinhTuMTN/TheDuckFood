@@ -99,6 +99,13 @@ public class SharedPreferenceManager {
         return cartItems;
     }
 
+    public void clearCartItems() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(THE_DUCK_FOOD_REFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_CART_ITEMS);
+        editor.apply();
+    }
+
     public void addCartItem(CartItem cartItem, Long storeId) {
         List<CartItem> cartItems;
         if (!Objects.equals(storeId, getLongValue(KEY_CART_SHOP_ID))) {
