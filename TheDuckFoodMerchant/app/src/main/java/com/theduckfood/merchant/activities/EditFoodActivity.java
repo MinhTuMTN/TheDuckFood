@@ -54,6 +54,7 @@ public class EditFoodActivity extends AppCompatActivity implements IEditFoodView
     }
 
     private void addEvents() {
+        binding.imageView.setOnClickListener(v -> onBackPressed());
         binding.btnThemHinhAnh.setOnClickListener(this::pickImage);
         binding.btnSuaMon.setOnClickListener(this::editFood);
         binding.btnXoaMon.setOnClickListener(view -> {
