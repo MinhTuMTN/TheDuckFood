@@ -98,10 +98,11 @@ public class OrderAPI {
                 && (new Date()).before(coupon.getExpiredAt());
 
         double amount = amount_before_coupon;
+        double discountAmount = 0d;
         if (couponIsValid) {
-            double temp = amount * coupon.getDiscount();
-            temp = temp > coupon.getMaxDiscount() ? coupon.getMaxDiscount() : temp;
-            amount -= temp;
+            discountAmount = amount * coupon.getDiscount();
+            discountAmount = discountAmount > coupon.getMaxDiscount() ? coupon.getMaxDiscount() : discountAmount;
+            amount -= discountAmount;
         }
 
         UserAddress userAddress = userAddressRepository
@@ -124,6 +125,7 @@ public class OrderAPI {
 
         Order order = new Order();
         order.setAmount(amount);
+        order.setDiscountAmount(discountAmount);
         order.setCoupon(couponIsValid ? coupon : null);
         order.setStore(store.get());
         order.setUserAddress(userAddress);
