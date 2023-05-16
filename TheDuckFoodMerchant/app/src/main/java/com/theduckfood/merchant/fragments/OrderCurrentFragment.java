@@ -48,6 +48,9 @@ public class OrderCurrentFragment extends Fragment implements IOrderView {
         binding.imgKhongDonHang.setVisibility(View.VISIBLE);
         if (ordersResponse.getOrders() == null || ordersResponse.getOrders().size() == 0)
             return;
+
+        binding.imgKhongDonHang.setVisibility(View.GONE);
+        binding.listDonHang.setVisibility(View.VISIBLE);
         OrderAdapter orderAdapter = new OrderAdapter(
                 getContext(),
                 ordersResponse.getOrders(),

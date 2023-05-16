@@ -40,6 +40,10 @@ public class DeliveryAPI {
                     case Constants.ORDER_STATUS_PROCESSING -> {
                         title = "Đơn hàng đã được xác nhận";
                         body = "Đơn hàng của bạn đã được xác nhận. Tài xế đang trên đường đến nhà hàng";
+                        FCMClient.merchantSendNotification(order.getStore().getFcmToken(),
+                                "Nhà hàng của bạn có đơn hàng mới",
+                                "Để xem thông tin chi tiết đơn hàng. Hãy nhấn vào đây"
+                                );
                     }
                     case Constants.ORDER_STATUS_SHIPPING -> {
                         title = "Đơn hàng đang trên đường giao đến bạn";
@@ -57,7 +61,7 @@ public class DeliveryAPI {
 
                 order.setStatus(orderStatus);
                 orderRepository.save(order);
-                FCMClient.sendNotification(
+                FCMClient.userSendNotification(
                         userFCMToken,
                         title,
                         body
