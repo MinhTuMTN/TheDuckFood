@@ -24,4 +24,5 @@
     <color name="yellow_dark">#D8C200</color>
     <color name="gray_background">#F4F4F4</color>
     <color name="gray_hint">#9E9B9B</color>
+    <color name="order_not_cancel">#1B9830</color>
 </resources>

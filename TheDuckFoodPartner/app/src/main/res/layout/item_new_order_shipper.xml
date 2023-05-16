@@ -95,7 +95,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txtTrangThai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
@@ -113,50 +113,65 @@
                 android:layout_height="@dimen/_5sdp"
                 android:src="@drawable/record"
                 android:layout_marginEnd="@dimen/_2sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@id/textView" />
+                app:layout_constraintBottom_toBottomOf="@+id/txtTrangThai"
+                app:layout_constraintEnd_toStartOf="@+id/txtTrangThai"
+                app:layout_constraintTop_toTopOf="@id/txtTrangThai" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/gray_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTongHoaDon" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnChapNhan"
+                android:backgroundTint="#00897B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/textView"
-                app:layout_constraintBottom_toBottomOf="@id/txtTongHoaDon"
+                android:layout_marginTop="@dimen/_4sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/txtTrangThai"
+                app:layout_constraintTop_toBottomOf="@+id/view"
                 app:strokeColor="@color/gray_hint"
                 app:strokeWidth="@dimen/_1sdp">
+
                 <TextView
+                    android:id="@+id/txtChapNhan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_1sdp"
                     android:paddingHorizontal="@dimen/_10sdp"
-                    android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp"
+                    android:paddingVertical="@dimen/_4sdp"
                     android:text="Chấp nhận"
-                    android:layout_marginBottom="@dimen/_1sdp"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btnHoanThanh"
+                android:id="@+id/btnHuyBo"
+                android:backgroundTint="@color/pink_1"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="@id/txtTongHoaDon"
                 app:layout_constraintEnd_toStartOf="@+id/btnChapNhan"
+                app:layout_constraintTop_toTopOf="@+id/btnChapNhan"
                 app:strokeColor="@color/gray_hint"
-                android:layout_marginEnd="@dimen/_4sdp"
                 app:strokeWidth="@dimen/_1sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_1sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_20sdp"
                     android:paddingVertical="@dimen/_4sdp"
-                    android:text="Hoàn thành"
-                    android:textColor="@color/gray_hint"
-                    android:textSize="@dimen/_7sdp" />
+                    android:text="Hủy bỏ"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

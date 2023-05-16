@@ -2,17 +2,17 @@ package com.theduckfood.theduckfoodpartner.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.theduckfood.merchant.fragments.OrderCancelledFragment;
-import com.theduckfood.merchant.fragments.OrderCompletedFragment;
-import com.theduckfood.merchant.fragments.OrderCurrentFragment;
-import com.theduckfood.merchant.fragments.OrderDeliveryFragment;
+import com.theduckfood.theduckfoodpartner.fragment.OrderCurrentFragment;
+import com.theduckfood.theduckfoodpartner.fragment.OrderHistoryFragment;
 import com.theduckfood.theduckfoodpartner.fragment.OrderNewFragment;
 
 public class ViewOrderAdapter extends FragmentStateAdapter {
-    public ViewOrderAdapter(@NonNull Fragment fragment) {
-        super(fragment);
+
+    public ViewOrderAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
 
     @NonNull
@@ -22,17 +22,17 @@ public class ViewOrderAdapter extends FragmentStateAdapter {
             case 0:
                 return new OrderNewFragment();
             case 1:
-                return new OrderDeliveryFragment();
-            case 2:
-                return new OrderCompletedFragment();
+                return new OrderCurrentFragment();
             default:
-                return new OrderCancelledFragment();
+                return new OrderHistoryFragment();
         }
     }
 
-
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
+
+
+
 }

@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/_4sdp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_current_orders_shipping"
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
