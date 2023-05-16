@@ -122,6 +122,7 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
                             if (coupon != null) {
                                 binding.txtCoupon.setText(coupon.getCouponCode());
                                 updatePriceDetail();
+                                orderPaymentAdapter.setCoupon(coupon);
                             }
                         }
 
@@ -155,7 +156,7 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
     private void getOrderItemList() {
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(this);
         cartItems = sharedPreferenceManager.getCartItems();
-        orderPaymentAdapter = new OrderPaymentAdapter(this, cartItems, store.getStoreId());
+        orderPaymentAdapter = new OrderPaymentAdapter(this, cartItems, store.getStoreId(), binding);
         binding.recyclerFoods.setAdapter(orderPaymentAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

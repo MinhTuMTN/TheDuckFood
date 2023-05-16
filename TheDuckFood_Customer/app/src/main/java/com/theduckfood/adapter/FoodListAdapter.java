@@ -81,6 +81,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         String price = DateTimeUtil.formatCurrency(String.valueOf(food.getPrice())) + " đ";
         holder.itemFoodBinding.txtPrice.setText(price);
         holder.itemView.setOnClickListener(v -> showPopUpFoodDetail(food));
+        holder.itemFoodBinding.btnAdd.setOnClickListener(v -> btnAddClick(food, false));
 
 
     }
@@ -134,7 +135,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popupFoodDetailBinding.btnIncrease.setOnClickListener(v -> increaseAmount());
         popupFoodDetailBinding.btnDecrease.setOnClickListener(v -> decreaseAmount());
 
-        popupFoodDetailBinding.btnAdd.setOnClickListener(v -> btnAddClick(food));
+        popupFoodDetailBinding.btnAdd.setOnClickListener(v -> btnAddClick(food, true));
 
     }
 
@@ -153,13 +154,18 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
 
     }
 
-    private void btnAddClick(Food food) {
-        int amountFood = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+    private void btnAddClick(Food food, boolean isPopup) {
+        int amountFood;
+        if (isPopup) {
+            amountFood = Integer.parseInt(popupFoodDetailBinding.txtAmount.getText().toString());
+            popUpFoodDetail.dismiss();
+        } else
+            amountFood = 1;
 
         CartItem cartItem = new CartItem(food, amountFood);
         sharedPreferenceManager.addCartItem(cartItem, store.getStoreId());
 
-        popUpFoodDetail.dismiss();
+
 
         showPopUpOrder();
     }
