@@ -103,9 +103,6 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         String priceCart = DateTimeUtil.formatCurrency(String.valueOf(totalPrice));
         activityOrderPaymentBinding.txtTongGiaTienMonAn.setText(priceCart);
 
-        int shipFee = 15000;
-        int serviceFee = 2000;
-
         int discount = 0;
         if(coupon != null) {
             if (totalPrice >= coupon.getMinPrice()) {
@@ -122,7 +119,11 @@ public class OrderPaymentAdapter extends RecyclerView.Adapter<OrderPaymentAdapte
         String discountOrder = DateTimeUtil.formatCurrency(String.valueOf(discount));
         activityOrderPaymentBinding.txtTienGiamGia.setText(discountOrder);
 
-        String totalPriceOrder = DateTimeUtil.formatCurrency(String.valueOf(totalPrice + shipFee + serviceFee - discount));
+        String totalPriceOrder = DateTimeUtil.formatCurrency(
+                String.valueOf(
+                        totalPrice + Constant.SERVICE_FEE + Constant.SHIP_FEE - discount
+                )
+        );
         activityOrderPaymentBinding.txtThanhTien.setText(totalPriceOrder);
     }
     @Override

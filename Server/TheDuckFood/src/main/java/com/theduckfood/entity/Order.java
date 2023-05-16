@@ -18,12 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "UserOrder")
-public class Order  implements Serializable {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
     private Double amount = 0D;
+    private Double discountAmount = 0D;
     private Double shipFee = 15000D;
     private Double serviceFee = 2000D;
 

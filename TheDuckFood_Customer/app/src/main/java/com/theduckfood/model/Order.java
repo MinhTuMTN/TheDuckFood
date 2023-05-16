@@ -6,6 +6,7 @@ import java.util.Date;
 public class Order implements Serializable {
     private Long orderId;
     private Double amount;
+    private Double discountAmount;
     private Double shipFee;
     private Double serviceFee;
     private Date createdAt;
@@ -23,6 +24,14 @@ public class Order implements Serializable {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
+    }
+
+    public Double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(Double discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
     public Long getOrderId() {
