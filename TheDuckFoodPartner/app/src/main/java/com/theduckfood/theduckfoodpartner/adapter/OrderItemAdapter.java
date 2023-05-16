@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.theduckfood.theduckfoodpartner.R;
 import com.theduckfood.theduckfoodpartner.databinding.ItemNewOrderShipperBinding;
 import com.theduckfood.theduckfoodpartner.model.response.DeliveryOrderResponse;
+import com.theduckfood.theduckfoodpartner.presenter.OrderPresenter;
 import com.theduckfood.theduckfoodpartner.util.Constant;
 import com.theduckfood.theduckfoodpartner.util.DateTimeUtil;
 
@@ -20,10 +21,12 @@ import java.util.List;
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemViewHolder>{
     Context context;
     List<DeliveryOrderResponse> orderResponses;
+    OrderPresenter orderPresenter;
 
-    public OrderItemAdapter(Context context, List<DeliveryOrderResponse> orderResponses) {
+    public OrderItemAdapter(Context context, List<DeliveryOrderResponse> orderResponses, OrderPresenter orderPresenter) {
         this.context = context;
         this.orderResponses = orderResponses;
+        this.orderPresenter = orderPresenter;
     }
 
     @NonNull
@@ -46,18 +49,49 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         String status = "";
         holder.binding.txtTrangThai.setTextColor(ContextCompat.getColor(context, R.color.order_not_cancel));
         holder.binding.imageView.setImageResource(R.drawable.record);
+        holder.binding.btnHuyBo.setOnClickListener(v -> {
+            String type = orderResponse.getOrder().getStatus().equals(Constant.ORDER_STATUS_WAITING)
+                    ? Constant.ORDER_TYPE_NEW
+                    : Constant.ORDER_TYPE_CURRENT;
+            orderPresenter.updateOrder(
+                    orderResponse.getOrder().getOrderId(),
+                    Constant.ORDER_STATUS_USER_CANCELED,
+                    type
+            );
+        });
         switch (orderResponse.getOrder().getStatus()) {
             case Constant.ORDER_STATUS_WAITING:
                 holder.binding.btnHuyBo.setVisibility(View.GONE);
                 status = "Chờ xác nhận";
+                holder.binding.btnChapNhan.setOnClickListener(v -> {
+                    orderPresenter.updateOrder(
+                            orderResponse.getOrder().getOrderId(),
+                            Constant.ORDER_STATUS_PROCESSING,
+                            Constant.ORDER_TYPE_NEW
+                            );
+                });
                 break;
             case Constant.ORDER_STATUS_PROCESSING:
                 status = "Đang chuẩn bị";
                 holder.binding.txtChapNhan.setText("Giao hàng");
+                holder.binding.btnChapNhan.setOnClickListener(v -> {
+                    orderPresenter.updateOrder(
+                            orderResponse.getOrder().getOrderId(),
+                            Constant.ORDER_STATUS_SHIPPING,
+                            Constant.ORDER_TYPE_CURRENT
+                    );
+                });
                 break;
             case Constant.ORDER_STATUS_SHIPPING:
                 status = "Đang giao";
                 holder.binding.txtChapNhan.setText("Đã đến nơi");
+                holder.binding.btnChapNhan.setOnClickListener(v -> {
+                    orderPresenter.updateOrder(
+                            orderResponse.getOrder().getOrderId(),
+                            Constant.ORDER_STATUS_SUCCESS,
+                            Constant.ORDER_TYPE_CURRENT
+                    );
+                });
                 break;
             case Constant.ORDER_STATUS_SUCCESS:
                 status = "Thành công";

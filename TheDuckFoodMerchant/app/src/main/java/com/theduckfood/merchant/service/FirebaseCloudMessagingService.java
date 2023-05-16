@@ -54,6 +54,6 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         }
 
 
-        notificationManager.notify(102, builder.build());
+        notificationManager.notify(1572, builder.build());
     }
 }

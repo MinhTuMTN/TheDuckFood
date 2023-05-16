@@ -21,6 +21,7 @@ import com.theduckfood.theduckfoodpartner.adapter.OrderItemAdapter;
 import com.theduckfood.theduckfoodpartner.databinding.FragmentNewOrdersShipperBinding;
 import com.theduckfood.theduckfoodpartner.databinding.FragmentOrderCurrentShipperBinding;
 import com.theduckfood.theduckfoodpartner.model.response.DeliveryGetOrdersResponse;
+import com.theduckfood.theduckfoodpartner.model.response.SimpleMessageResponse;
 import com.theduckfood.theduckfoodpartner.presenter.OrderPresenter;
 import com.theduckfood.theduckfoodpartner.presenter.contact.IOrderView;
 import com.theduckfood.theduckfoodpartner.util.Constant;
@@ -57,7 +58,7 @@ public class OrderCurrentFragment extends Fragment implements IOrderView {
     }
 
     private void initRecyclerView() {
-        adapter = new OrderItemAdapter(getContext(), new ArrayList<>());
+        adapter = new OrderItemAdapter(getContext(), new ArrayList<>(), orderPresenter);
         binding.listItem.setAdapter(adapter);
         binding.listItem.setLayoutManager(
                 new LinearLayoutManager(
@@ -94,6 +95,14 @@ public class OrderCurrentFragment extends Fragment implements IOrderView {
         binding.listItem.setVisibility(View.VISIBLE);
         binding.layoutNotFoundOrder.setVisibility(View.GONE);
         adapter.setOrderResponses(response.getOrders());
+    }
+
+    @Override
+    public void updateOrderResponse(SimpleMessageResponse response) {
+        if (response == null || response.isError())
+            Toast.makeText(getContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
