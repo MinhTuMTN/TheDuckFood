@@ -39,6 +39,27 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnXoaAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnSuDungAddress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/gray_hint"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_1sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:text="Xóa"
+                    android:textColor="@color/gray_hint"
+                    android:textSize="@dimen/_7sdp" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnSuDungAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

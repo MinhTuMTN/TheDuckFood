@@ -37,20 +37,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintHeader">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_40sdp"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập địa chỉ mới"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:backgroundTint="@color/white"/>
+        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdd"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:background="@drawable/icons8_plus_filled_36px"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.923"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -61,24 +88,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintHeader">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:background="#D1D0D0"/>
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:background="#D1D0D0" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintKhongTimThay"
                 android:layout_width="match_parent"
@@ -108,7 +135,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-
 
 
     </ScrollView>

@@ -45,7 +45,7 @@ public class UserAddressPresenter {
         UserAccountEndpoint userAccountEndpoint = APIUtil.getRetrofit().create(UserAccountEndpoint.class);
         Call<SimpleMessageResponse> call = userAccountEndpoint.addUserAddress(
                 streetAddress,
-                "Bearer" + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY)
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY)
         );
         call.enqueue(new Callback<SimpleMessageResponse>() {
             @Override
@@ -65,7 +65,7 @@ public class UserAddressPresenter {
         UserAccountEndpoint userAccountEndpoint = APIUtil.getRetrofit().create(UserAccountEndpoint.class);
         Call<UserAddressResponse> call = userAccountEndpoint.deleteUserAddress(
                 userAddressId,
-                "Bearer" + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY)
+                "Bearer " + sharedPreferenceManager.getStringValue(SharedPreferenceManager.AUTH_TOKEN_KEY)
         );
         call.enqueue(new Callback<UserAddressResponse>() {
             @Override
