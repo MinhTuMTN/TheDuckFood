@@ -45,7 +45,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     private Store store;
     Dialog popUpFoodDetail;
     PopupWindow popUpOrder;
-    boolean isFirst = true;
     SharedPreferenceManager sharedPreferenceManager;
 
     public FoodListAdapter(Context context, List<Food> foods, Store store) {
