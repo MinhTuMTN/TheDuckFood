@@ -51,7 +51,6 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
     private void onAddButtonClicked() {
         String streetAddress = binding.edtAddress.getText().toString();
         userAddressPresenter.addUserAddress(streetAddress);
-        //userAddressPresenter.getUserAddress();
     }
 
     private void loadData() {

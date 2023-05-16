@@ -1,6 +1,8 @@
 package com.theduckfood.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -58,6 +60,14 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         UserAddress userAddress = addresses.get(position);
         holder.itemAddressBinding.txtStreetAddress.setText(userAddress.getStreetAddress());
         holder.itemAddressBinding.btnXoaAddress.setOnClickListener(v -> btnXoaClicked(userAddress.getUserAddressId(), position));
+        holder.itemAddressBinding.btnSuDungAddress.setOnClickListener(v -> selectAddress(userAddress));
+    }
+
+    private void selectAddress(UserAddress userAddress) {
+        Intent intent = new Intent();
+        intent.putExtra("userAddress", userAddress);
+        ((Activity)context).setResult(Activity.RESULT_OK, intent);
+        ((Activity)context).finish();
     }
 
     private void btnXoaClicked(Long userAddressId, int position) {

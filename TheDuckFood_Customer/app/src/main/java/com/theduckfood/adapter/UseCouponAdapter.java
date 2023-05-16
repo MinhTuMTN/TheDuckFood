@@ -1,6 +1,8 @@
 package com.theduckfood.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,15 @@ public class UseCouponAdapter extends RecyclerView.Adapter<UseCouponAdapter.UseC
         String expiredAt = DateTimeUtil.formatDate(coupon.getExpiredAt());
         String hanSuDungCoupon = startAt + " - " + expiredAt;
         holder.itemCouponBinding.txtHanDungCoupon.setText(hanSuDungCoupon);
+
+        holder.itemCouponBinding.btnSuDungCoupon.setOnClickListener(v -> selectCoupon(coupon));
+    }
+
+    private void selectCoupon(Coupon coupon) {
+        Intent intent = new Intent();
+        intent.putExtra("coupon", coupon);
+        ((Activity)context).setResult(Activity.RESULT_OK, intent);
+        ((Activity)context).finish();
     }
 
     @Override
