@@ -2,13 +2,11 @@ package com.theduckfood.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.theduckfood.databinding.ActivityReviewBinding;
-import com.theduckfood.model.Order;
 import com.theduckfood.model.request.UserReviewRequest;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.model.respone.SimpleMessageResponse;

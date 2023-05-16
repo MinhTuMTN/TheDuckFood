@@ -1,11 +1,8 @@
 package com.theduckfood.adapter;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +24,6 @@ import com.theduckfood.databinding.PopupOrderBinding;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Food;
 import com.theduckfood.model.Store;
-import com.theduckfood.model.respone.StoreResponse;
 import com.theduckfood.util.Constant;
 import com.theduckfood.util.DateTimeUtil;
 import com.theduckfood.util.SharedPreferenceManager;
@@ -39,7 +35,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
     ItemFoodBinding itemFoodBinding;
     PopupFoodDetailBinding popupFoodDetailBinding;
     PopupOrderBinding popupOrderBinding;
-    boolean isOrdering = false;
     private Context context;
     private List<Food> foods;
     private Store store;
@@ -123,7 +118,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         List<CartItem> cartItems = sharedPreferenceManager.getCartItems();
         CartItem item;
         for (int i = 0; i < cartItems.size(); i++) {
-            item = (CartItem) cartItems.get(i);
+            item = cartItems.get(i);
             if (Objects.equals(item.getFood().getFoodId(), food.getFoodId())) {
                 amount = item.getAmount();
                 break;

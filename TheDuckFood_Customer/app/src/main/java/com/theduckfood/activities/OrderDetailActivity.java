@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.theduckfood.adapter.OrderDetailListAdapter;
 import com.theduckfood.databinding.ActivityOrderDetailBinding;
-import com.theduckfood.model.Order;
 import com.theduckfood.model.respone.OrderItemResponse;
 import com.theduckfood.model.respone.OrderResponse;
 import com.theduckfood.util.Constant;
@@ -96,12 +94,6 @@ public class OrderDetailActivity extends AppCompatActivity {
     private void switchToUserReviewActivity(OrderResponse orderDetail) {
         Intent intent = new Intent(this, UserReviewActivity.class);
         intent.putExtra("orderDetail", orderDetail);
-        startActivity(intent);
-    }
-
-    public void switchToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

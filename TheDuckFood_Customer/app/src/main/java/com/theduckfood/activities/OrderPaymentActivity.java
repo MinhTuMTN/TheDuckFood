@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.theduckfood.adapter.OrderPaymentAdapter;
 import com.theduckfood.databinding.ActivityOrderPaymentBinding;
-import com.theduckfood.fragments.OrderCurrentFragment;
 import com.theduckfood.model.CartItem;
 import com.theduckfood.model.Coupon;
 import com.theduckfood.model.Store;
@@ -33,9 +32,7 @@ import java.util.List;
 
 public class OrderPaymentActivity extends AppCompatActivity implements ICreateOrderView {
     ActivityOrderPaymentBinding binding;
-
     OrderPaymentAdapter orderPaymentAdapter;
-
     ActivityResultLauncher<Intent> couponActivityResultLauncher;
     ActivityResultLauncher<Intent> addressActivityResultLauncher;
     List<CartItem> cartItems;
@@ -117,33 +114,27 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
 
         couponActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            coupon = (Coupon) result.getData().getSerializableExtra("coupon");
-                            if (coupon != null) {
-                                binding.txtCoupon.setText(coupon.getCouponCode());
-                                updatePriceDetail();
-                                orderPaymentAdapter.setCoupon(coupon);
-                            }
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        coupon = (Coupon) result.getData().getSerializableExtra("coupon");
+                        if (coupon != null) {
+                            binding.txtCoupon.setText(coupon.getCouponCode());
+                            updatePriceDetail();
+                            orderPaymentAdapter.setCoupon(coupon);
                         }
-
                     }
+
                 });
 
         addressActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
-                            if (userAddress != null)
-                                binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
-                        }
-
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
+                        if (userAddress != null)
+                            binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
                     }
+
                 });
     }
 

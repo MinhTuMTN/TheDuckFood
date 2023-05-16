@@ -15,7 +15,6 @@ import com.theduckfood.model.Food;
 import com.theduckfood.model.Store;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.StoreDetailResponse;
-import com.theduckfood.model.respone.StoreResponse;
 import com.theduckfood.presenter.StoreDetailPresenter;
 import com.theduckfood.presenter.contact.IStoreDetailView;
 import com.theduckfood.util.Constant;
@@ -26,30 +25,27 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
     ActivityShopDetailBinding binding;
     List<Food> foods;
     FoodListAdapter foodListAdapter;
+    StoreDetailPresenter storeDetailPresenter;
+    Long storeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityShopDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        StoreDetailPresenter storeDetailPresenter = new StoreDetailPresenter(this, StoreDetailActivity.this);
-        addEvents(storeDetailPresenter);
+        storeDetailPresenter = new StoreDetailPresenter(this, StoreDetailActivity.this);
+        addEvents();
 
     }
 
-    private void addEvents(StoreDetailPresenter storeDetailPresenter) {
-        loadStoreDetail(storeDetailPresenter);
+    private void addEvents() {
+        loadStoreDetail();
         binding.btnBack.setOnClickListener(v -> onBackPressed());
-        binding.chkFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                chkFavoriteClick(storeDetailPresenter);
-            }
-        });
+        binding.chkFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> chkFavoriteClick());
     }
 
-    private void loadStoreDetail(StoreDetailPresenter storeDetailPresenter) {
-        Long storeId = getIntent().getLongExtra("store", 18L);
+    private void loadStoreDetail() {
+        storeId = getIntent().getLongExtra("store", 18L);
         storeDetailPresenter.getStoreDetail(storeId);
     }
 
@@ -86,8 +82,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore());
     }
 
-    private void chkFavoriteClick(StoreDetailPresenter storeDetailPresenter) {
-        Long storeId = Long.valueOf(18);
+    private void chkFavoriteClick() {
         storeDetailPresenter.favorite(storeId);
     }
 
@@ -100,11 +95,6 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void switchToMainActivity() {
-        Intent intent = new Intent(StoreDetailActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();

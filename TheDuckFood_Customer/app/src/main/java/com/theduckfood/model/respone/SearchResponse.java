@@ -1,7 +1,5 @@
 package com.theduckfood.model.respone;
 
-import com.theduckfood.model.Food;
-import com.theduckfood.model.FoodSearchResponse;
 import com.theduckfood.model.Store;
 
 import java.util.List;
