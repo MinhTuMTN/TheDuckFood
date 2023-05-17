@@ -37,6 +37,7 @@
             android:layout_marginTop="16dp"
             android:maxLines="1"
             android:text="KFC food"
+            android:ellipsize="end"
             android:textAllCaps="true"
             android:textColor="@color/red_deep"
             android:textSize="@dimen/_17sdp"

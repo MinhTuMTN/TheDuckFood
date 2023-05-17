@@ -29,7 +29,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT SUM(o.amount), count(*) " +
             "FROM Order o " +
             "WHERE cast(o.createdAt as date ) = cast(GETDATE() as date) " +
-            "AND o.status != 'user_canceled' AND o.status != 'waiting'"
+            "AND o.status != 'user_canceled' AND o.status != 'waiting'" +
+            "AND o.store = ?1"
     )
     List<Object[]> findOrderAmountAndOrderCountToday(Store store);
 
