@@ -142,9 +142,9 @@ public class OrderAPI {
             }
             orderRepository.save(order);
 
-            Store updateStore = store.get();
-            updateStore.setBalance(updateStore.getBalance() + order.getAmount() - Constants.SERVICE_FEE);
-            storeRepository.save(updateStore);
+//            Store updateStore = store.get();
+//            updateStore.setBalance(updateStore.getBalance() + order.getAmount() - Constants.SERVICE_FEE);
+//            storeRepository.save(updateStore);
 
             if (couponIsValid) {
                 coupon.setUsed(coupon.getUsed() + 1);

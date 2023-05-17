@@ -6,9 +6,7 @@ import com.theduckfood.model.response.DeliveryGetOrdersResponse;
 import com.theduckfood.model.response.DeliveryLoginResponse;
 import com.theduckfood.model.response.DeliveryOrderResponse;
 import com.theduckfood.model.response.SimpleMessageResponse;
-import com.theduckfood.repositories.DeliveryManAccountRepository;
-import com.theduckfood.repositories.DeliveryManRepository;
-import com.theduckfood.repositories.OrderRepository;
+import com.theduckfood.repositories.*;
 import com.theduckfood.util.Constants;
 import com.theduckfood.util.EncodingUtil;
 import com.theduckfood.util.FCMClient;
@@ -33,6 +31,12 @@ public class DeliveryAPI {
 
     @Autowired
     DeliveryManRepository deliveryManRepository;
+
+    @Autowired
+    UserProfileRepository userProfileRepository;
+
+    @Autowired
+    StoreRepository storeRepository;
 
     @PostMapping("/login")
     public ResponseEntity<DeliveryLoginResponse> login(@RequestBody LoginRequest loginRequest) {
@@ -82,7 +86,7 @@ public class DeliveryAPI {
                         orderRepository.save(order);
 
                         assert deliveryMan != null;
-                        deliveryMan.setBalance(deliveryMan.getBalance() + (Constants.SHIP_FEE - Constants.SERVICE_FEE));
+                        deliveryMan.setBalance(deliveryMan.getBalance() - order.getAmount());
                         deliveryManRepository.save(deliveryMan);
 
                         title = "Đơn hàng đã được xác nhận";
@@ -93,14 +97,30 @@ public class DeliveryAPI {
                                 );
                     }
                     case Constants.ORDER_STATUS_SHIPPING -> {
+                        Store store = order.getStore();
+                        store.setBalance(store.getBalance() + order.getAmount() - Constants.SERVICE_FEE);
+                        storeRepository.save(store);
+
                         title = "Đơn hàng đang trên đường giao đến bạn";
                         body = "Đơn hàng đã được chuẩn bị và giao cho shipper. Bạn vui lòng đợi một tí nữa nha";
                     }
                     case Constants.ORDER_STATUS_SUCCESS -> {
+                        assert deliveryMan != null;
+                        deliveryMan.setBalance(deliveryMan.getBalance() + order.getAmount() + Constants.SHIP_FEE - Constants.SERVICE_FEE);
                         title = "Bữa ăn đã được giao thành công";
                         body = "Chúc bạn ăn ngon miệng";
                     }
                     default -> {
+                        assert deliveryMan != null;
+                        UserProfile userProfile = order.getUserProfile();
+                        if (order.getStatus().equals(Constants.ORDER_STATUS_PROCESSING)) {
+                            deliveryMan.setBalance(deliveryMan.getBalance() + order.getAmount());
+                            deliveryManRepository.save(deliveryMan);
+
+                        }
+                        userProfile.setBalance(userProfile.getBalance() + order.getAmount() + Constants.SHIP_FEE + Constants.SERVICE_FEE);
+                        userProfileRepository.save(userProfile);
+
                         title = "Đơn hàng bị hủy";
                         body = "Chúng tôi rất tiếc vì sự cố này";
                     }

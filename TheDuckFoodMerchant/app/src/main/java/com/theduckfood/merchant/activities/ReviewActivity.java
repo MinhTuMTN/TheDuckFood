@@ -36,7 +36,6 @@ public class ReviewActivity extends AppCompatActivity implements IReviewView {
 
     private void initialize() {
         reviewPresenter = new ReviewPresenter(this, this);
-
     }
 
     private void getData() {
