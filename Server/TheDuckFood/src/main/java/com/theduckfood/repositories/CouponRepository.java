@@ -14,10 +14,11 @@ public interface CouponRepository extends JpaRepository<Coupon,  Long> {
     @Query("SELECT c FROM Coupon c " +
             "WHERE c.store = :store " +
             "AND c.used < c.amount " +
-            "AND c.expiredAt >= GETDATE() ")
+            "AND c.expiredAt >= GETDATE() " +
+            "AND c.startAt <= GETDATE()")
     List<Coupon> getCouponsAvailableByStore(Store store);
     @Query("SELECT c FROM Coupon c " +
             "WHERE c.store = :store " +
-            "AND (c.expiredAt <= GETDATE()   OR c.amount <= c.used)")
+            "AND (c.expiredAt < GETDATE()  OR c.amount <= c.used OR c.startAt > GETDATE())")
     List<Coupon> getCouponsUnavailableByStore(Store store);
 }
