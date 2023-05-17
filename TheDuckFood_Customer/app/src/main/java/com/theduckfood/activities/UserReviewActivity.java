@@ -33,7 +33,6 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
     }
     private void getIntentData() {
         orderDetail = (OrderResponse) getIntent().getSerializableExtra("orderDetail");
-        Toast.makeText(this, orderDetail.getStore().getStoreId().toString(), Toast.LENGTH_SHORT).show();
     }
     private void addEvents() {
         binding.btnBack.setOnClickListener(v -> switchToMainActivity());

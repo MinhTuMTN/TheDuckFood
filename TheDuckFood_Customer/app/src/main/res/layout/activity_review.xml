@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginVertical="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
                 android:text="Gửi đánh giá"
                 android:textSize="@dimen/_13sdp"
                 app:cornerRadius="@dimen/_15sdp" />
