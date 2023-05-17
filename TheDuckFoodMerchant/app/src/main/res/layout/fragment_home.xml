@@ -31,14 +31,16 @@
 
         <TextView
             android:id="@+id/txtTen"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:maxLines="1"
             android:text="KFC food"
             android:textAllCaps="true"
             android:textColor="@color/red_deep"
             android:textSize="@dimen/_17sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgAva"
             app:layout_constraintTop_toTopOf="parent"
             tools:textStyle="bold" />
