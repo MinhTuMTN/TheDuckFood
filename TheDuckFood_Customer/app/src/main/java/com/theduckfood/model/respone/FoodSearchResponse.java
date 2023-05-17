@@ -1,4 +1,6 @@
-package com.theduckfood.model;
+package com.theduckfood.model.respone;
+
+import com.theduckfood.model.Food;
 
 public class FoodSearchResponse {
     private Food food;
