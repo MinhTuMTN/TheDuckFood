@@ -204,9 +204,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
 
         popupOrderBinding.txtStoreNamePopup.setText(store.getStoreName());
 
-        String priceCart = price + " đ";
+        String priceCart = DateTimeUtil.formatCurrency(String.valueOf(price)) + " đ";
         popupOrderBinding.txtPriceOrderPopup.setText(priceCart);
-        popUpOrder.showAtLocation(popupView, Gravity.BOTTOM, 0, margin10SDP);
+        popUpOrder.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
 
         int totalPrice = price;
         popupOrderBinding.popupOrder.setOnClickListener(v -> switchToOrderPaymentActivity(store));
