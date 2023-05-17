@@ -39,62 +39,53 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/scrvCoupon"
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#D1D0D0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintHeader">
+        app:layout_constraintTop_toBottomOf="@+id/constraintHeader" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintKhongTimThay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:src="@drawable/duck_not_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Hiện không có khuyến mãi nào"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:background="#D1D0D0"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintKhongTimThay"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_470sdp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_250sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_70sdp"
-                    android:src="@drawable/duck_not_found"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hiện không có khuyến mãi nào"
-                    android:textSize="@dimen/_15sdp"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
-                    app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-
-
-
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
