@@ -9,11 +9,19 @@ import java.util.Locale;
 
 public class DateTimeUtil {
     public static String formatTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 7);
+        Date newTime = calendar.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
-        return formatter.format(date);
+        return formatter.format(newTime);
     }
 
     public static String formatDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 7);
+        Date newTime = calendar.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(date);
     }

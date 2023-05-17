@@ -201,6 +201,7 @@ public class AddCouponActivity extends AppCompatActivity implements IAddCouponVi
                 endAt
         );
         addCouponPresenter.addCoupon(addCouponRequest);
+        binding.btnTaoCoupon.setEnabled(false);
     }
 
     @Override
