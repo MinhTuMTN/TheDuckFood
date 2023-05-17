@@ -35,7 +35,7 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
         orderDetail = (OrderResponse) getIntent().getSerializableExtra("orderDetail");
     }
     private void addEvents() {
-        binding.btnBack.setOnClickListener(v -> switchToMainActivity());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
         binding.btnSend.setOnClickListener(v -> btnSendClick());
     }
 
@@ -49,10 +49,11 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
         userReviewPresenter.review(userReviewRequest);
     }
 
-    public void switchToMainActivity() {
-        Intent intent = new Intent(UserReviewActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
     @Override
@@ -66,6 +67,6 @@ public class UserReviewActivity extends AppCompatActivity implements IUserReview
             return;
         }
         Toast.makeText(this, simpleMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-        switchToMainActivity();
+        onBackPressed();
     }
 }
