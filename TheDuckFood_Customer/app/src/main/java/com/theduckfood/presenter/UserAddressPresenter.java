@@ -72,6 +72,7 @@ public class UserAddressPresenter {
             @Override
             public void onResponse(Call<UserAddressResponse> call, Response<UserAddressResponse> response) {
                 iUserAddressView.deleteUserAddress(response.body());
+                getUserAddress();
             }
 
             @Override

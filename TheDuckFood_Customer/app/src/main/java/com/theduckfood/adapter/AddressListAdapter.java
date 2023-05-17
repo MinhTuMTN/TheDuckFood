@@ -27,9 +27,10 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     List<UserAddress> addresses;
     UserAddressPresenter userAddressPresenter;
 
-    public AddressListAdapter(Context context, List<UserAddress> addresses) {
+    public AddressListAdapter(Context context, List<UserAddress> addresses, UserAddressPresenter userAddressPresenter) {
         this.context = context;
         this.addresses = addresses;
+        this.userAddressPresenter = userAddressPresenter;
     }
     public void setUserAddresses(List<UserAddress> userAddresses) {
         this.addresses.clear();
@@ -75,9 +76,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
     private void btnXoaClicked(Long userAddressId, int position) {
-        userAddressPresenter = new UserAddressPresenter(this, context);
         userAddressPresenter.deleteUserAddress(userAddressId);
-        deleteUserAddress(position);
+        // deleteUserAddress(position);
     }
 
     @Override

@@ -61,7 +61,7 @@ public class UserAddressActivity extends AppCompatActivity implements IUserAddre
     }
 
     private void loadData() {
-        addressListAdapter = new AddressListAdapter(this, new ArrayList<>());
+        addressListAdapter = new AddressListAdapter(this, new ArrayList<>(), userAddressPresenter);
         binding.recyclerAddress.setAdapter(addressListAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
