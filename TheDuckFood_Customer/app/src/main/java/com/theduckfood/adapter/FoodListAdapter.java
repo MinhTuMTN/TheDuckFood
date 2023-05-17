@@ -83,6 +83,17 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         holder.itemView.setOnClickListener(v -> showPopUpFoodDetail(food));
         holder.itemFoodBinding.btnAdd.setOnClickListener(v -> btnAddClick(food, false));
 
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int margin16SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp);
+        int margin64SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._64sdp);
+        int margin4SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
+
+        if (position == foods.size() - 1) {
+            layoutParams.setMargins(margin16SDP, margin4SDP, margin16SDP, margin64SDP);
+        } else {
+            layoutParams.setMargins(margin16SDP, margin4SDP, margin16SDP, margin4SDP);
+        }
+        holder.itemFoodBinding.getRoot().setLayoutParams(layoutParams);
 
     }
 
@@ -177,7 +188,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         popUpOrder.setContentView(popupOrderBinding.getRoot());
 
         int margin300SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._300sdp);
-        int margin10SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._10sdp);
+        int margin10SDP = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._60sdp);
 
         popUpOrder.setOutsideTouchable(false);
         popUpOrder.setFocusable(false);
