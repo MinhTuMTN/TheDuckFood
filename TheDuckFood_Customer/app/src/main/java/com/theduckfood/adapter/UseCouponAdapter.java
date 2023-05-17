@@ -44,7 +44,7 @@ public class UseCouponAdapter extends RecyclerView.Adapter<UseCouponAdapter.UseC
         Coupon coupon = coupons.get(position);
         holder.itemCouponBinding.txtCouponCode.setText(coupon.getCouponCode());
 
-        int discount = (int)(coupon.getDiscount()*10);
+        int discount = (int)(coupon.getDiscount()*100);
         String discountCoupon = "Giảm " + discount + "% trên tổng hoá đơn";
         holder.itemCouponBinding.txtPhanTramGiam.setText(discountCoupon);
 
