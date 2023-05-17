@@ -61,7 +61,7 @@ public class OrderCompletedFragment extends Fragment implements IOrderView {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getContext(),
                 LinearLayoutManager.VERTICAL,
-                false
+                true
         );
         binding.listDonHang.setLayoutManager(linearLayoutManager);
     }
