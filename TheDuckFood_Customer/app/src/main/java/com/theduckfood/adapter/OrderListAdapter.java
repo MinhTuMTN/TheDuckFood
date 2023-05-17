@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theduckfood.R;
-import com.theduckfood.activities.MainActivity;
 import com.theduckfood.activities.OrderDetailActivity;
 import com.theduckfood.databinding.ItemOrderBinding;
 import com.theduckfood.model.respone.OrderItemResponse;

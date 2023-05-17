@@ -1,7 +1,5 @@
 package com.theduckfood.fragments;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;

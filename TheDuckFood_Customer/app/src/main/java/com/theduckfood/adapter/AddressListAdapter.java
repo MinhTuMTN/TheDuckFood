@@ -11,14 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theduckfood.databinding.ItemAddressBinding;
-import com.theduckfood.databinding.ItemFoodBinding;
 import com.theduckfood.model.UserAddress;
 import com.theduckfood.model.respone.SimpleMessageResponse;
 import com.theduckfood.model.respone.UserAddressResponse;
 import com.theduckfood.presenter.UserAddressPresenter;
 import com.theduckfood.presenter.contact.IUserAddressView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements IUserAddressView {
@@ -36,10 +34,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         this.addresses = userAddresses;
         notifyDataSetChanged();
     }
-    public void addUserAddress(UserAddress userAddress) {
-        this.addresses.add(userAddress);
-        notifyDataSetChanged();
-    }
+
     public void deleteUserAddress(int position) {
         try {
             this.addresses.remove(position);
