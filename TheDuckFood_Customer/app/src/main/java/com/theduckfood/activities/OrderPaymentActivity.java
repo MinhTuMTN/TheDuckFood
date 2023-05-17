@@ -99,6 +99,7 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
                 binding.txtCoupon.setText("Coupon không phù hợp!");
             }
         }
+
         String discountOrder = DateTimeUtil.formatCurrency(String.valueOf(discount));
         binding.txtTienGiamGia.setText(discountOrder);
 
@@ -121,7 +122,11 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
                             binding.txtCoupon.setText(coupon.getCouponCode());
                             updatePriceDetail();
                             orderPaymentAdapter.setCoupon(coupon);
+                        } else {
+                            binding.txtCoupon.setText("Áp dụng ưu đãi");
+                            updatePriceDetail();
                         }
+
                     }
 
                 });
@@ -133,6 +138,8 @@ public class OrderPaymentActivity extends AppCompatActivity implements ICreateOr
                         userAddress = (UserAddress) result.getData().getSerializableExtra("userAddress");
                         if (userAddress != null)
                             binding.txtDiaChiHienTai.setText(userAddress.getStreetAddress());
+                        else
+                            binding.txtDiaChiHienTai.setText("Vui lòng chọn địa chỉ");
                     }
 
                 });
