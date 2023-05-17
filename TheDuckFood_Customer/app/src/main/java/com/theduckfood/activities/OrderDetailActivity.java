@@ -46,8 +46,13 @@ public class OrderDetailActivity extends AppCompatActivity {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         binding.txtTime.setText(timeFormat.format(orderDetail.getOrder().getCreatedAt()));
 
-        String amount = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getAmount())) + " đ";
+        String amount = DateTimeUtil.formatCurrency(String.valueOf(orderDetail.getOrder().getAmount() + orderDetail.getOrder().getDiscountAmount())) + " đ";
         binding.txtPrice.setText(amount);
+
+        String discount = "-" + DateTimeUtil.formatCurrency(
+                String.valueOf(orderDetail.getOrder().getDiscountAmount())
+        ) + " đ";
+        binding.txtTienGiamGia.setText(discount);
 
         String total = DateTimeUtil.formatCurrency(
                 String.valueOf(

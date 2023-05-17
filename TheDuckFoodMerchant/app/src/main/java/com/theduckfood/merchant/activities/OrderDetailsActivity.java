@@ -42,12 +42,19 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
         String soMon = amountFood + " món";
         binding.txtSoMon.setText(soMon);
-        binding.txtTongTamTinh.setText(DateTimeUtil
-                .formatCurrency(orderResponse
-                        .getOrder()
-                        .getAmount()
-                        .toString()
-                ));
+        binding.txtTongTamTinh.setText(
+                DateTimeUtil
+                    .formatCurrency(
+                        String.valueOf(
+                                orderResponse.getOrder().getAmount()
+                                        + orderResponse.getOrder().getDiscountAmount()
+                        )
+                )
+        );
+        String discount = "-" + DateTimeUtil.formatCurrency(
+                orderResponse.getOrder().getDiscountAmount().toString()
+        );
+        binding.txtTienGiamCoupon.setText(discount);
         binding.txtTongSauCung.setText(DateTimeUtil
                 .formatCurrency(String.valueOf(orderResponse.getOrder().getAmount() - Constant.SERVICE_FEE)));
 

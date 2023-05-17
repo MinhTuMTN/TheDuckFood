@@ -91,7 +91,7 @@
                             android:layout_marginTop="@dimen/_16sdp"
                             android:numStars="1"
                             android:progressTint="@color/pink_1"
-                            android:rating="0.7"
+                            android:rating="0"
                             android:scaleX="1.5"
                             android:scaleY="1.5" />
 
@@ -100,7 +100,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="2"
+                            android:text="0"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_25sdp"
                             android:textStyle="bold" />
@@ -110,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="22 đánh giá"
+                            android:text="0 đánh giá"
                             android:textColor="@color/gray_hint"
                             android:textSize="@dimen/_15sdp"
                             android:textStyle="bold" />
@@ -216,7 +216,7 @@
                                 android:layout_marginEnd="@dimen/_16sdp"
                                 android:numStars="5"
                                 android:progressTint="@color/pink_1"
-                                android:rating="2" />
+                                android:rating="3" />
 
                             <ProgressBar
                                 android:id="@+id/progressBar3"
@@ -252,7 +252,7 @@
                                 android:layout_marginEnd="@dimen/_16sdp"
                                 android:numStars="5"
                                 android:progressTint="@color/pink_1"
-                                android:rating="2" />
+                                android:rating="4" />
 
                             <ProgressBar
                                 android:id="@+id/progressBar4"
@@ -288,7 +288,7 @@
                                 android:layout_marginEnd="@dimen/_16sdp"
                                 android:numStars="5"
                                 android:progressTint="@color/pink_1"
-                                android:rating="2" />
+                                android:rating="5" />
 
                             <ProgressBar
                                 android:id="@+id/progressBar5"
