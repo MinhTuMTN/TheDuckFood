@@ -12,7 +12,8 @@ public class FCMClient {
 
     }
 
-    private static boolean sendNotification(String apiKey, String fcmToken, String title, String body) throws IOException {
+    private static boolean sendNotification(String apiKey, String fcmToken, String title, String body) 
+        throws IOException {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         JSONObject data = new JSONObject();

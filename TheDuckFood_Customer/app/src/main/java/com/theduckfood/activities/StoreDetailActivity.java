@@ -2,6 +2,7 @@ package com.theduckfood.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -79,7 +80,14 @@ public class StoreDetailActivity extends AppCompatActivity implements IStoreDeta
         binding.ratingBar.setRating(storeDetailResponse.getStore().getRate());
         binding.txtRate.setText(String.valueOf(round(storeDetailResponse.getStore().getRate(), 1)));
 
-        getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore());
+        if (storeDetailResponse.getStore().getStatus().equals(Constant.STORE_STATUS_OPENING)) {
+            binding.layoutClosed.setVisibility(View.GONE);
+            binding.recyclerFoods.setVisibility(View.VISIBLE);
+            getFoods(storeDetailResponse.getFoods(), storeDetailResponse.getStore());
+        } else {
+            binding.layoutClosed.setVisibility(View.VISIBLE);
+            binding.recyclerFoods.setVisibility(View.GONE);
+        }
     }
 
     private void chkFavoriteClick() {

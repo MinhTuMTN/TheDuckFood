@@ -48,7 +48,10 @@ public class OrderAPI {
             @RequestHeader("Authorization") String bearerToken,
             @RequestBody OrderRequest orderRequest) {
         Optional<Store> store = storeRepository.findById(orderRequest.getStoreId());
-        if (store.isEmpty())
+        if (store.isEmpty()
+                || store.get().getStatus().equals(Constants.STORE_STATUS_CLOSED)
+                || store.get().getStatus().equals(Constants.STORE_STATUS_DELETED)
+        )
             return ResponseEntity.status(404).body(
                     new CreateOrderResponse(
                             true,
