@@ -1,7 +1,7 @@
 package com.theduckfood.merchant.util;
 
 public class Constant {
-    public static final String BASE_URL = "https://b319-123-21-151-104.ngrok-free.app";
+    public static final String BASE_URL = "https://ad0a-113-185-74-169.ngrok-free.app";
 
     public static final String IMAGE_BASE_URL = BASE_URL + "/api/file/image?id=";
 
