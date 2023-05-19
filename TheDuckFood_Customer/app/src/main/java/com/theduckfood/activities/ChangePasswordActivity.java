@@ -21,7 +21,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements IChange
         binding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         addEvents();
     }
 
