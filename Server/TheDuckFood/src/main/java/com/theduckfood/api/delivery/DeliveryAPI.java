@@ -48,7 +48,7 @@ public class DeliveryAPI {
                 );
 
         if (deliveryManAccount == null)
-            return  ResponseEntity.status(401).body(new DeliveryLoginResponse(
+            return ResponseEntity.status(401).body(new DeliveryLoginResponse(
                     true,
                     "Tài khoản hoặc mật khẩu không chính xác",
                     null,
@@ -94,7 +94,7 @@ public class DeliveryAPI {
                         FCMClient.merchantSendNotification(order.getStore().getFcmToken(),
                                 "Nhà hàng của bạn có đơn hàng mới",
                                 "Để xem thông tin chi tiết đơn hàng. Hãy nhấn vào đây"
-                                );
+                        );
                     }
                     case Constants.ORDER_STATUS_SHIPPING -> {
                         Store store = order.getStore();
@@ -179,7 +179,7 @@ public class DeliveryAPI {
         }
 
         List<DeliveryOrderResponse> orderResponses = new ArrayList<>();
-        for (Order order: orders) {
+        for (Order order : orders) {
             orderResponses.add(new DeliveryOrderResponse(
                     order,
                     order.getStore().getStoreName(),
@@ -198,8 +198,8 @@ public class DeliveryAPI {
         String email = Objects.requireNonNull(JWTUtil.getPayloadFromJWTToken(bearerToken)).get("email").toString();
         DeliveryManAccount deliveryManAccount = deliveryManAccountRepository
                 .findDeliveryManAccountByEmailAndStatusNotContaining(
-                email,
-                Constants.DELIVERY_MAN_ACCOUNT_STATUS_DELETED);
+                        email,
+                        Constants.DELIVERY_MAN_ACCOUNT_STATUS_DELETED);
         if (deliveryManAccount == null)
             return null;
 
